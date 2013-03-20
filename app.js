@@ -21,7 +21,7 @@ ss.client.define('main', {
 ss.client.define('me', {
   view: 'me.jade',
   css: ['me.styl'],
-  code: ['libs/jquery.min.js', 'libs/jquery.ba-bbq.min.js', 'app/fonts.js', 'app/script.me.js'],
+  code: ['libs/jquery.min.js', 'libs/script.me.js'],
   tmpl: '*'
 });
 

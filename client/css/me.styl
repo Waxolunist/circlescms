@@ -1,0 +1,175 @@
+@import "normalize"
+@import "mixin"
+@import "960"
+@import "animations"
+
+background-color = #e5e9ea
+header-color = #657089
+orange = #D15600
+green = #73880A
+blue =  #3F4C6B
+red = #D01F3C
+circle-colors = orange green blue red
+circlecount = length(circle-colors)
+
+/* colmargins are defined in 960 */
+nav-overlap = colmargin-right + colmargin-left
+nav-circlesize = 3 * colwidth + 2 * nav-overlap
+nav-containersize = nav-circlesize * circlecount - colmargin-left * (circlecount - 1) 
+nav-tabheight = 35px
+nav-fontsize = 170%
+nav-activeborder = 5px
+nav-paddingbottom = 100px
+
+/* medias */
+medium = '(max-width:' + (nav-containersize + 20px) + ')'
+small = '(max-width:' + (nav-circlesize * 2) + ')'
+
+html
+  height 100%
+
+body 
+  margin 0 
+  padding 0
+  padding-left 20px
+  height 100% 
+  background background-color url(../img/bg.png)
+  font-family 'Ubuntu', sans-serif
+  &.container_12
+    width nav-containersize
+    min-width nav-containersize
+    & .grid_12
+      width 100%
+      margin-left 0
+      margin-right 0
+  > header
+    font-family 'Permanent Marker', cursive
+    margin-top 10%
+    > hgroup
+      > h1
+        color header-color
+      > h2
+        color lighten(header-color, 30)
+      > h1
+      > h2
+        margin-before 0
+        margin-after 0
+
+  /* circles container */
+  > nav.overlap.grid_12
+    margin-top 3em
+    padding-bottom nav-paddingbottom
+    height nav-circlesize
+    &.active
+      > a
+        border-radius 0        
+        height nav-tabheight
+        line-height nav-tabheight
+        margin-right 0
+        width (nav-containersize / 4)
+        &.overlap
+          /* remove overlap */
+          margin-left 0
+        &.active
+          border-bottom nav-activeborder black solid
+        &::after 
+          content normal
+      
+    > a
+      font-size nav-fontsize
+      color white
+      text-align center
+      text-transform lowercase
+      text-decoration none
+      line-height nav-circlesize
+      full-circle nav-circlesize
+      transition-property height,border-radius,line-height
+      opacity .8
+      for row in 1..circlecount
+        &:nth-child({row})
+          z-index circlecount + 1 - row
+          background-color circle-colors[row - 1]
+      &:hover
+        z-index circlecount + 1
+      &.overlap
+        margin-left nav-overlap * -1
+        &.alpha
+          margin-left 0
+
+      &::after
+        content ""
+        height 100%
+        width 100%
+        position absolute
+        top 0
+        left 0
+        background-image url(../img/hover-circle.png)
+        background-repeat no-repeat
+        background-size 100%
+      &:hover::after
+        animation rotateIn 2s linear
+
+  > footer.overlap.grid_12
+    border-top 1px black solid
+    width 100%
+    padding-bottom 5em
+
+  > article.overlap.grid_12
+    width 100%
+    transition-property height,margin-top,opacity
+    height 0px
+    margin-top 0px
+    overflow hidden
+    opacity 0
+    &.active
+      background-color white
+      visibility visible
+      opacity 1
+      height nav-circlesize - nav-tabheight - nav-activeborder + nav-paddingbottom - 25px
+      margin-top 0 - nav-circlesize + nav-activeborder + nav-tabheight - nav-paddingbottom + 25px
+
+.animated
+  transition-duration 1s
+  transition-timing-function ease
+  transition-delay 0s 
+
+@media medium 
+  body
+    &.container_12
+      width (nav-circlesize * 2) - colmargin-right
+      min-width (nav-circlesize * 2) - colmargin-right
+
+      > nav.overlap.grid_12 
+        height nav-circlesize * 2
+        > a:nth-child(3)
+          margin-left 0
+          margin-top (colmargin-right * -1)
+        > a:nth-child(2)
+          margin-right 0
+        > a:nth-child(4)
+          margin-top (colmargin-right * -1)
+        &.active
+          height nav-tabheight * 2 + nav-activeborder * 2 + nav-paddingbottom - 25px
+          > a
+            margin-top 0
+            &.active
+              &:nth-child(1)
+              &:nth-child(2)
+                border-bottom none
+                border-top nav-activeborder black solid
+                margin-top (nav-activeborder * -1)
+  
+      > article.active
+        margin-top nav-tabheight * 2 + nav-activeborder * 2 + nav-paddingbottom - 25px
+      
+        
+@media small 
+  body
+    > nav.overlap.grid_12
+      width (nav-circlesize)
+
+      > a
+        for row in 1..circlecount
+          &:nth-child({row})
+            margin-left 0
+        

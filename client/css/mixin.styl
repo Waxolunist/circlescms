@@ -1,0 +1,52 @@
+vendors = official webkit moz o ms
+
+allvendors(prop, args...)
+  for vendor in vendors
+    if vendor == official
+      {prop}: args
+    else
+      -{vendor}-{prop}: args
+
+margin-before()
+  allvendors margin-before arguments
+margin-after()
+  allvendors margin-after arguments
+
+border-radius()
+  allvendors border-radius arguments
+
+animation()
+  allvendors animation arguments
+animation-delay()
+  allvendors animation-delay arguments
+animation-fill-mode()
+  allvendors animation-fill-mode arguments
+
+transform()
+  allvendors transform arguments
+transform-origin()
+  allvendors transform-origin arguments
+
+transition()
+  allvendors transition arguments
+transition-timing-function()
+  allvendors transition-timing-function arguments
+transition-delay()
+  allvendors transition-delay arguments
+transition-duration()
+  allvendors transition-duration arguments
+transition-property()
+  allvendors transition-property arguments
+
+calculate(prop, val)
+  for vendor in vendors
+    if vendor == official
+      {prop}: calc(val)
+    else
+      {prop}: unquote(join('','-',vendor,unquote('-calc('),val,')'))
+
+full-circle(diameter)
+  height diameter
+  width diameter
+  border-radius (diameter/2)
+

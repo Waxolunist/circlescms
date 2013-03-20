@@ -1,0 +1,80 @@
+cols = 12
+colwidth = 60px
+colmargin-right = 12px
+colmargin-left = 13px
+
+gridarray = ()
+pusharray = ()
+pullarray = ()
+for i in (1..cols)
+  push(gridarray, '.grid_' + i)
+  push(pusharray, '.push_' + i)
+  push(pullarray, '.pull_' + i)
+
+gridlist = join(',', gridarray)
+pushlist = join(',', pusharray)
+pulllist = join(',', pullarray)
+
+body
+  min-width cols * ( colwidth + colmargin-right + colmargin-left )
+
+.container_{cols}
+  margin-left auto
+  margin-right auto
+  width cols * ( colwidth + colmargin-right + colmargin-left )
+
+{gridlist} 
+  display inline
+  float left
+  position relative
+  margin-left colmargin-left
+  margin-right colmargin-right
+
+{pushlist},
+{pulllist}
+  position relative
+
+.alpha {
+	margin-left: 0;
+}
+
+.omega {
+	margin-right: 0;
+}
+
+for arg, idx in gridarray
+  .container_{cols} {arg}
+    width (idx + 1) * colwidth + (idx * (colmargin-right + colmargin-left))
+
+for i in 1..(cols - 1)    
+  .container_{cols} .prefix_{i}
+    padding-left i * colwidth + (i * (colmargin-right + colmargin-left))
+  .container_{cols} .suffix_{i}
+    padding-right i * colwidth + (i * (colmargin-right + colmargin-left))
+  .container_{cols} .push_{i}
+    left i * colwidth + (i * (colmargin-right + colmargin-left))
+  .container_{cols} .pull_{i}
+    left -1 * i * colwidth - (i * (colmargin-right + colmargin-left))
+
+.clear 
+  clear both
+  display block
+  overflow hidden
+  visibility hidden
+  width 0
+  height 0
+
+.clearfix:before
+.clearfix:after 
+  content '\0020'
+  display block
+  overflow hidden
+  visibility hidden
+  width 0
+  height 0
+
+.clearfix:after 
+  clear both
+
+.clearfix 
+  zoom 1

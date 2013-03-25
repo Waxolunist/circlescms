@@ -47,8 +47,8 @@ function restartAnimation(el) {
 }
 
 function setContent(el) {
-  console.log("setContent");
-  ss.rpc('app.loadcontent', window.location.hash, function(response){
+  var link = $('a[href=' + window.location.hash + ']');
+  ss.rpc('cms.loadcontent', window.location.hash, link.attr('data-op'), function(response){
     el.html(response);
   });
 }

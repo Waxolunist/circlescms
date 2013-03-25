@@ -10,14 +10,6 @@ ss.client.formatters.add(require('ss-stylus'));
 
 ss.client.templateEngine.use(require('ss-hogan'));
 
-// Define a single-page client called 'main'
-ss.client.define('main', {
-  view: 'app.jade',
-  css:  ['libs/reset.css', 'app.styl'],
-  code: ['libs/jquery.min.js', 'app'],
-  tmpl: '*'
-});
-
 ss.client.define('me', {
   view: 'me.jade',
   css: ['me.styl'],
@@ -28,11 +20,7 @@ ss.client.define('me', {
 // Minimize and pack assets if you type: SS_ENV=production node app.js
 if (ss.env === 'production') ss.client.packAssets();
 
-// Use Express to route requests
 app.get('/', function(req, res){
-  res.serveClient('main');
-});
-app.get('/me', function(req, res){
   res.serveClient('me');
 });
 

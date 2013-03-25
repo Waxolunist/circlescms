@@ -11,6 +11,7 @@ ss.server.on('reconnect', function(){
   console.log('Connection back up :-)');
 });
 
+/*
 ss.server.on('ready', function(){
 
   // Wait for the DOM to finish loading
@@ -22,3 +23,4 @@ ss.server.on('ready', function(){
   });
 
 });
+*/

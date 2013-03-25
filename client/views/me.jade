@@ -17,7 +17,7 @@ html(lang="en")
       a.overlap.grid_3.alpha.animated(href='#about') About
       a.overlap.grid_3.animated(href='#resume') Resume
       a.overlap.grid_3.animated(href='#projects') Projects
-      a.overlap.grid_3.omega.animated(href='#blog') Blog
+      a.overlap.grid_3.omega.animated(href='#blog', data-op='list') Blog
     article#content.grid_12.clearfix.animated
       h1 About
       | TODO:
@@ -29,25 +29,33 @@ html(lang="en")
         li Bring out a good enough solution based on node.js and github
         li Keysequence ESC for closing article
         li Closing button for articles
-        li Startanimation on load (rotating circles)
+        li 
+          del Startanimation on load (rotating circles)
         li Polaroid pics
         li Degrading browsers and modernizr
         li 
           del CSS Refactoring (less nesting, more class names)
-        li SEO optimisation
+        li SEO optimisation (#!)
         li Better comments in CSS
+        li list blog articles
+        li popups on top toolbar
+        li load content on load of page according to hashtag
+        li use require
       ul
         li Node.js (AppFog / better Openshift)
-        li Github repo to store and version static files, templates and content
-        li git-fs?
+        li Github repo to store and version static files, templates and content (use Bitbucket wiki)
+        li 
+          del git-fs
         li git-upstream-watch?
-        li stylus
+        li 
+          del stylus
         li cache: https://github.com/ptarjan/node-cache or redis
         li 
-          del dustjs or 
-          | jade as template language
-        li socketstream and express
-        li one branch for code, another for content
+          del jade as template language
+        li 
+          del socketstream and express
+        li 
+          del one branch for code, another for content
     // article#resume.grid_12.clearfix.animated Resume
     // article#projects.grid_12.clearfix.animated Projects
     // article#contact.grid_12.clearfix.animated Contact

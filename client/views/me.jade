@@ -2,6 +2,7 @@
 html(lang="en")
   head
     meta(charset="utf-8")
+    meta(name="viewport",content="width=device-width,initial-scale=0.6")
     link(href='http://fonts.googleapis.com/css?family=Permanent+Marker|Ubuntu',rel='stylesheet',type='text/css')
     != SocketStream
     title Christian Sterzl vCard
@@ -9,25 +10,30 @@ html(lang="en")
     header.grid_12.clearfix
       hgroup
         h1 Christian Sterzl
-        h2 Enterprise Architect and Software Developer
-    nav.overlap.grid_12.clearfix
+        h2 
+          | Enterprise Architect 
+          nobr and Software Developer
+    nav.grid_12.clearfix.animated
       a.overlap.grid_3.alpha.animated(href='#about') About
       a.overlap.grid_3.animated(href='#resume') Resume
       a.overlap.grid_3.animated(href='#projects') Projects
-      a.overlap.grid_3.omega.animated(href='#contact') Contact
-    article#about.overlap.grid_12.clearfix.animated
-      | About
+      a.overlap.grid_3.omega.animated(href='#blog') Blog
+    article#content.grid_12.clearfix.animated
+      h1 About
       | TODO:
       ul
-        li Viewport for mobile devices
-        li set height for articles
+        li 
+          del Viewport for mobile devices
+        li 
+          del set height for articles
         li Bring out a good enough solution based on node.js and github
         li Keysequence ESC for closing article
         li Closing button for articles
         li Startanimation on load (rotating circles)
         li Polaroid pics
         li Degrading browsers and modernizr
-        li CSS Refactoring (less nesting, more class names)
+        li 
+          del CSS Refactoring (less nesting, more class names)
         li SEO optimisation
         li Better comments in CSS
       ul
@@ -42,7 +48,11 @@ html(lang="en")
           | jade as template language
         li socketstream and express
         li one branch for code, another for content
-    article#resume.overlap.grid_12.clearfix.animated Resume
-    article#projects.overlap.grid_12.clearfix.animated Projects
-    article#contact.overlap.grid_12.clearfix.animated Contact
-    footer.overlap.grid_12.clearfix 
+    // article#resume.grid_12.clearfix.animated Resume
+    // article#projects.grid_12.clearfix.animated Projects
+    // article#contact.grid_12.clearfix.animated Contact
+    footer.grid_12.clearfix 
+    div.topbar
+      a(href="#contact") Contact
+      a(href="#circlescms").omega Circlescms
+

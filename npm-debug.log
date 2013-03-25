@@ -1,0 +1,145 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install', 'compress' ]
+2 info using npm@1.2.14
+3 info using node@v0.10.0
+4 verbose node symlink /usr/bin/node
+5 verbose read json /home/cst/Development/circlescms/package.json
+6 verbose read json /home/cst/Development/circlescms/node_modules/express/package.json
+7 verbose read json /home/cst/Development/circlescms/node_modules/git-fs/package.json
+8 verbose read json /home/cst/Development/circlescms/node_modules/socketstream/package.json
+9 verbose read json /home/cst/Development/circlescms/node_modules/ss-hogan/package.json
+10 verbose read json /home/cst/Development/circlescms/node_modules/ss-jade/package.json
+11 verbose read json /home/cst/Development/circlescms/node_modules/ss-stylus/package.json
+12 verbose from cache /home/cst/Development/circlescms/package.json
+13 verbose readDependencies using package.json deps
+14 verbose cache add [ 'compress', null ]
+15 verbose cache add name=undefined spec="compress" args=["compress",null]
+16 verbose parsed url { protocol: null,
+16 verbose parsed url   slashes: null,
+16 verbose parsed url   auth: null,
+16 verbose parsed url   host: null,
+16 verbose parsed url   port: null,
+16 verbose parsed url   hostname: null,
+16 verbose parsed url   hash: null,
+16 verbose parsed url   search: null,
+16 verbose parsed url   query: null,
+16 verbose parsed url   pathname: 'compress',
+16 verbose parsed url   path: 'compress',
+16 verbose parsed url   href: 'compress' }
+17 silly lockFile 89d6bb15-compress compress
+18 verbose lock compress /home/cst/.npm/89d6bb15-compress.lock
+19 silly lockFile 89d6bb15-compress compress
+20 silly lockFile 89d6bb15-compress compress
+21 verbose addNamed [ 'compress', '' ]
+22 verbose addNamed [ null, '' ]
+23 silly lockFile 90c845cd-compress compress@
+24 verbose lock compress@ /home/cst/.npm/90c845cd-compress.lock
+25 silly addNameRange { name: 'compress', range: '', hasData: false }
+26 verbose url raw compress
+27 verbose url resolving [ 'https://registry.npmjs.org/', './compress' ]
+28 verbose url resolved https://registry.npmjs.org/compress
+29 info trying registry request attempt 1 at 00:30:14
+30 verbose etag "S2ZJ4UHZVAIRF6C6SUUPR95B"
+31 http GET https://registry.npmjs.org/compress
+32 http 304 https://registry.npmjs.org/compress
+33 silly registry.get cb [ 304,
+33 silly registry.get   { server: 'CouchDB/1.2.1 (Erlang OTP/R15B03)',
+33 silly registry.get     etag: '"S2ZJ4UHZVAIRF6C6SUUPR95B"',
+33 silly registry.get     date: 'Sat, 23 Mar 2013 23:30:15 GMT',
+33 silly registry.get     'content-length': '0' } ]
+34 verbose etag compress from cache
+35 silly addNameRange number 2 { name: 'compress', range: '', hasData: true }
+36 silly addNameRange versions [ 'compress', [ '0.1.6', '0.1.7', '0.1.8', '0.1.9' ] ]
+37 verbose addNamed [ 'compress', '0.1.9' ]
+38 verbose addNamed [ '0.1.9', '0.1.9' ]
+39 silly lockFile f575ee5c-compress-0-1-9 compress@0.1.9
+40 verbose lock compress@0.1.9 /home/cst/.npm/f575ee5c-compress-0-1-9.lock
+41 verbose read json /home/cst/.npm/compress/0.1.9/package/package.json
+42 silly lockFile f575ee5c-compress-0-1-9 compress@0.1.9
+43 silly lockFile f575ee5c-compress-0-1-9 compress@0.1.9
+44 silly lockFile 90c845cd-compress compress@
+45 silly lockFile 90c845cd-compress compress@
+46 silly resolved [ { name: 'compress',
+46 silly resolved     description: 'A streaming compression / gzip library for node.js',
+46 silly resolved     version: '0.1.9',
+46 silly resolved     author: { name: 'Rhys' },
+46 silly resolved     repository:
+46 silly resolved      { type: 'git',
+46 silly resolved        url: 'http://github.com/waveto/node-compress.git' },
+46 silly resolved     scripts:
+46 silly resolved      { 'pre-install': 'node-waf configure && node-waf',
+46 silly resolved        install: 'node-waf clean ; node-waf configure build' },
+46 silly resolved     engine: [ 'node >=0.2.5' ],
+46 silly resolved     main: './build/default/compress',
+46 silly resolved     readme: 'node-compress\n=============\n\nA streaming compression / gzip module for node.js\n\nTo install, ensure that you have libz installed, and run:\n\nnode-waf configure \nnode-waf build\n\nThis will put the compress.node binary module in build/default. \n\n\nQuick example\n-------------\n\nvar compress=require("./compress");\nvar sys=require("sys");\nvar posix=require("posix");\n\n// Create gzip stream\nvar gzip=new compress.Gzip;\ngzip.init();\n\n// Pump data to be compressed\nvar gzdata1 = gzip.deflate("My data that needs ", "binary"); \nsys.puts("Compressed size : "+gzdata1.length);\n\nvar gzdata2 = gzip.deflate("to be compressed. 01234567890.", "binary"); \nsys.puts("Compressed size : "+gzdata2.length);\n\nvar gzdata3 = gzip.end();\nsys.puts("Last bit : "+gzdata3.length);\n\n// Normally stream this out as its generated, but just print here\nvar gzdata = gzdata1+gzdata2+gzdata3;\nsys.puts("Total compressed size : "+gzdata.length);\n',
+46 silly resolved     readmeFilename: 'README',
+46 silly resolved     _id: 'compress@0.1.9',
+46 silly resolved     _from: 'compress@' } ]
+47 info install compress@0.1.9 into /home/cst/Development/circlescms
+48 info installOne compress@0.1.9
+49 verbose from cache /home/cst/.npm/compress/0.1.9/package/package.json
+50 info /home/cst/Development/circlescms/node_modules/compress unbuild
+51 verbose read json /home/cst/Development/circlescms/node_modules/compress/package.json
+52 verbose tar unpack /home/cst/.npm/compress/0.1.9/package.tgz
+53 silly lockFile 41bacf36-circlescms-node-modules-compress /home/cst/Development/circlescms/node_modules/compress
+54 verbose lock /home/cst/Development/circlescms/node_modules/compress /home/cst/.npm/41bacf36-circlescms-node-modules-compress.lock
+55 silly lockFile 7df7d0b2-t-npm-compress-0-1-9-package-tgz /home/cst/.npm/compress/0.1.9/package.tgz
+56 verbose lock /home/cst/.npm/compress/0.1.9/package.tgz /home/cst/.npm/7df7d0b2-t-npm-compress-0-1-9-package-tgz.lock
+57 silly gunzTarPerm modes [ '755', '644' ]
+58 silly gunzTarPerm extractEntry package.json
+59 silly gunzTarPerm extractEntry README
+60 silly gunzTarPerm extractEntry LICENSE
+61 silly gunzTarPerm extractEntry filetest.js
+62 silly gunzTarPerm extractEntry test.js
+63 silly gunzTarPerm extractEntry compress.cc
+64 silly gunzTarPerm extractEntry wscript
+65 verbose read json /home/cst/Development/circlescms/node_modules/compress/package.json
+66 silly lockFile 41bacf36-circlescms-node-modules-compress /home/cst/Development/circlescms/node_modules/compress
+67 silly lockFile 41bacf36-circlescms-node-modules-compress /home/cst/Development/circlescms/node_modules/compress
+68 silly lockFile 7df7d0b2-t-npm-compress-0-1-9-package-tgz /home/cst/.npm/compress/0.1.9/package.tgz
+69 silly lockFile 7df7d0b2-t-npm-compress-0-1-9-package-tgz /home/cst/.npm/compress/0.1.9/package.tgz
+70 info preinstall compress@0.1.9
+71 verbose from cache /home/cst/Development/circlescms/node_modules/compress/package.json
+72 verbose readDependencies using package.json deps
+73 verbose from cache /home/cst/Development/circlescms/node_modules/compress/package.json
+74 verbose readDependencies using package.json deps
+75 silly resolved []
+76 verbose about to build /home/cst/Development/circlescms/node_modules/compress
+77 info build /home/cst/Development/circlescms/node_modules/compress
+78 verbose from cache /home/cst/Development/circlescms/node_modules/compress/package.json
+79 verbose linkStuff [ false,
+79 verbose linkStuff   false,
+79 verbose linkStuff   false,
+79 verbose linkStuff   '/home/cst/Development/circlescms/node_modules' ]
+80 info linkStuff compress@0.1.9
+81 verbose linkBins compress@0.1.9
+82 verbose linkMans compress@0.1.9
+83 verbose rebuildBundles compress@0.1.9
+84 info install compress@0.1.9
+85 verbose unsafe-perm in lifecycle true
+86 silly exec sh "-c" "node-waf clean ; node-waf configure build"
+87 silly sh,-c,node-waf clean ; node-waf configure build,/home/cst/Development/circlescms/node_modules/compress spawning
+88 info compress@0.1.9 Failed to exec install script
+89 info /home/cst/Development/circlescms/node_modules/compress unbuild
+90 verbose from cache /home/cst/Development/circlescms/node_modules/compress/package.json
+91 info preuninstall compress@0.1.9
+92 info uninstall compress@0.1.9
+93 verbose true,/home/cst/Development/circlescms/node_modules,/home/cst/Development/circlescms/node_modules unbuild compress@0.1.9
+94 info postuninstall compress@0.1.9
+95 error compress@0.1.9 install: `node-waf clean ; node-waf configure build`
+95 error `sh "-c" "node-waf clean ; node-waf configure build"` failed with 127
+96 error Failed at the compress@0.1.9 install script.
+96 error This is most likely a problem with the compress package,
+96 error not with npm itself.
+96 error Tell the author that this fails on your system:
+96 error     node-waf clean ; node-waf configure build
+96 error You can get their info via:
+96 error     npm owner ls compress
+96 error There is likely additional logging output above.
+97 error System Linux 3.5.0-26-generic
+98 error command "/usr/bin/node" "/usr/bin/npm" "install" "compress"
+99 error cwd /home/cst/Development/circlescms
+100 error node -v v0.10.0
+101 error npm -v 1.2.14
+102 error code ELIFECYCLE
+103 verbose exit [ 1, true ]

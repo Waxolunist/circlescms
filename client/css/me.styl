@@ -24,109 +24,119 @@ nav-paddingbottom = 100px
 /* medias */
 medium = '(max-width:' + (nav-containersize + 20px) + ')'
 
-html
-  height 100%
-
 body 
-  margin 0 
-  padding 0
-  padding-left 20px
-  height 100% 
   background background-color url(/images/bg.png)
   font-family 'Ubuntu', sans-serif
-  &.container_12
-    width nav-containersize
-    min-width nav-containersize
-    & .grid_12
-      width 100%
-      margin-left 0
-      margin-right 0
-  > header
-    font-family 'Permanent Marker', cursive
-    margin-top 10%
-    > hgroup
-      > h1
-        color header-color
-      > h2
-        color lighten(header-color, 30)
-      > h1
-      > h2
-        margin-before 0
-        margin-after 0
+  position relative
 
-  /* circles container */
-  > nav.overlap.grid_12
-    margin-top 3em
-    padding-bottom nav-paddingbottom
-    height nav-circlesize
-    border-bottom 1px black solid
-    &.active
-      height auto
-      padding-bottom 25px
-      > a
-        border-radius 0        
-        height nav-tabheight
-        line-height nav-tabheight
-        margin-right 0
-        width (nav-containersize / 4)
-        &.overlap
-          /* remove overlap */
-          margin-left 0
-        &.active
-          border-bottom nav-activeborder black solid
-        &::after 
-          content normal
-      
+.container_12
+  width nav-containersize
+  min-width nav-containersize
+  & .grid_12
+    width 100%
+    margin-left 0
+    margin-right 0
+
+header
+  font-family 'Permanent Marker', cursive
+  margin-top 1.5em
+  margin-bottom 1em
+  > hgroup
+    > h1
+      color header-color
+    > h2
+      color lighten(header-color, 30)
+    > h1
+    > h2
+      // webkit fix
+      margin-before 0
+      margin-after 0
+
+/* circles container */
+nav
+  // active state
+  transition-delay 0.1s 
+  transition-property none
+  &.active
+    & .grid_3
+      width (nav-containersize / 4)
     > a
-      font-size nav-fontsize
-      color white
-      text-align center
-      text-transform lowercase
-      text-decoration none
-      line-height nav-circlesize
-      full-circle nav-circlesize
-      transition-property height,border-radius,line-height
-      opacity .8
-      for row in 1..circlecount
-        &:nth-child({row})
-          z-index circlecount + 1 - row
-          background-color circle-colors[row - 1]
-      &:hover
-        z-index circlecount + 1
+      border-radius 0        
+      height nav-tabheight
+      line-height nav-tabheight
+      margin-right 0
       &.overlap
-        margin-left nav-overlap * -1
-        &.alpha
-          margin-left 0
+        /* remove overlap when active*/
+        margin-left 0
+      &.active
+        border-bottom nav-activeborder black solid
+      &::after 
+        content normal // disable ::after
 
-      &::after
-        content ""
-        height 100%
-        width 100%
-        position absolute
-        top 0
-        left 0
-        background-image url(/images/hover-circle.png)
-        background-repeat no-repeat
-        background-size 100%
-      &:hover::after
-        animation rotateIn 2s linear
+  // inactive state
+  > a
+    font-size nav-fontsize
+    color white
+    text-align center
+    text-transform lowercase
+    text-decoration none // links are underlined by default
+    line-height nav-circlesize
+    full-circle nav-circlesize
+    opacity .8
+    for row in 1..circlecount
+      &:nth-child({row})
+        z-index circlecount + 1 - row
+        background-color circle-colors[row - 1]
+    transition-property height,border-radius,line-height
+    &:hover
+      z-index circlecount + 1
+    &.overlap
+      margin-left nav-overlap * -1
+      &.alpha
+        margin-left 0
 
-  > footer.overlap.grid_12
-    width 100%
-    padding-bottom 5em
+    &::after
+      content ""
+      height 100%
+      width 100%
+      position absolute
+      top 0
+      left 0
+      background-image url(/images/hover-circle.png)
+      background-repeat no-repeat
+      background-size 100%
+    &:hover::after
+      animation rotateIn 2s linear
 
-  > article.overlap.grid_12
-    width 100%
-    height 0px
-    min-height 0px
-    overflow hidden
-    opacity 0
-    &.active
-      transition-property height,opacity
-      background-color white
-      opacity 1
-      height auto
-      min-height nav-circlesize - nav-tabheight - nav-activeborder + nav-paddingbottom * .75
+div.topbar
+  height 1.2em
+  position absolute
+  top 0
+  right 0
+  font-size small
+  border-bottom 1px lighten(header-color, 30) solid
+  > a
+    padding-right 1em
+    color lighten(header-color, 30)
+    text-decoration none
+    &.omega
+      padding-right 0
+
+footer
+  padding-bottom 5em
+  border-top 1px black solid
+
+/* TODO */
+article
+  height auto
+  max-height 0px
+  overflow hidden
+  opacity 0
+  transition-property opacity,max-height
+  &.active
+    max-height 1000px
+    background-color white
+    opacity 1
 
 .animated
   transition-duration 1s
@@ -135,38 +145,56 @@ body
 
 @media medium 
   @css {
-    @-viewport {
+    @viewport {
       width: device-width;
-      zoom: .5;
+      zoom: 1;
     }
   }
-  body
-    &.container_12
-      width (nav-circlesize * 2) - colmargin-right
-      min-width (nav-circlesize * 2) - colmargin-right
 
-      > nav.overlap.grid_12 
-        height nav-circlesize * 2
-        > a:nth-child(3)
-          margin-left 0
-          margin-top (colmargin-right * -1)
-        > a:nth-child(2)
-          margin-right 0
-        > a:nth-child(4)
-          margin-top (colmargin-right * -1)
-        &.active
-          height nav-tabheight * 2 + nav-activeborder * 2 + nav-paddingbottom * .75
-          > a
-            width (((nav-circlesize * 2) - colmargin-right) / 2)
-            margin-top 0
-            &.active
-              &:nth-child(1)
-              &:nth-child(2)
-                border-bottom none
-                border-top nav-activeborder black solid
-                margin-top (nav-activeborder * -1)
+  // iphone 4
+  html
+    calculate height, "100% + 100px"
+
+  .container_12
+  .container_12 .grid_12
+    width nav-circlesize * 2 - colmargin-right
+    min-width nav-circlesize * 2 - colmargin-right
   
-      > article.overlap.grid_12.active
-        margin-top 0 - nav-tabheight * 2 - nav-activeborder * 2 - nav-paddingbottom * .75
-      
+  div.topbar
+    font-size medium
+  
+  header
+    margin-top 0.7em
+    > hgroup
+      > h1
+        font-size 1.45em
+      > h2
+        font-size 1.1em
 
+  nav
+    height nav-circlesize * 2 - colmargin-right
+    > a
+      &::after
+        animation rotateIn 2s linear
+      &:nth-child(2)
+        margin-right 0
+      &:nth-child(3)
+        margin-left 0
+        margin-top (colmargin-right * -1)
+      &:nth-child(4)
+        margin-top (colmargin-right * -1)
+      &:hover::after
+        animation none
+    &.grid_12.active
+      transition-property height
+      transition-delay 0.1s 
+      height nav-tabheight * 2 + nav-activeborder
+      > a
+        width ((nav-circlesize * 2 - colmargin-right) / 2)
+        margin-top 0
+        &.active
+          &:nth-child(1)
+          &:nth-child(2)
+            border-bottom none
+            border-top nav-activeborder black solid
+            margin-top (nav-activeborder * -1)

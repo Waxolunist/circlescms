@@ -48,7 +48,13 @@ function restartAnimation(el) {
 
 function setContent(el) {
   var link = $('a[href=' + window.location.hash + ']');
-  ss.rpc('cms.loadcontent', window.location.hash, link.attr('data-op'), function(response){
-    el.html(response);
+  var op = link.attr('data-op');
+  ss.rpc('cms.loadcontent', window.location.hash, op, function(response){
+    if(op) {
+      var html = ss.tmpl[op].render({res: response});
+      el.html(html);
+    } else {
+      el.html(response);
+    }
   });
 }

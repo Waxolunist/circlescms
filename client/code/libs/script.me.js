@@ -48,13 +48,10 @@ function restartAnimation(el) {
 
 function setContent(el) {
   var link = $('a[href=' + window.location.hash + ']');
-  var op = link.attr('data-op');
+  var op = link.attr('data-op') ? link.attr('data-op') : 'content';
+  var tmpl = link.attr('data-tmpl') ? link.attr('data-tmpl') : op;
   ss.rpc('cms.loadcontent', window.location.hash, op, function(response){
-    if(op) {
-      var html = ss.tmpl[op].render({res: response});
-      el.html(html);
-    } else {
-      el.html(response);
-    }
+    var html = ss.tmpl[tmpl]({res: response});
+    el.html(html);
   });
 }

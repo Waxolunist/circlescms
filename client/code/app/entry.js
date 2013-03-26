@@ -24,3 +24,5 @@ ss.server.on('ready', function(){
 
 });
 */
+
+window.moment = require('/moment');

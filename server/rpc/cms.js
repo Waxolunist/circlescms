@@ -1,6 +1,7 @@
 var md = require("node-markdown").Markdown,
     Path = require("path"),
-    Git = require("git-fs");
+    Git = require("git-fs"),
+    moment = require("moment");
 
 Git("../circlescms-content");
 
@@ -52,6 +53,7 @@ function readDir(path, res) {
         
         Git.log(fullpath, function (err, logdata) {
           if (err) throw err;
+          //Get first json entry
           var keys = Object.keys(logdata);
           var filelog = logdata[keys[0]];
           //remove extension

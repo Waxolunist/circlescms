@@ -26,7 +26,7 @@ function deactivateAll() {
 
 function activateLink(href) {
   $('nav > a').removeClass(activeClass);
-  var link = $('a[href=' + href + ']');
+  var link = $('a[href="' + href.split('/')[0] + '"]');
   link.addClass(activeClass);
   link.parent().addClass(activeClass);
 }
@@ -47,10 +47,11 @@ function restartAnimation(el) {
 }
 
 function setContent(el) {
-  var link = $('a[href=' + window.location.hash + ']');
+  var hash = window.location.hash;
+  var link = $('a[href="' + hash + '"]');
   var op = link.attr('data-op') ? link.attr('data-op') : 'content';
   var tmpl = link.attr('data-tmpl') ? link.attr('data-tmpl') : op;
-  ss.rpc('cms.loadcontent', window.location.hash, op, function(response){
+  ss.rpc('cms.loadcontent', hash, op, function(response){
     var html = ss.tmpl[tmpl]({res: response});
     el.html(html);
   });

@@ -1,7 +1,8 @@
 var md = require("node-markdown").Markdown,
     Path = require("path"),
     Git = require("git-fs"),
-    moment = require("moment");
+    moment = require("moment"),
+    metamd = require('metamd');
 
 Git("../circlescms-content");
 
@@ -51,6 +52,17 @@ function readDir(path, res) {
         //windows - cygwin fix
         var fullpath = Path.join(path, file).replace(Path.sep, '/');
         
+        Git.readFile(sha, fullpath, function(err, content) {
+          if(err) throw err;
+          var parsed = metamd(content.toString());
+          var filedata = parsed.getData();
+          filedata.path = fullpath.slice(0, -Path.extname(fullpath).length);
+          console.log(filedata);
+          files.push(filedata);
+          if(files.length == data.files.length) 
+            return res(files);
+        });
+        /*
         Git.log(fullpath, function (err, logdata) {
           if (err) throw err;
           //Get first json entry
@@ -64,6 +76,7 @@ function readDir(path, res) {
             return res(files);
           }
         });
+        */
       });
     });
   }); 

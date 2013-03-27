@@ -36,7 +36,7 @@ function readFile(path, res) {
     if(err) throw err;
     Git.readFile(sha, path, function(err, data) {
       if(err) return res("Content not found");
-      return res(md(data.toString()));
+      return res(metamd(data.toString()).getHtml());
     });
   });
 }

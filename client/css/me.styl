@@ -143,6 +143,24 @@ article
   transition-timing-function ease
   transition-delay 0s 
 
+ol.blog
+  padding-start 0
+  list-style-type none 
+  & li
+    line-height 3em
+    border-bottom 1px lighten(#757575, 40) solid
+    &:hover
+      background-color lighten(#757575, 45)
+  & time
+    color #757575 
+    text-transform uppercase
+  & a
+    text-decoration none
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
+    word-wrap normal
+
 @media medium 
   @css {
     @viewport {

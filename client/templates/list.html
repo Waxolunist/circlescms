@@ -1,7 +1,8 @@
-<div>
+<ol class="blog grid_12">
 {{#res}}
-  <div>
-    {{dateFormat date format="MMM D, YYYY"}}<a href="#{{path}}">{{title}}</a>
-  </div>
+  <li class="grid_9">
+    <time class="grid_2" datetime="{{date}}" pubdate>{{dateFormat date format="MMM D, YYYY"}}</time>
+    <a class="grid_6" href="#{{path}}" rel="bookmark" title="{{title}}">{{title}}</a>
+  </li>
 {{/res}}
-</div>
+</ol>

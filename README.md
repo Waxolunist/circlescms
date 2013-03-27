@@ -100,7 +100,7 @@ The json of an item contains all metatags. So a get on _#blog_ will return follo
 
 ```json
 {
-    res: [
+    "res": [
         {
             "title": "A title",
             "date": "2013-01-01",

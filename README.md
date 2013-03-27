@@ -22,7 +22,7 @@ The content is stored in a git repository, just as Wheat does. CirclesCMS uses [
 
 CirclesCMS knows 2 types of content: Lists (Directories) and Items (Files)
 
-An Item is basically a markdown file with some metadata in it (see [metamd](https://github.com/chrisjaure/metamd). A List is a directory containing other Lists and Items.
+An Item is basically a markdown file with some metadata in it (see [metamd](https://github.com/chrisjaure/metamd)). A List is a directory containing other Lists and Items.
 
 Depending on the hashtag following content will be retrieved assuming following content structure:
 
@@ -40,13 +40,13 @@ Depending on the hashtag following content will be retrieved assuming following 
        |- tmp/
 
 
-| Hash            | Content    | Result                                                                                      |
-|-----------------|------------|---------------------------------------------------------------------------------------------|
-| #blog           | Directory  | A json list containing the non recursive content of the Directory blog (see [json](#json)). |
-| #about          | File       | The rendered content of the file about.md.                                                  |
-| #blog/afile     | File       | The rendered content of the file blog/afile.md.                                             |
-| #doesnotexist   | Error      | An error message formated as json.                                                          |
-| #blog/directory | File       | The rendered content of the file blog/directory.md.                                         |
+| Hash            | Content    | Result                                                                                             |
+|-----------------|------------|----------------------------------------------------------------------------------------------------|
+| #blog           | Directory  | A json list containing the non recursive content of the Directory blog (see [json](#json-format)). |
+| #about          | File       | The rendered content of the file about.md.                                                         |
+| #blog/afile     | File       | The rendered content of the file blog/afile.md.                                                    |
+| #doesnotexist   | Error      | An error message formated as json.                                                                 |
+| #blog/directory | File       | The rendered content of the file blog/directory.md.                                                |
 
 As you can see, an Item has precedence over a List. Thus I encourage to use unique paths, because in the case of _#blog/directory_ you are not able to retrieve the directory listing. That means you can for example link to the files in _#blog/directory_ manually in the file directory.md.
 
@@ -56,15 +56,15 @@ As you can see, an Item has precedence over a List. Thus I encourage to use uniq
 
 The content will be rendered using clientside templates. By default items use the template _item.html_ and lists _list.html_.
 
-You can override the used template by setting the data field _data-tmpl_ (see [Overriding defaults](#overriding).
+You can override the used template by setting the data field _data-tmpl_ (see [Overriding defaults](#overriding-content-defaults)).
 
 ### Where? (Where to put the rendered output)
 
 By default content will be rendered into the element with the id _content_.
 
-You can override this selector by setting the data field _data-el_ (see [Overriding defaults](#overriding).
+You can override this selector by setting the data field _data-el_ (see [Overriding defaults](#overriding-content-defaults)).
 
-### <a id="overriding></a>Overriding content defaults
+### Overriding content defaults
 
 Defaults can be overridden by setting data fields.
 
@@ -80,13 +80,15 @@ At the moment two parameters exist:
 
 ### Examples
 
-    ```
+    ```html
     <div id="about" data-tmpl="about.html" data-el="about"></div>
-    <a href="#about" data-tmpl="contact.html" data-el="about"></a>
+    <a href="#about" data-tmpl="about2.html"></a>
     <a href="#contact" data-tmpl="contact.html" data-el="about"></a>
     <a href="#blog"></a>
     <div id="content"></div>
     ```
+
+The second element does not have any influence, because matching id-referenced elements have precedence over href-referenced elements.
 
 * _#about_ will render the output of about.md using the template about.html and showed in the div about.
 * _#contact_ will render the output of contact.md using the template contact.html and showed in the div about.
@@ -96,6 +98,7 @@ At the moment two parameters exist:
 
 The json of an item contains all metatags. So a get on _#blog_ will return following object:
 
+    ```json
     {
         res: [
             {
@@ -134,12 +137,15 @@ The json of an item contains all metatags. So a get on _#blog_ will return follo
             }
         ]
     }
+    ```
 
 An error message in json format will look like following:
 
+    ```json
     {
         "type": "error",
         "code": "404",
         "message": "Content Not Found"
     }
+    ```
 

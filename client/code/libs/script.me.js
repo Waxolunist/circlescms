@@ -1,7 +1,7 @@
 var activeClass = "active";
 var contentId = "#content";
 
-$(window).bind('hashchange', function() {
+$(window).bind('hashchange', function(o) {
   activateLink(window.location.hash);
   var contentEl = $(contentId);
   if(contentEl.hasClass(activeClass)) {

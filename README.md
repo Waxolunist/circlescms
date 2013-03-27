@@ -80,13 +80,13 @@ At the moment two parameters exist:
 
 ### Examples
 
-    ```html
-    <div id="about" data-tmpl="about.html" data-el="about"></div>
-    <a href="#about" data-tmpl="about2.html"></a>
-    <a href="#contact" data-tmpl="contact.html" data-el="about"></a>
-    <a href="#blog"></a>
-    <div id="content"></div>
-    ```
+```html
+<div id="about" data-tmpl="about.html" data-el="about"></div>
+<a href="#about" data-tmpl="about2.html"></a>
+<a href="#contact" data-tmpl="contact.html" data-el="about"></a>
+<a href="#blog"></a>
+<div id="content"></div>
+```
 
 The second element does not have any influence, because matching id-referenced elements have precedence over href-referenced elements.
 
@@ -98,54 +98,54 @@ The second element does not have any influence, because matching id-referenced e
 
 The json of an item contains all metatags. So a get on _#blog_ will return following object:
 
-    ```json
-    {
-        res: [
-            {
-                "title": "A title",
-                "date": "2013-01-01",
-                "author": "Christian Sterzl",
-                //
-                // other metatags
-                //
-                "path": "blog/afile",
-                "type": "item"
-            },
-            {
-                "title": "Another title",
-                "date": "2013-02-02",
-                "author": "Christian Sterzl",
-                //
-                // other metatags
-                //
-                "path": "blog/anotherfile",
-                "type": "item"
-            },
-            {                
-                "title": "Another title",
-                "date": "2013-02-02",
-                "author": "Christian Sterzl",
-                //
-                // other metatags
-                //
-                "path": "blog/directory",
-                "type": "item"
-            },
-            {                
-                "path": "blog/tmp",
-                "type": "list"
-            }
-        ]
-    }
-    ```
+```json
+{
+    res: [
+        {
+            "title": "A title",
+            "date": "2013-01-01",
+            "author": "Christian Sterzl",
+            //
+            // other metatags
+            //
+            "path": "blog/afile",
+            "type": "item"
+        },
+        {
+            "title": "Another title",
+            "date": "2013-02-02",
+            "author": "Christian Sterzl",
+            //
+            // other metatags
+            //
+            "path": "blog/anotherfile",
+            "type": "item"
+        },
+        {                
+            "title": "Another title",
+            "date": "2013-02-02",
+            "author": "Christian Sterzl",
+            //
+            // other metatags
+            //
+            "path": "blog/directory",
+            "type": "item"
+        },
+        {                
+            "path": "blog/tmp",
+            "type": "list"
+        }
+    ]
+}
+```
 
 An error message in json format will look like following:
 
-    ```json
-    {
-        "type": "error",
-        "code": "404",
-        "message": "Content Not Found"
-    }
-    ```
+```json
+{
+    "type": "error",
+    "code": "404",
+    "message": "Content Not Found"
+}
+```
 

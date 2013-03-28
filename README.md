@@ -111,17 +111,50 @@ Some examples:
 2. list.html
 3. no template
 
+*#doesnotexist* -> no resource found, error returned
+1. error.html
+2. no template, errormessage will be output in either the container with the id error or in the container with the id content.
+
+*#blog/doesnotexist* -> no resource found, error returned
+1. blog/error.html
+2. error.html
+2. no template, errormessage will be output in either the container with the id error or in the container with the id content.
+
 ### Elements (Where)
 
 Elements in the current DOM are used to override default assumptions made by Circles. Circles makes therefore decent use of [HTML5 data attributes](http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#embedding-custom-non-visible-data-with-the-data-attributes).
 
-# Content
+Elements can override following fields:
 
-The content is stored in a git repository, just as Wheat does. CirclesCMS uses [git-fs](https://github.com/creationix/node-git) to read the repository.
+* data-tmpl
+* data-el
 
-CirclesCMS knows 2 types of content: Lists (Directories) and Items (Files)
+If an element can be resolved and it declares the field data-tmpl, template resolution will be skipped and the declared template will be used.
 
-An Item is basically a markdown file with some metadata in it (see [metamd](https://github.com/chrisjaure/metamd)). A List is a directory containing other Lists and Items.
+By default all resources are rendered in the container with the id content. If an element can be resolved and it declares the field data-el, the selector specified will be used to get the element, where the rendered resource should be placed.
+If a selector returns more than one element, only the first will be used.
+
+#### Element Resolution
+
+Before searching for the correct template, the element matching the hashtag will be resolved. First the element with the id exactly matching the hashtag will be tried, because this is the fastest selector available. Afterwards an anchor with href matching the hashtag will be tried. If the hashtag contains slashes, an similiar approach like in resource resolution will be tried. If no element is found, the defaults will be used. If the element does not define a data-field, the default value will be used.
+
+Some examples:
+
+*#a* -> 
+```html
+<[...] id="a" data-el="content2" data-tmpl="item2.html" [...] />
+<a href="#a" data-el="content2" data-tmpl="item2.html" [...] />
+```
+
+*#blog/a* -> 
+```html
+<[...] id="blog/a" data-el="content2" data-tmpl="item2.html" [...] />
+<a href="#blog/a" data-el="content2" data-tmpl="item2.html" [...] />
+<[...] id="blog" data-el="content2" data-tmpl="item2.html" [...] />
+<a href="#blog" data-el="content2" data-tmpl="item2.html" [...] />
+```
+
+### More Examples
 
 Depending on the hashtag following content will be retrieved assuming following content structure:
 
@@ -149,55 +182,9 @@ Depending on the hashtag following content will be retrieved assuming following 
 
 As you can see, an Item has precedence over a List. Thus I encourage to use unique paths, because in the case of _#blog/directory_ you are not able to retrieve the directory listing. That means you can for example link to the files in _#blog/directory_ manually in the file directory.md.
 
-## Rendering the content
+### JSON Format
 
-### How? (How to render)
-
-The content will be rendered using clientside templates. By default items use the template _item.html_ and lists _list.html_.
-
-You can override the used template by setting the data field _data-tmpl_ (see [Overriding defaults](#overriding-content-defaults)).
-
-### Where? (Where to put the rendered output)
-
-By default content will be rendered into the element with the id _content_.
-
-You can override this selector by setting the data field _data-el_ (see [Overriding defaults](#overriding-content-defaults)).
-
-### Overriding content defaults
-
-Defaults can be overridden by setting data fields.
-
-These fields are content specific and are determined by looking at the element either 
-
-* the first element with the id equal to the hash value or if not found
-* the first element with an href equal to the hash
-
-At the moment two parameters exist:
-
-* data-tmpl
-* data-el
-
-### Examples
-
-```html
-<div id="about" data-tmpl="about.html" data-el="about"></div>
-<a href="#about" data-tmpl="about2.html"></a>
-<a href="#contact" data-tmpl="contact.html" data-el="about"></a>
-<a href="#blog"></a>
-<div id="content"></div>
-```
-
-The second element does not have any influence, because matching id-referenced elements have precedence over href-referenced elements.
-
-* _#about_ will render the output of about.md using the template about.html and showed in the div about.
-* _#contact_ will render the output of contact.md using the template contact.html and showed in the div about.
-* _#blog_ will render the output of the json list retrieved using the template list.html and showed in the div content.
-
-If no matching elements were found, the defaults are used.
-
-## JSON Format
-
-The json of an item contains all metatags. So a get on _#blog_ will return following object:
+The json of an item contains all metatags. So a get on _#blog_, assuming blog is a directory, will return following object:
 
 ```json
 {
@@ -239,6 +226,8 @@ The json of an item contains all metatags. So a get on _#blog_ will return follo
     ]
 }
 ```
+
+Get on _#blog/directory_ resolves to _blog/directory.md_ and will return following resource:
 
 ```json
 {

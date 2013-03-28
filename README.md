@@ -59,22 +59,26 @@ A resource will be tried to resolve in the following order:
 To give you an idea I give some examples:
 
 *#a* -> no suffix, trying default suffixes
+
 1. a.md
 2. a.html
 3. a/
 4. 404
 
 *#a.html* ->
+
 1. a.html
 2. a.html/
 3. 404
 
 *#a.md* ->
+
 1. a.md
 2. a.md/
 3. 404
 
 *#blog/a* ->
+
 1. blog/a.md
 2. blog/a.html
 3. blog/a/
@@ -93,29 +97,35 @@ A template will be chosen based on the type and the path.
 Some examples:
 
 *#a* -> found content a.md, no type given, default type item
+
 1. a.item.html
 2. item.html
 3. no template
 
 *#a* -> found content a.html, no metadata or type support, type none
+
 1. no template
 
 *#blog/a* -> found content blog/a.md, type article
+
 1. blog/a.article.html
 3. blog/article.html
 3. article.html
 4. no template
 
 *#blog* -> found content blog/, directory, type list
+
 1. blog.list.html
 2. list.html
 3. no template
 
 *#doesnotexist* -> no resource found, error returned
+
 1. error.html
 2. no template, errormessage will be output in either the container with the id error or in the container with the id content.
 
 *#blog/doesnotexist* -> no resource found, error returned
+
 1. blog/error.html
 2. error.html
 2. no template, errormessage will be output in either the container with the id error or in the container with the id content.

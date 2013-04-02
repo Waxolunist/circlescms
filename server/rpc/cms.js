@@ -12,9 +12,8 @@ exports.actions = function(req, res, ss) {
 
   return {
 
-    loadcontent: function(message, op) {
+    loadcontent: function(message) {
       console.log(message);
-      console.log(op);
       var path = null;
       switch(op) {
         case "list":
@@ -62,21 +61,6 @@ function readDir(path, res) {
           if(files.length == data.files.length) 
             return res(files);
         });
-        /*
-        Git.log(fullpath, function (err, logdata) {
-          if (err) throw err;
-          //Get first json entry
-          var keys = Object.keys(logdata);
-          var filelog = logdata[keys[0]];
-          //remove extension
-          filelog.path = fullpath.slice(0, -Path.extname(fullpath).length);
-          files.push(filelog);
-          //when all files are processed, return
-          if(files.length == data.files.length) {
-            return res(files);
-          }
-        });
-        */
       });
     });
   }); 

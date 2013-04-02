@@ -1,0 +1,72 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+Desktop.ini
+.Spotlight-V100
+.Trashes
+._*
+
+# NetBeans #
+############
+nbsettings/
+nbproject/
+nbbuild/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Textmate #
+############
+*.tmproj
+*.tmproject
+tmtags
+
+# VIM #
+#######
+.*.sw[a-z]
+*.un~
+Session.vim
+
+# Sublime TextEditor #
+######################
+*.sublime-project
+
+# Eclipse #
+######################
+/.project
+/.settings
+
+# Node #
+######################
+node_modules
+npm-debug.*
+
+# Project specific #
+######################
+/tmp
+/test
+/src
+/dist/amd
+/dist/regular
+/bin/build
+/bin/assets
+/build
+/.gitignore
+/.travis.yml
+/component.json
+/testem.json
+/CHANGELOG.md
+/README_website.md
+/dejavu_readme.md

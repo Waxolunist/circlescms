@@ -3,20 +3,19 @@ if (typeof define !== 'function') {
 }
 
 define(function(require) {
-  var dejavu = require('dejavu'),
-      cc = require('./cc.js');
+  var dejavu = require('dejavu');
 
-  cc.parser = {};
+  parser = {};
 
-  cc.parser.IParser = dejavu.Interface.declare({
+  parser.IParser = dejavu.Interface.declare({
     $statics: {
       getSuffix: function() {}
     },
     parseContent: function(data) {}
   });
 
-  cc.parser.DefaultParser = dejavu.Class.declare({
-    $implements: [cc.parser.IParser],
+  parser.DefaultParser = dejavu.Class.declare({
+    $implements: [parser.IParser],
 
     $statics: { 
       getSuffix: function() { return "html"; }
@@ -31,7 +30,7 @@ define(function(require) {
 
   var ParserRegistry = dejavu.Class.declare({
     $statics: {
-      __defaultParser: new cc.parser.DefaultParser(),
+      __defaultParser: new parser.DefaultParser(),
       __parserMap: new Object()
     },
     
@@ -50,7 +49,7 @@ define(function(require) {
     }
   });
 
-  cc.parser.Registry = new ParserRegistry();
+  parser.Registry = new ParserRegistry();
 
-  return cc;
+  return parser;
 });

@@ -5,63 +5,63 @@ if (typeof define !== 'function') {
 define(function(require) {
   var dejavu = require('dejavu');
 
-  function getPropertyByString(o, s) {
-    s = s.replace(/\[(\w+)\]/g, '.$1');  // convert indexes to properties
-    s = s.replace(/^\./, ''); // strip leading dot
-    var a = s.split('.');
-    while (a.length) {
-        var n = a.shift();
-        if (n in o) {
-            o = o[n];
-        } else {
-            return;
-        }
-    }
-    return o;
-  }
-
-  Object.prototype.byString = function(s) {
-    return getPropertyByString(this, s);
-  };
-
   var cc = {};
 
-  cc.isLoaded = function(pkg, a) {
-    if(!a || !pkg) {
-      return false;
-    } else if(typeof a === 'string') {
-      return cc.isLoaded(pkg, a.split('.'));
-    } else if(!(a instanceof Array)) {
-      return false;
-    } else {
-      if(a.length == 1) {
-        return !!pkg[a[0]];
+  cc.byString = function(o, s) {
+    if(s) {
+      s = s.replace(/\[(\w+)\]/g, '.$1');  // convert indexes to properties
+      s = s.replace(/^\./, ''); // strip leading dot
+      var a = s.split('.');
+      while (a.length) {
+        var n = a.shift();
+        if (n in o) {
+          o = o[n];
+        } else {
+          return;
+        }
       }
-      return cc.isLoaded(pkg[a[0]], a.slice(1, a.length));
+      return o;
     }
+    return;
+  }
+
+  cc.isLoaded = function(pkg, subpkg) {
+    if(pkg) {
+      if(subpkg instanceof Array) {
+        return !!cc.byString(pkg, subpkg.join('.'));
+      } else if(typeof subpkg === 'string') {
+        return !!cc.byString(pkg, subpkg);
+      } else {
+        return false;
+      }
+    }
+    return false;
   }
 
   return function() {
     for(var i = 0; i < arguments.length; i++) {
       var pkgname = arguments[i];
-      console.log('Load package ' + pkgname + ' ...');
       
       var pkgnamesplit = pkgname.split('.');
+      var tmpPkg = cc;
       pkgnamesplit.forEach(function(el, idx, array) {
-        var parentpkgname = pkgnamesplit.slice(0, idx);
-        if(cc[el]) {
-          console.log('Package ' + el + ' already loaded. Do nothing!');
+        var subpkg = array.slice(idx, idx + 1).join('.');
+        var subpkgpath = array.slice(0, idx + 1).join('.');
+        if(cc.isLoaded(cc, subpkgpath)) {
+          console.log('Package ' + subpkgpath + ' already loaded. Do nothing!');
         } else {
-          
+          console.log('Load package ' + subpkgpath + ' ...');
+          var module = require('./cc.' + subpkgpath + '.js');
+          if(!module) {
+            console.log('Could not find package ' + subpkgpath);
+          } else {
+            console.log('Package ' + subpkgpath + ' successful loaded.');
+            tmpPkg[subpkg] = module;
+          }
         }
+        tmpPkg = tmpPkg[subpkg];
       });
-      var module = require('./cc.' + pkgname + '.js');
-      if(!module) {
-        console.log('Could not find package ' + pkgname);
-      } else {
-        console.log('Package ' + pkgname + ' successful loaded.');
-        cc[pkgname] = module;
-      }
+      
     }
     
     return cc;

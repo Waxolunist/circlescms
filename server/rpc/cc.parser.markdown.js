@@ -4,13 +4,13 @@ if (typeof define !== 'function') {
 
 define(function(require) {
   var dejavu = require('dejavu'),
-      cc = require('./cc.parser.js'),
+      parser = require('./cc.parser.js'),
       metamd = require('metamd');
 
-  cc.parser.markdown = {};
+  var markdown = {};
 
-  cc.parser.markdown.MarkdownParser = dejavu.Class.declare({
-    $implements: [cc.parser.IParser],
+  markdown.MarkdownParser = dejavu.Class.declare({
+    $implements: [parser.IParser],
 
     $statics: { 
       getSuffix: function() { return "md"; }
@@ -22,10 +22,10 @@ define(function(require) {
     }
   });
 
-  cc.parser.Registry.registerParser(
-    cc.parser.markdown.MarkdownParser.getSuffix(),
-    new cc.parser.markdown.MarkdownParser()
+  parser.Registry.registerParser(
+    markdown.MarkdownParser.getSuffix(),
+    new markdown.MarkdownParser()
   );
 
-  return cc;
+  return markdown;
 });

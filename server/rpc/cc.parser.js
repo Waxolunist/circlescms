@@ -4,28 +4,23 @@ if (typeof define !== 'function') {
 
 define(function(require) {
   var dejavu = require('dejavu'),
-      cc = require('cc');
+      cc = require('./cc.js');
 
-  cc.IParser = dejavu.Interface.declare({
-    getSuffix: function() {},
+  cc.parser = {};
+
+  cc.parser.IParser = dejavu.Interface.declare({
+    $statics: {
+      getSuffix: function() {}
+    },
     parseContent: function(data) {}
   });
 
-  cc.MarkdownParser = dejavu.Class.declare({
-    $implements: [cc.IParser],
+  cc.parser.DefaultParser = dejavu.Class.declare({
+    $implements: [cc.parser.IParser],
 
-    getSuffix: function() { return "md"; },
-
-    parseContent: function(data) {
-      //TODO
-      return {};
-    }
-  });
-
-  cc.DefaultParser = dejavu.Class.declare({
-    $implements: [cc.IParser],
-
-    getSuffix: function() { return "html"; },
+    $statics: { 
+      getSuffix: function() { return "html"; }
+    },
 
     parseContent: function(data) {
       return {
@@ -33,4 +28,29 @@ define(function(require) {
       };
     }
   });
+
+  var ParserRegistry = dejavu.Class.declare({
+    $statics: {
+      __defaultParser: new cc.parser.DefaultParser(),
+      __parserMap: new Object()
+    },
+    
+    initialize: function() {
+    },
+
+    registerParser: function(suffix, parser) {
+      this.$static.__parserMap[suffix] = parser;
+    },
+
+    getParserBySuffix: function(suffix) {
+      if(this.$static.__parserMap.hasOwnProperty(suffix)) {
+        return this.$static.__parserMap[suffix];
+      }
+      return this.$static.__defaultParser;
+    }
+  });
+
+  cc.parser.Registry = new ParserRegistry();
+
+  return cc;
 });

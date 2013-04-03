@@ -72,10 +72,6 @@ define(function(require) {
     }
   });
 
-  if (window !== undefined) {
-    window.cc = cc;
-  }
-
   return cc;
 //define end
 });

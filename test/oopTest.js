@@ -1,4 +1,4 @@
-var cc = require('../server/rpc/cc.js')('resource', 'parser', 'parser.markdown'),
+var cc = require('../server/rpc/cc.js')('resource', 'resource.provider', 'resource.provider.git', 'parser', 'parser.markdown'),
     dejavu = require('dejavu');
 
 console.log(cc);
@@ -9,12 +9,12 @@ exports.testIfLoaded = function(test) {
   a.b.c = {};
   a.b.c.d = {};
   
-  test.ok(!cc.isLoaded());
-  test.ok(!cc.isLoaded(a));
-  test.ok(cc.isLoaded(a, 'b'));
-  test.ok(cc.isLoaded(a, 'b.c.d'));
-  test.ok(!cc.isLoaded(a, 'b.c.d.e'));
-  test.ok(!cc.isLoaded(a, 'f.c.d.e'));
+  test.ok(!cc.util.ObjectUtil.isDefined());
+  test.ok(!cc.util.ObjectUtil.isDefined(a));
+  test.ok(cc.util.ObjectUtil.isDefined(a, 'b'));
+  test.ok(cc.util.ObjectUtil.isDefined(a, 'b.c.d'));
+  test.ok(!cc.util.ObjectUtil.isDefined(a, 'b.c.d.e'));
+  test.ok(!cc.util.ObjectUtil.isDefined(a, 'f.c.d.e'));
   test.done();
 };
 
@@ -47,5 +47,40 @@ exports.testMarkdownParserRegistration = function(test) {
   test.ok(dejavu.instanceOf(parserregistry.getParserBySuffix('html'), cc.parser.IParser));
   test.ok(dejavu.instanceOf(parserregistry.getParserBySuffix('html'), cc.parser.DefaultParser));
   test.ok(!dejavu.instanceOf(parserregistry.getParserBySuffix('md'), cc.parser.DefaultParser));
+  test.done();
+};
+
+exports.testPreconditions = function(test) {
+  test.throws(function() {
+    cc.util.Preconditions.checkNotEmptyString();
+  });
+  test.throws(function() {
+    cc.util.Preconditions.checkNotEmptyString("");
+  });
+  test.throws(function() {
+    cc.util.Preconditions.checkNotEmptyString(undefined);
+  });
+  test.throws(function() {
+    cc.util.Preconditions.checkNotEmptyString(null);
+  });
+  test.doesNotThrow(function() {
+    cc.util.Preconditions.checkNotEmptyString("a");
+  });
+  test.done();
+};
+
+exports.testResourceProviderRegistration = function(test) {
+  test.ok(!!cc.resource.provider.Registry);
+  
+  test.throws(function() {
+    new cc.resource.provider.git.GitResourceProvider();
+  });
+
+  var gitprovider = new cc.resource.provider.git.GitResourceProvider("name", "path");
+  test.ok(!!gitprovider);
+
+  cc.resource.provider.Registry.registerProvider(gitprovider.getName(), gitprovider);
+  test.deepEqual(cc.resource.provider.Registry.getProviderByName("name"), gitprovider);
+
   test.done();
 };

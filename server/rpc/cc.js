@@ -7,36 +7,7 @@ define(function(require) {
 
   var cc = {};
 
-  cc.byString = function(o, s) {
-    if(s) {
-      s = s.replace(/\[(\w+)\]/g, '.$1');  // convert indexes to properties
-      s = s.replace(/^\./, ''); // strip leading dot
-      var a = s.split('.');
-      while (a.length) {
-        var n = a.shift();
-        if (n in o) {
-          o = o[n];
-        } else {
-          return;
-        }
-      }
-      return o;
-    }
-    return;
-  }
-
-  cc.isLoaded = function(pkg, subpkg) {
-    if(pkg) {
-      if(subpkg instanceof Array) {
-        return !!cc.byString(pkg, subpkg.join('.'));
-      } else if(typeof subpkg === 'string') {
-        return !!cc.byString(pkg, subpkg);
-      } else {
-        return false;
-      }
-    }
-    return false;
-  }
+  cc.util = require('./cc.util.js');
 
   return function() {
     for(var i = 0; i < arguments.length; i++) {
@@ -47,7 +18,7 @@ define(function(require) {
       pkgnamesplit.forEach(function(el, idx, array) {
         var subpkg = array.slice(idx, idx + 1).join('.');
         var subpkgpath = array.slice(0, idx + 1).join('.');
-        if(cc.isLoaded(cc, subpkgpath)) {
+        if(cc.util.ObjectUtil.isDefined(cc, subpkgpath)) {
           console.log('Package ' + subpkgpath + ' already loaded. Do nothing!');
         } else {
           console.log('Load package ' + subpkgpath + ' ...');

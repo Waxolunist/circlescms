@@ -22,7 +22,7 @@ define(function(require) {
     }
   });
 
-  parser.Registry.registerParser(
+  parser.ParserRegistry.getInstance().registerParser(
     markdown.MarkdownParser.getSuffix(),
     new markdown.MarkdownParser()
   );

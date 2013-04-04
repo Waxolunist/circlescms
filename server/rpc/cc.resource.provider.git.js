@@ -23,7 +23,7 @@ define(function(require) {
     },
 
     getName: function() { 
-      return name; 
+      return this._name; 
     },
 
     readItem: function(uri) {

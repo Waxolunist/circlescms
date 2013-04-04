@@ -4,7 +4,8 @@ if (typeof define !== 'function') {
 
 define(function(require) {
   var dejavu = require('dejavu'),
-      provider = require('./cc.resource.provider.js');  
+      provider = require('./cc.resource.provider.js'),  
+      util = require('./cc.util.js');
 
   var fs = {};
 
@@ -15,12 +16,14 @@ define(function(require) {
     _path: null,
 
     initialize: function(name, path) {
+      util.Preconditions.checkNotEmptyString(name);
+      util.Preconditions.checkNotEmptyString(path);
       this._name = name;
       this._path = path;
     },
 
     getName: function() { 
-      return name; 
+      return this._name; 
     },
 
     readItem: function(uri) {

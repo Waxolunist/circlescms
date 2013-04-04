@@ -6,7 +6,7 @@ define(function(require) {
   var dejavu = require('dejavu'),
       resource = require('./cc.resource.js');
 
-  provider = {};
+  var provider = {};
 
   provider.IResourceProvider = dejavu.Interface.declare({
     getName: function() {},
@@ -14,12 +14,27 @@ define(function(require) {
     readList: function(uri) {}
   });
 
-  var ProviderRegistry = dejavu.Class.declare({
+  provider.ProviderRegistry = dejavu.Class.declare({
+    $name: 'resource.provider.ProviderRegistry',
+
     $statics: {
-      __providerMap: new Object()
+      __providerMap: new Object(),
+      __instance: null,
+      getInstance: function() {
+        if(this.$self.__instance) {
+          return this.$self.__instance;
+        }
+        this.$self.__instance = new provider.ProviderRegistry();
+        return this.$self.__instance;
+      }
     },
     
-    initialize: function() {
+    __initialize: function() {
+      if(this.$self.__instance) {
+        util.ExceptionUtil.throwIllegalStateException("ProviderRegistry already initialized. Use getInstance!");
+      } else {
+        this.$self.__instance = this;
+      }
     },
 
     registerProvider: function(suffix, provider) {
@@ -30,8 +45,6 @@ define(function(require) {
       return this.$static.__providerMap[name];
     }
   });
-
-  provider.Registry = new ProviderRegistry();
 
   provider.ResourceResolver = dejavu.Class.declare({
     resolveContent: function(uri) {

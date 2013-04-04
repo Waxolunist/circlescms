@@ -5,7 +5,7 @@ if (typeof define !== 'function') {
 define(function(require) {
   var dejavu = require('dejavu');
 
-  parser = {};
+  var parser = {};
 
   parser.IParser = dejavu.Interface.declare({
     $statics: {
@@ -28,13 +28,28 @@ define(function(require) {
     }
   });
 
-  var ParserRegistry = dejavu.Class.declare({
+  parser.ParserRegistry = dejavu.Class.declare({
+    $name: 'parser.ParserRegistry',
+
     $statics: {
       __defaultParser: new parser.DefaultParser(),
-      __parserMap: new Object()
+      __parserMap: new Object(),
+      __instance: null,
+      getInstance: function() {
+        if(this.$self.__instance) {
+          return this.$self.__instance;
+        }
+        this.$self.__instance = new parser.ParserRegistry();
+        return this.$self.__instance;
+      }
     },
     
-    initialize: function() {
+    __initialize: function() {
+      if(this.$self.__instance) {
+        util.ExceptionUtil.throwIllegalStateException("ParserRegistry already initialized. Use getInstance!");
+      } else {
+        this.$self.__instance = this;
+      }
     },
 
     registerParser: function(suffix, parser) {
@@ -48,8 +63,6 @@ define(function(require) {
       return this.$static.__defaultParser;
     }
   });
-
-  parser.Registry = new ParserRegistry();
 
   return parser;
 });

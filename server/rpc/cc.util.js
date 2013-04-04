@@ -74,13 +74,23 @@ define(function(require) {
     $statics: {
       checkNotEmptyString: function(s) {
         if(!util.ObjectUtil.isString(s)) {
-          this.$static.__throwIllegalArgumentException("Check for non empty String failed: " + s);
+          util.ExceptionUtil.throwIllegalArgumentException("Check for non empty String failed: " + s);
         }
+      }
+    }
+  });
+
+  util.ExceptionUtil = dejavu.Class.declare({
+    $statics: {
+      throwIllegalArgumentException: function(m) {
+        this.$static.__throwException("IllegalArgumentException", m);
       },
-      
-      __throwIllegalArgumentException: function(m) {
+      throwIllegalStateException: function(m) {
+        this.$static.__throwException("IllegalStateException", m);
+      },
+      __throwException: function(n,m) {
         throw {
-          name: "IllegalArgumentException",
+          name: n,
           message: m
         };
       }

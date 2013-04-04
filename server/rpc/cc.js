@@ -5,11 +5,11 @@ if (typeof define !== 'function') {
 define(function(require) {
   var dejavu = require('dejavu');
 
-  var cc = {};
-
-  cc.util = require('./cc.util.js');
-
   return function() {
+    var cc = {};
+
+    cc.util = require('./cc.util.js');
+
     for(var i = 0; i < arguments.length; i++) {
       var pkgname = arguments[i];
       

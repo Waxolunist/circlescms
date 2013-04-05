@@ -45,7 +45,7 @@ define(function(require) {
           var a = s.split('.');
           while (a.length) {
             var n = a.shift();
-            if (n in o) {
+            if (this.$static.isObject(o) && n in o) {
               o = o[n];
             } else {
               return;
@@ -75,6 +75,10 @@ define(function(require) {
 
       isArray: function(a) {
         return !!a && a instanceof Array;
+      },
+
+      isObject: function(o) {
+        return !!o && typeof o === 'object';
       }
     }
   });

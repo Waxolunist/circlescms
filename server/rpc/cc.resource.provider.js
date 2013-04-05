@@ -4,14 +4,17 @@ if (typeof define !== 'function') {
 
 define(function(require) {
   var dejavu = require('dejavu'),
-      resource = require('./cc.resource.js');
+      resource = require('./cc.resource.js'),
+      util = require('./cc.util.js'),
+      parser = require('./cc.parser.js');
 
   var provider = {};
 
   provider.IResourceProvider = dejavu.Interface.declare({
     getName: function() {},
-    readItem: function(uri) {},
-    readList: function(uri) {}
+    readItem: function(path) {},
+    readList: function(path) {},
+    returnFirstThatExists: function(paths) {}
   });
 
   provider.ProviderRegistry = dejavu.Class.declare({
@@ -37,8 +40,12 @@ define(function(require) {
       }
     },
 
-    registerProvider: function(suffix, provider) {
-      this.$static.__providerMap[suffix] = provider;
+    registerProvider: function(name, provider) {
+      this.$static.__providerMap[name] = provider;
+    },
+
+    unregisterProvider: function(name) {
+      delete this.$static.__providerMap[name];
     },
 
     getProviderByName: function(name) {
@@ -47,18 +54,21 @@ define(function(require) {
   });
 
   provider.ResourceResolver = dejavu.Class.declare({
+    $constants: {
+      TEMPLATE_SUFFIX: 'html'
+    },
+
     resolveContent: function(uri) {
       var ret = new Array();
       if(util.ObjectUtil.isString(uri)) {
+        var registry = parser.ParserRegistry.getInstance();
         var isDirectoryPath = util.PathUtil.isDirectoryPath(uri);
-        //TODO
         //has registered suffix
-        if(this._hasDefaultSuffix(uri) || isDirectoryPath) {
+        if(registry.isSuffixRegistered(util.PathUtil.getSuffix(uri)) || isDirectoryPath) {
           ret.push(uri);
-        } else if(!uri) {
-          //TODO
+        } else if(!isDirectoryPath) {
           //get all suffixes
-          this._defaultsuffixes.forEach(function(el) {
+          registry.getAllRegisteredSuffixes().forEach(function(el) {
             ret.push([uri, el].join('.')); 
           });
         }
@@ -69,8 +79,30 @@ define(function(require) {
       ret.push(404);
       return ret;
     },
-    resolveTemplate: function(resource) {
-      //TODO
+
+    resolveTemplate: function(r) {
+      if(dejavu.instanceOf(r, resource.IResource)) {
+        var ret = new Array();
+        var basename = "";
+        if(util.ObjectUtil.isString(r.getPath())) {
+          basename = util.PathUtil.getBasename(r.getPath());
+        } else if(util.ObjectUtil.isString(r.getUri())) {
+          basename = util.PathUtil.getDirectory(r.getUri());
+        }
+        //filter empty elements
+        var basesplit = basename.split('/').filter(function(el) {
+          return el;
+        });
+        var basetemplate = [r.getType(), this.$static.TEMPLATE_SUFFIX].join('.');
+        basesplit.forEach(function(el, idx, a){
+          var folder = a.slice(0,a.length - idx).join('/');
+          ret.push([folder, basetemplate].join(idx ? '/' : '.'));
+        });
+        ret.push(basetemplate);
+        return ret; 
+      } else {
+        return new Array();
+      } 
     }
   });
 

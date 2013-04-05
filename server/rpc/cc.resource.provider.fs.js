@@ -32,6 +32,10 @@ define(function(require) {
     
     readList: function(uri) {
       //TODO
+    },
+
+    returnFirstThatExists: function(paths) {
+      //TODO
     }
   });
 

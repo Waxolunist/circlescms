@@ -55,20 +55,24 @@ define(function(require) {
     registerParser: function(suffix, parser) {
       this.$static.__parserMap[suffix] = parser;
     },
+    
+    unregisterParser: function(suffix) {
+      delete this.$static.__parserMap[suffix];
+    },
 
     getParserBySuffix: function(suffix) {
-      if(this.$static.__parserMap.hasOwnProperty(suffix)) {
+      if(this.isSuffixRegistered(suffix)) {
         return this.$static.__parserMap[suffix];
       }
       return this.$static.__defaultParser;
     },
 
     isSuffixRegistered: function(suffix) {
-      //TODO
+      return this.$static.__parserMap.hasOwnProperty(suffix);
     },
 
     getAllRegisteredSuffixes: function() {
-      //TODO
+      return Object.keys(this.$static.__parserMap);
     }
   });
 

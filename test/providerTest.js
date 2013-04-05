@@ -28,6 +28,65 @@ module.exports = testCase({
         }
       })
     }),
+    'ResourceResolver': testCase({
+      'resolveContent': testCase({
+        '1': function(test) {
+          /*
+          test.deepEqual(resolver.resolveContent("a"), ["a.md", "a.html", "a/", 404]);
+          test.deepEqual(resolver.resolveContent("1"), ["1.md", "1.html", "1/", 404]);
+          test.deepEqual(resolver.resolveContent("a.html"), ["a.html", "a.html/", 404]);
+          test.deepEqual(resolver.resolveContent("a.md"), ["a.md", "a.md/", 404]);
+          test.deepEqual(resolver.resolveContent("blog/a"), ["blog/a.md", "blog/a.html", "blog/a/", 404]);
+          test.deepEqual(resolver.resolveContent("blog/a.asp"), ["blog/a.asp.md", "blog/a.asp.html", "blog/a.asp/", 404]);
+          test.deepEqual(resolver.resolveContent("blog/"), ["blog/", 404]);
+          test.deepEqual(resolver.resolveContent(null), [404]);
+          test.deepEqual(resolver.resolveContent(undefined), [404]);
+          test.deepEqual(resolver.resolveContent(""), [404]);
+          test.deepEqual(resolver.resolveContent(0), [404]);
+          test.deepEqual(resolver.resolveContent(1), [404]);
+          test.deepEqual(resolver.resolveContent(NaN), [404]);
+          test.deepEqual(resolver.resolveContent(true), [404]);
+          test.deepEqual(resolver.resolveContent(false), [404]);
+          */
+          test.done();
+        }
+      }),
+      'resolveTemplate': testCase({
+        '1': function(test) {
+          /*
+          test.deepEqual(resolver.resolveTemplate(new circles.Resource("a", "a.md", "item")), 
+                ["a.item.html", "item.html"]);
+          test.deepEqual(resolver.resolveTemplate(new circles.Resource("a", "a.html", null)), []);
+          test.deepEqual(resolver.resolveTemplate(
+                new circles.Resource("blog/a", "blog/a.md", "article")), 
+                ["blog/a.article.html", "blog/article.html", "article.html"]);
+          test.deepEqual(resolver.resolveTemplate(
+                new circles.Resource("blog/dir/a", "blog/dir/a.md", "article")), 
+                ["blog/dir/a.article.html", "blog/dir/article.html", "blog/article.html", "article.html"]);
+          test.deepEqual(resolver.resolveTemplate(new circles.Resource("blog", "blog/", "list")),
+                ["blog.list.html", "list.html"]);
+          test.deepEqual(resolver.resolveTemplate(
+                new circles.Resource("doesnotexist", 404, "error")), 
+                ["error.html"]);
+          test.deepEqual(resolver.resolveTemplate(
+                new circles.Resource("blog/doesnotexist", 404, "error")), 
+                ["blog.error.html", "error.html"]);
+          test.deepEqual(resolver.resolveTemplate(
+                new circles.Resource(null, 404, "error")), 
+                ["error.html"]);
+          test.deepEqual(resolver.resolveTemplate(null), []);
+          test.deepEqual(resolver.resolveTemplate(undefined), []);
+          test.deepEqual(resolver.resolveTemplate(""), []);
+          test.deepEqual(resolver.resolveTemplate(0), []);
+          test.deepEqual(resolver.resolveTemplate(1), []);
+          test.deepEqual(resolver.resolveTemplate(NaN), []);
+          test.deepEqual(resolver.resolveTemplate(true), []);
+          test.deepEqual(resolver.resolveTemplate(false), []);
+          */
+          test.done();
+        }
+      })
+    }),
     'git': testCase({
       'GitResourceProvider': testCase({
         'initialize': testCase({

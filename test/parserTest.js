@@ -7,12 +7,20 @@ module.exports = testCase({
     'Registry': testCase({
       'initialize': testCase({
         '1': function(test) {
-          console.log('Test private constructor:');
-          test.throws(function() { 
+          //Will not fail in loose mode
+          if(dejavu.mode == 'strict') {
+            test.throws(function() { 
+                new cc.parser.ParserRegistry(); 
+              }, 
+              /Constructor of class .* is private/
+            );
+          } else {
+            test.throws(function() {
               new cc.parser.ParserRegistry(); 
-            }, 
-            /Constructor of class .* is private/
-          );
+            }, function(e) {
+              return e.name == 'IllegalStateException';
+            });
+          }
           test.done();
         },
         '2': function(test) {

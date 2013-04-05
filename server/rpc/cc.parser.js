@@ -3,8 +3,8 @@ if (typeof define !== 'function') {
 }
 
 define(function(require) {
-  var dejavu = require('dejavu');
-
+  var dejavu = require('dejavu'),
+      util = require('./cc.util.js');
   var parser = {};
 
   parser.IParser = dejavu.Interface.declare({
@@ -61,6 +61,14 @@ define(function(require) {
         return this.$static.__parserMap[suffix];
       }
       return this.$static.__defaultParser;
+    },
+
+    isSuffixRegistered: function(suffix) {
+      //TODO
+    },
+
+    getAllRegisteredSuffixes: function() {
+      //TODO
     }
   });
 

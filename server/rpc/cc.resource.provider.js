@@ -48,7 +48,26 @@ define(function(require) {
 
   provider.ResourceResolver = dejavu.Class.declare({
     resolveContent: function(uri) {
-      //TODO
+      var ret = new Array();
+      if(util.ObjectUtil.isString(uri)) {
+        var isDirectoryPath = util.PathUtil.isDirectoryPath(uri);
+        //TODO
+        //has registered suffix
+        if(this._hasDefaultSuffix(uri) || isDirectoryPath) {
+          ret.push(uri);
+        } else if(!uri) {
+          //TODO
+          //get all suffixes
+          this._defaultsuffixes.forEach(function(el) {
+            ret.push([uri, el].join('.')); 
+          });
+        }
+        if(!isDirectoryPath) {
+          ret.push(uri + '/');
+        }
+      }
+      ret.push(404);
+      return ret;
     },
     resolveTemplate: function(resource) {
       //TODO

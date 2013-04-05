@@ -1,17 +1,23 @@
-var testCase  = require('nodeunit').testCase;
-var cc = require('../server/rpc/cc.js')('resource.provider.git', 'resource.provider.fs');
+var testCase  = require('nodeunit').testCase,
+    cc = require('../server/rpc/cc.js')('resource.provider.git', 'resource.provider.fs'),
+    dejavu = require('dejavu');
 
 module.exports = testCase({
   'provider': testCase({
     'Registry': testCase({
       'initialize': testCase({
         '1': function(test) {
-          console.log('Test private constructor:');
-          test.throws(function() { 
-              new cc.resource.provider.ProviderRegistry(); 
-            }, 
-            /Constructor of class .* is private/
-          );
+          if(dejavu.mode == 'strict') {
+            test.throws(function() { 
+                new cc.resource.provider.ProviderRegistry(); 
+              }, 
+              /Constructor of class .* is private/
+            );
+          } else {
+            test.doesNotThrow(function() {
+              new cc.resource.provider.ProviderRegistry();
+            });
+          }
           test.done();
         },
         '2': function(test) {
@@ -73,4 +79,4 @@ module.exports = testCase({
       })
     })
   })
-})
+});

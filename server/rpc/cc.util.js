@@ -9,20 +9,29 @@ define(function(require) {
 
   util.PathUtil = dejavu.Class.declare({
     $statics: {
+      __suffixRe: /(?:\.([^./]+))?$/,
       getBasename: function(path) {
-        //TODO
+        if(util.ObjectUtil.isString(path)) {
+          var suffix = this.$static.getSuffix(path);
+          return path.substring(0, path.length - (suffix ? suffix.length + 1 : 0));
+        }
+        return "";
       },
 
       getDirectory: function(path) {
-        //TODO
+        if(util.ObjectUtil.isString(path)) {
+          return path.substring(0, path.lastIndexOf('/') + 1);
+        }
+        return "";
       },
 
       getSuffix: function(path) {
-        //TODO
+        var ret = this.$static.__suffixRe.exec(path)[1];
+        return ret ? ret : "";
       },
 
       isDirectoryPath: function(path) {
-        //TODO
+        return util.ObjectUtil.isString(path) && path.charAt(path.length-1) == '/';
       }
     }
   });

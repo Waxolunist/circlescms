@@ -6,7 +6,8 @@ define(function(require) {
   var dejavu = require('dejavu'),
       resource = require('./cc.resource.js'),
       util = require('./cc.util.js'),
-      parser = require('./cc.parser.js');
+      parser = require('./cc.parser.js'),
+      _ = require('underscore');
 
   var provider = {};
 
@@ -40,8 +41,12 @@ define(function(require) {
       }
     },
 
-    registerProvider: function(name, provider) {
-      this.$static.__providerMap[name] = provider;
+    registerProvider: function(name, p) {
+      if(util.ObjectUtil.instanceOf(p, provider.IResourceProvider)) {
+        this.$static.__providerMap[name] = p;
+      } else {
+        util.ExceptionUtil.throwIllegalArgumentException("provider is not of type provider.IResourceProvider.");
+      }
     },
 
     unregisterProvider: function(name) {
@@ -60,7 +65,7 @@ define(function(require) {
 
     resolveContent: function(uri) {
       var ret = new Array();
-      if(util.ObjectUtil.isString(uri)) {
+      if(_.isString(uri) && uri != "") {
         var registry = parser.ParserRegistry.getInstance();
         var isDirectoryPath = util.PathUtil.isDirectoryPath(uri);
         //has registered suffix
@@ -84,9 +89,9 @@ define(function(require) {
       if(dejavu.instanceOf(r, resource.IResource)) {
         var ret = new Array();
         var basename = "";
-        if(util.ObjectUtil.isString(r.getPath())) {
+        if(_.isString(r.getPath())) {
           basename = util.PathUtil.getBasename(r.getPath());
-        } else if(util.ObjectUtil.isString(r.getUri())) {
+        } else if(_.isString(r.getUri())) {
           basename = util.PathUtil.getDirectory(r.getUri());
         }
         //filter empty elements
@@ -106,16 +111,29 @@ define(function(require) {
     }
   });
 
-  var ResourceFactory = dejavu.Class.declare({
-    __resolver: new provider.ResourceResolver(),
+  provider.ResourceFactory = dejavu.Class.declare({
+    __resolver: null,
+    __providerregistry: null,
 
-    getResource: function(uri) {
-      //TODO
+    initialize: function() {
+      this.__resolver = new provider.ResourceResolver();
+      this.__providerregistry = provider.ProviderRegistry().getInstance();
+    },
+
+    getResource: function(providername, uri) {
+      var provider = this.__providerregistry.getProviderByName(providername);
+      var paths = this.__resolver.resolveContent(uri);
+      var path = provider.returnFirstThatExists(uri);
+      if(path == 404) {
+        //TODO create error
+      } else if(util.PathUtil.isDirectoryPath(path)) {
+        //TODO create List
+      } else {
+        //TODO create Item
+      }
     }
     
   });
-
-  provider.ResourceFactory = new ResourceFactory();
 
   return provider;
 });

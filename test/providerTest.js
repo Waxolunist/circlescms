@@ -26,6 +26,18 @@ module.exports = testCase({
           test.strictEqual(cc.resource.provider.ProviderRegistry.getInstance(), registry);
           test.done();
         }
+      }),
+      'registerProvider': testCase({
+        '1': function(test) {
+          var registry = cc.resource.provider.ProviderRegistry.getInstance();
+          test.throws(function() {
+            registry.registerProvider("1", undefined); 
+          }, function(e) { return e.name == 'IllegalArgumentException'; });
+          test.throws(function() {
+            registry.registerProvider("1", {}); 
+          }, function(e) { return e.name == 'IllegalArgumentException'; });
+          test.done();
+        }
       })
     }),
     'ResourceResolver': testCase({

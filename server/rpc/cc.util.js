@@ -3,7 +3,8 @@ if (typeof define !== 'function') {
 }
 
 define(function(require) {
-  var dejavu = require('dejavu');
+  var dejavu = require('dejavu'),
+      _ = require('underscore');
 
   var util = {};
 
@@ -11,7 +12,7 @@ define(function(require) {
     $statics: {
       __suffixRe: /(?:\.([^./]+))?$/,
       getBasename: function(path) {
-        if(util.ObjectUtil.isString(path)) {
+        if(_.isString(path)) {
           var suffix = this.$static.getSuffix(path);
           return path.substring(0, path.length - (suffix ? suffix.length + 1 : 0));
         }
@@ -19,7 +20,7 @@ define(function(require) {
       },
 
       getDirectory: function(path) {
-        if(util.ObjectUtil.isString(path)) {
+        if(_.isString(path)) {
           return path.substring(0, path.lastIndexOf('/') + 1);
         }
         return "";
@@ -31,7 +32,7 @@ define(function(require) {
       },
 
       isDirectoryPath: function(path) {
-        return util.ObjectUtil.isString(path) && path.charAt(path.length-1) == '/';
+        return _.isString(path) && path.charAt(path.length-1) == '/';
       }
     }
   });
@@ -45,7 +46,7 @@ define(function(require) {
           var a = s.split('.');
           while (a.length) {
             var n = a.shift();
-            if (this.$static.isObject(o) && n in o) {
+            if (_.isObject(o) && n in o) {
               o = o[n];
             } else {
               return;
@@ -58,9 +59,9 @@ define(function(require) {
       
       isDefined: function(o, s) {
           if(o) {
-            if(this.$static.isArray(s)) {
+            if(_.isArray(s)) {
               return !!this.$static.getProperty(o, s.join('.'));
-            } else if(this.$static.isString(s)) {
+            } else if(_.isString(s)) {
               return !!this.$static.getProperty(o, s);
             } else {
               return false;
@@ -69,16 +70,8 @@ define(function(require) {
           return false;
       },
 
-      isString: function(s) {
-        return !!s && typeof s === 'string';
-      },
-
-      isArray: function(a) {
-        return !!a && a instanceof Array;
-      },
-
-      isObject: function(o) {
-        return !!o && typeof o === 'object';
+      instanceOf: function(i, c) {
+        return _.isFunction(c) && dejavu.instanceOf(i, c);
       }
     }
   });
@@ -86,7 +79,7 @@ define(function(require) {
   util.Preconditions = dejavu.Class.declare({
     $statics: {
       checkNotEmptyString: function(s) {
-        if(!util.ObjectUtil.isString(s)) {
+        if(!_.isString(s) || s == "") {
           util.ExceptionUtil.throwIllegalArgumentException("Check for non empty String failed: " + s);
         }
       }

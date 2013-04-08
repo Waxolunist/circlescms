@@ -5,7 +5,8 @@ if (typeof define !== 'function') {
 define(function(require) {
   var dejavu = require('dejavu'),
       provider = require('./cc.resource.provider.js'),  
-      util = require('./cc.util.js');
+      util = require('./cc.util.js'),
+      _ = require('underscore');
 
   var test = {};
 
@@ -49,7 +50,7 @@ define(function(require) {
       var list = new Array();
       var subtree = util.ObjectUtil.getProperty(this.$static.__tree, propertypath);
       for(key in subtree) {
-        if(util.ObjectUtil.isString(subtree[key])) {
+        if(_.isString(subtree[key])) {
           list.push(key);
         } else {
           list.push(key + "/");
@@ -62,19 +63,19 @@ define(function(require) {
       for(idx in paths) {
         var p = paths[idx];
         var isDir = false;
-        if(p.charAt(p.length-1) == '/') {
+        if(util.PathUtil.isDirectoryPath(p)) {
           p = p.slice(0, -1);
           isDir = true;
         }
         var propertypath = p.replace(/\//g, ".");
         var subtree = util.ObjectUtil.getProperty(this.$static.__tree, propertypath);
         if(subtree) {
-          if((util.ObjectUtil.isString(subtree) && !isDir) || isDir) {
+          if((_.isString(subtree) && !isDir) || isDir) {
             return paths[idx];
           }
         }
       }
-      return;
+      return 404;
     }
   });
 

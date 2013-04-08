@@ -50,6 +50,7 @@ resource.AbstractResource = dejavu.AbstractClass.declare({
 /* Implementations */
 resource.Item = dejavu.Class.declare({
   $extends: resource.AbstractResource,
+  $locked: false,
 
   initialize: function(uri, path, type) {
     this.setSuperType(this.$static.ITEMTYPE);
@@ -62,6 +63,7 @@ resource.Item = dejavu.Class.declare({
 
 resource.List = dejavu.Class.declare({
   $extends: resource.AbstractResource,
+  $locked: false,
 
   initialize: function(uri, path, type) {
     this.setSuperType(this.$static.LISTTYPE);

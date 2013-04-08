@@ -52,12 +52,20 @@ define(function(require) {
       }
     },
 
-    registerParser: function(suffix, parser) {
-      this.$static.__parserMap[suffix] = parser;
+    registerParser: function(suffix, p) {
+      if(util.ObjectUtil.instanceOf(p, parser.IParser)) {
+        this.$static.__parserMap[suffix] = p;
+      } else {
+        util.ExceptionUtil.throwIllegalArgumentException("parser is not of type parser.IParser.");
+      }
     },
     
     unregisterParser: function(suffix) {
       delete this.$static.__parserMap[suffix];
+    },
+
+    unregisterAll: function() {
+      this.$static.__parserMap = new Object();
     },
 
     getParserBySuffix: function(suffix) {

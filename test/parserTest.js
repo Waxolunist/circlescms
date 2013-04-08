@@ -71,6 +71,14 @@ module.exports = testCase({
           test.ok(!registry.isSuffixRegistered('asp'));
           test.done();
         }
+      }),
+      'unregisterAll': testCase({
+        '1': function(test) {
+          var registry = cc.parser.ParserRegistry.getInstance();
+          test.doesNotThrow(function() { registry.unregisterAll(); });
+          test.deepEqual(registry.getAllRegisteredSuffixes(), []);
+          test.done();
+        }
       })
     })
   })

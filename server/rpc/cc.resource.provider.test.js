@@ -46,7 +46,8 @@ define(function(require) {
     },
     
     readList: function(path) {
-      var propertypath = path.replace(/\//g, ".");
+      var p = path.replace(/\/$/, "");
+      var propertypath = p.replace(/\//g, ".");
       var list = new Array();
       var subtree = util.ObjectUtil.getProperty(this.$static.__tree, propertypath);
       for(key in subtree) {
@@ -56,22 +57,29 @@ define(function(require) {
           list.push(key + "/");
         }
       }
-      return list; 
+      return {
+        resources: list
+      };
     },
 
     returnFirstThatExists: function(paths) {
-      for(idx in paths) {
-        var p = paths[idx];
-        var isDir = false;
-        if(util.PathUtil.isDirectoryPath(p)) {
-          p = p.slice(0, -1);
-          isDir = true;
-        }
-        var propertypath = p.replace(/\//g, ".");
-        var subtree = util.ObjectUtil.getProperty(this.$static.__tree, propertypath);
-        if(subtree) {
-          if((_.isString(subtree) && !isDir) || isDir) {
-            return paths[idx];
+      if(_.isArray(paths)) {
+        for(idx in paths) {
+          var p = paths[idx];
+          if(p === 404) {
+            break;
+          }
+          var isDir = false;
+          if(util.PathUtil.isDirectoryPath(p)) {
+            p = p.slice(0, -1);
+            isDir = true;
+          }
+          var propertypath = p.replace(/\//g, ".");
+          var subtree = util.ObjectUtil.getProperty(this.$static.__tree, propertypath);
+          if(subtree) {
+            if((_.isString(subtree) && !isDir) || isDir) {
+              return paths[idx];
+            }
           }
         }
       }

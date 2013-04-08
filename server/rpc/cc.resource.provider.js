@@ -25,11 +25,11 @@ define(function(require) {
       __providerMap: new Object(),
       __instance: null,
       getInstance: function() {
-        if(this.$self.__instance) {
-          return this.$self.__instance;
+        if(this.$static.__instance) {
+          return this.$static.__instance;
         }
-        this.$self.__instance = new provider.ProviderRegistry();
-        return this.$self.__instance;
+        this.$static.__instance = new provider.ProviderRegistry();
+        return this.$static.__instance;
       }
     },
     
@@ -74,7 +74,11 @@ define(function(require) {
         } else if(!isDirectoryPath) {
           //get all suffixes
           registry.getAllRegisteredSuffixes().forEach(function(el) {
-            ret.push([uri, el].join('.')); 
+            if(el !== '') { 
+              ret.push([uri, el].join('.')); 
+            } else {
+              ret.push(uri);
+            }
           });
         }
         if(!isDirectoryPath) {
@@ -117,20 +121,26 @@ define(function(require) {
 
     initialize: function() {
       this.__resolver = new provider.ResourceResolver();
-      this.__providerregistry = provider.ProviderRegistry().getInstance();
+      this.__providerregistry = provider.ProviderRegistry.getInstance();
     },
 
     getResource: function(providername, uri) {
       var provider = this.__providerregistry.getProviderByName(providername);
       var paths = this.__resolver.resolveContent(uri);
-      var path = provider.returnFirstThatExists(uri);
-      if(path == 404) {
-        //TODO create error
+      var path = provider.returnFirstThatExists(paths);
+      var r = null;
+      if(_.isFinite(path)) {
+        r = new resource.Item(uri, path, "error");
+        r.message = "Could not find content for '" + uri + "'.";
       } else if(util.PathUtil.isDirectoryPath(path)) {
-        //TODO create List
+        r = new resource.List(uri, path, "list");
+        r = _.extend(r, provider.readList(path));
       } else {
-        //TODO create Item
+        r = new resource.Item(uri, path, "item");
+        r = _.extend(r, provider.readItem(path));
       }
+      r.setTemplates(this.__resolver.resolveTemplate(r));
+      return r;
     }
     
   });

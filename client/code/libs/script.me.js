@@ -51,8 +51,16 @@ function setContent(el) {
   var link = $('a[href="' + hash + '"]');
   var op = link.attr('data-op') ? link.attr('data-op') : 'content';
   var tmpl = link.attr('data-tmpl') ? link.attr('data-tmpl') : op;
-  ss.rpc('cms.loadcontent', hash, op, function(response){
-    var html = ss.tmpl[tmpl]({res: response});
-    el.html(html);
+  ss.rpc('cms.loadcontent', hash, function(response){
+    console.log(response);
+    var tmpl;
+    for(i in response.templates) {
+      var t = response.templates[i];
+      if(ss.tmpl[t]) {
+        tmpl = ss.tmpl[t];
+        el.html(tmpl({res: response}));
+        break;
+      }
+    }
   });
 }

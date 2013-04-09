@@ -45,12 +45,25 @@ resource.AbstractResource = dejavu.AbstractClass.declare({
 
   getTemplates: function () { return this._templates; },
   setTemplates: function (templates) { this._templates = templates; return this; },
+
+  toJSON: function() {
+    var replacement = new Object();
+    for (val in this) {
+      var idx = val;
+      if(val.charAt(0) === '_') {
+        idx = val.substr(1);
+      }
+      replacement[idx] = this[val];
+    }
+    return replacement;
+  }
 });
 
 /* Implementations */
 resource.Item = dejavu.Class.declare({
   $extends: resource.AbstractResource,
   $locked: false,
+  $name: "cc.resource.Item",
 
   initialize: function(uri, path, type) {
     this.setSuperType(this.$static.ITEMTYPE);
@@ -64,6 +77,7 @@ resource.Item = dejavu.Class.declare({
 resource.List = dejavu.Class.declare({
   $extends: resource.AbstractResource,
   $locked: false,
+  $name: "cc.resource.List",
 
   initialize: function(uri, path, type) {
     this.setSuperType(this.$static.LISTTYPE);

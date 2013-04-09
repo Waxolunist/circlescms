@@ -96,22 +96,22 @@ module.exports = testCase({
         '1': function(test) {
           var resolver = new cc.resource.provider.ResourceResolver();
           test.deepEqual(resolver.resolveTemplate(new cc.resource.Item("a", "a.md", "item")), 
-                ["a.item.html", "item.html"]);
-          test.deepEqual(resolver.resolveTemplate(new cc.resource.Item("a", "a.html", null)), ["a.item.html", "item.html"]);
+                ["a.item", "item"]);
+          test.deepEqual(resolver.resolveTemplate(new cc.resource.Item("a", "a.html", null)), ["a.item", "item"]);
           test.deepEqual(resolver.resolveTemplate(
                 new cc.resource.Item("blog/a", "blog/a.md", "article")), 
-                ["blog/a.article.html", "blog/article.html", "article.html"]);
+                ["blog/a.article", "blog/article", "article"]);
           test.deepEqual(resolver.resolveTemplate(
                 new cc.resource.Item("blog/dir/a", "blog/dir/a.md", "article")), 
-                ["blog/dir/a.article.html", "blog/dir/article.html", "blog/article.html", "article.html"]);
+                ["blog/dir/a.article", "blog/dir/article", "blog/article", "article"]);
           test.deepEqual(resolver.resolveTemplate(new cc.resource.Item("blog", "blog/", "list")),
-                ["blog.list.html", "list.html"]);
+                ["blog.list", "list"]);
           test.deepEqual(resolver.resolveTemplate(
                 new cc.resource.Item("doesnotexist", 404, "error")), 
-                ["error.html"]);
+                ["error"]);
           test.deepEqual(resolver.resolveTemplate(
                 new cc.resource.Item(null, 404, "error")), 
-                ["error.html"]);
+                ["error"]);
           test.deepEqual(resolver.resolveTemplate(null), []);
           test.deepEqual(resolver.resolveTemplate(undefined), []);
           test.deepEqual(resolver.resolveTemplate(""), []);
@@ -126,7 +126,7 @@ module.exports = testCase({
           var resolver = new cc.resource.provider.ResourceResolver();
           test.deepEqual(resolver.resolveTemplate(
                 new cc.resource.Item("blog/doesnotexist", 404, "error")), 
-                ["blog.error.html", "error.html"]);
+                ["blog.error", "error"]);
           test.done();
         }
       })
@@ -151,7 +151,7 @@ module.exports = testCase({
           test.equal(r.getUri(), "doesnotexist");
           test.equal(r.getPath(), 404);
           test.ok(/Could not find content.*/g.test(r.message));
-          test.deepEqual(r.getTemplates(), ["error.html"]);
+          test.deepEqual(r.getTemplates(), ["error"]);
           cc.resource.provider.ProviderRegistry.getInstance().unregisterProvider("test");
           test.done();
         },
@@ -166,7 +166,7 @@ module.exports = testCase({
           test.equal(r.getUri(), "g");
           test.equal(r.getPath(), "g");
           test.ok(/Content of g/g.test(r.content));
-          test.deepEqual(r.getTemplates(), ["g.item.html", "item.html"]);
+          test.deepEqual(r.getTemplates(), ["g.item", "item"]);
           cc.resource.provider.ProviderRegistry.getInstance().unregisterProvider("test");
           test.done();
         },
@@ -181,7 +181,7 @@ module.exports = testCase({
           test.equal(r.getUri(), "a");
           test.equal(r.getPath(), "a/");
           test.deepEqual(r.resources, ['b', 'c', 'd/']);
-          test.deepEqual(r.getTemplates(), ["a.list.html", "list.html"]);
+          test.deepEqual(r.getTemplates(), ["a.list", "list"]);
           cc.resource.provider.ProviderRegistry.getInstance().unregisterProvider("test");
           test.done();
         }
@@ -224,20 +224,29 @@ module.exports = testCase({
       'FsResourceProvider': testCase({
         'initialize': testCase({
           '1': function(test) {
+            //Test with empty arguments
             test.throws(function() {
               new cc.resource.provider.fs.FsResourceProvider();
             }, function(e) { return e.name == 'IllegalArgumentException'; });
             test.done();
           },
           '2': function(test) {
-            var fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "path");
+            //Test default behaviour
+            var fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
             test.ok(!!fsprovider);
+            test.done();
+          },
+          '3': function(test) {
+            //Test with non existent path
+            test.throws(function() {
+              new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
+            }, function(e) { return e.name == 'ResourceNotFoundException'; });
             test.done();
           }
         }),
         'register': testCase({
           '1': function(test) {
-            var fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "path");
+            var fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
             cc.resource.provider.ProviderRegistry.getInstance().registerProvider(fsprovider.getName(), fsprovider);
             test.strictEqual(cc.resource.provider.ProviderRegistry.getInstance().getProviderByName("fs"), fsprovider);
             test.done();
@@ -248,6 +257,24 @@ module.exports = testCase({
             var registry = cc.resource.provider.ProviderRegistry.getInstance();
             registry.unregisterProvider("fs");
             test.ok(!registry.getProviderByName("fs"));
+            test.done();
+          }
+        }),
+        'readItem': testCase({
+          '1': function(test) {
+            //TODO
+            test.done();
+          }
+        }),
+        'readList': testCase({
+          '1': function(test) {
+            //TODO
+            test.done();
+          }
+        }),
+        'returnFirstThatExists': testCase({
+          '1': function(test) {
+            //TODO
             test.done();
           }
         })
@@ -292,6 +319,11 @@ module.exports = testCase({
             test.deepEqual(testprovider.readList("a/d")["resources"], ['e', 'f']);
             test.deepEqual(testprovider.readList("a/")["resources"], ['b', 'c', 'd/']);
             test.deepEqual(testprovider.readList("a")["resources"], ['b', 'c', 'd/']);
+            test.done();
+          },
+          '2': function(test) {
+            var testprovider = new cc.resource.provider.test.TestResourceProvider("test");
+            console.log(testprovider.readList("blog/"));
             test.done();
           }
         }),

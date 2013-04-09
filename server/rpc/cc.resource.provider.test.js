@@ -19,12 +19,27 @@ define(function(require) {
           "b": "Content of b",
           "c": "Content of c",
           "d": {
-            "e": "Content of e",
-            "f": "Content of f"
-          }
+              "e": "Content of e",
+              "f": "Content of f"
+           }
         },
         "g": "Content of g",
-        "h": "Content of h"
+        "h": "Content of h",
+        "about": "Content of about",
+        "resume": "Content of resume",
+        "projects": "Content of projects",
+        "blog": {
+          "1": {
+            "title": "Title 1",
+            "date": "2013-01-01",
+            "content": "Some example content"
+          },
+          "2": {
+            "title": "Title 1",
+            "date": "2013-01-01",
+            "content": "Some example content"
+          }
+        }
       }
     },
 

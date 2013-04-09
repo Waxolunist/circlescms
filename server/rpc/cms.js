@@ -1,67 +1,26 @@
-var md = require("node-markdown").Markdown,
-    Path = require("path"),
-    Git = require("git-fs"),
-    moment = require("moment"),
-    metamd = require('metamd');
-
-Git("../circlescms-content");
+var cc = require('./cc.js')('resource.provider.test', 'parser'),
+    _ = require('underscore');
 
 exports.actions = function(req, res, ss) {
 
   req.use('session');
 
+  var factory = new cc.resource.provider.ResourceFactory();
+  var testprovider = new cc.resource.provider.test.TestResourceProvider("test");
+  cc.resource.provider.ProviderRegistry.getInstance().registerProvider(testprovider.getName(), testprovider);
+  cc.parser.ParserRegistry.getInstance().registerParser('', new cc.parser.DefaultParser());
+
   return {
 
     loadcontent: function(message) {
-      console.log(message);
-      var path = null;
-      switch(op) {
-        case "list":
-          path = message.substring(1);
-          readDir(path, res);
-          break;
-        default:
-          path = message.substring(1) + ".md";       
-          readFile(path, res);
-          break;
+      try {
+        var r = factory.getResource("test", message.substr(1));
+        console.inspect(r);
+        res(r);
+      } catch (err) {
+        console.log(err);
       }
     }
   };
 
 };
-
-function readFile(path, res) {
-  Git.getHead(function(err, sha) {
-    if(err) throw err;
-    Git.readFile(sha, path, function(err, data) {
-      if(err) return res("Content not found");
-      return res(metamd(data.toString()).getHtml());
-    });
-  });
-}
-
-function readDir(path, res) {
-  Git.getHead(function(err, sha) {
-    if(err) throw err;
-    Git.readDir(sha, path, function(err, data) {
-      if(err) return res("Content not found");
-
-      var files = new Array();
-      data.files.forEach(function (file) {
-        //windows - cygwin fix
-        var fullpath = Path.join(path, file).replace(Path.sep, '/');
-        
-        Git.readFile(sha, fullpath, function(err, content) {
-          if(err) throw err;
-          var parsed = metamd(content.toString());
-          var filedata = parsed.getData();
-          filedata.path = fullpath.slice(0, -Path.extname(fullpath).length);
-          console.log(filedata);
-          files.push(filedata);
-          if(files.length == data.files.length) 
-            return res(files);
-        });
-      });
-    });
-  }); 
-}

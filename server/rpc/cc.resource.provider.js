@@ -18,6 +18,8 @@ define(function(require) {
     returnFirstThatExists: function(paths) {}
   });
 
+  //TODO AbstractResourceProvider implementing skeleton for returnFirstThatExists
+
   provider.ProviderRegistry = dejavu.Class.declare({
     $name: 'resource.provider.ProviderRegistry',
 
@@ -102,12 +104,11 @@ define(function(require) {
         var basesplit = basename.split('/').filter(function(el) {
           return el;
         });
-        var basetemplate = [r.getType(), this.$static.TEMPLATE_SUFFIX].join('.');
         basesplit.forEach(function(el, idx, a){
           var folder = a.slice(0,a.length - idx).join('/');
-          ret.push([folder, basetemplate].join(idx ? '/' : '.'));
+          ret.push([folder, r.getType()].join(idx ? '/' : '.'));
         });
-        ret.push(basetemplate);
+        ret.push(r.getType());
         return ret; 
       } else {
         return new Array();

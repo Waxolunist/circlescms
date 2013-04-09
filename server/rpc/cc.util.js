@@ -94,6 +94,9 @@ define(function(require) {
       throwIllegalStateException: function(m) {
         this.$static.__throwException("IllegalStateException", m);
       },
+      throwResourceNotFoundException: function(path) {
+        this.$static.__throwException("ResourceNotFoundException", "Resource " + path + " could not be found.");
+      }
       __throwException: function(n,m) {
         throw {
           name: n,

@@ -8,6 +8,7 @@ define(function(require) {
       util = require('./cc.util.js'),
       filecache = require('filecache'),
       nodefs = require('fs'),
+      sync = require('sync'),
       _ = require('underscore');
 
   var fs = {};
@@ -37,11 +38,23 @@ define(function(require) {
       }
       this._name = name;
       this._path = path;
-      var fc = filecache(path, this.$static.__fcoptions);
       var that = this;
-      fc.load(path, function(e, c) { 
-         that._fc = c;
-      });
+      sync(
+        function readPath() {
+          var fc = filecache(path, this.$static.__fcoptions);
+          fc.load(path, function(e,c) {
+          console.log(c);
+          });
+        },
+        function saveCache(e, c) {
+          console.log(c);
+          that.setCache(c);
+        }
+      );
+    },
+
+    setCache: function(cache) {
+      this._fc = cache;  
     },
 
     getName: function() { 

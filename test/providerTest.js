@@ -276,9 +276,8 @@ module.exports = testCase({
         }),
         'returnFirstThatExists': testCase({
           '1': function(test) {
+            //test invalid values
             var provider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
-            test.equal(provider.returnFirstThatExists(['blog.md', 'blog.html', 'blog/']), 'blog/');
-            test.equal(provider.returnFirstThatExists(['blog/article1.md', 'blog/article1.html', 'blog/article1/']), 'blog/article1.md');
             test.equal(provider.returnFirstThatExists([404]), 404);
             test.equal(provider.returnFirstThatExists([]), 404);
             test.equal(provider.returnFirstThatExists(undefined), 404);
@@ -290,6 +289,26 @@ module.exports = testCase({
             test.equal(provider.returnFirstThatExists(true), 404);
             test.equal(provider.returnFirstThatExists(false), 404);
             test.equal(provider.returnFirstThatExists(), 404);
+            test.done();
+          },
+          '2': function(test) {
+            //test inexistent values
+            //TODO
+            var provider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
+            test.done();
+          },
+          '3': function(test) {
+            //TODO
+            //test directories
+            var provider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
+            test.equal(provider.returnFirstThatExists(['blog.md', 'blog.html', 'blog/']), 'blog/');
+            test.done();
+          },
+          '4': function(test) {
+            //TODO
+            //test files
+            var provider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
+            test.equal(provider.returnFirstThatExists(['blog/article1.md', 'blog/article1.html', 'blog/article1/']), 'blog/article1.md');
             test.done();
           }
         })

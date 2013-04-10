@@ -239,8 +239,10 @@ module.exports = testCase({
           '3': function(test) {
             //Test with non existent path
             test.throws(function() {
-              new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
-            }, function(e) { return e.name == 'ResourceNotFoundException'; });
+              new cc.resource.provider.fs.FsResourceProvider("fs", "doesnotexist");
+            }, function(e) { 
+              return e.name == 'ResourceNotFoundException'; 
+            });
             test.done();
           }
         }),
@@ -274,7 +276,20 @@ module.exports = testCase({
         }),
         'returnFirstThatExists': testCase({
           '1': function(test) {
-            //TODO
+            var provider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
+            test.equal(provider.returnFirstThatExists(['blog.md', 'blog.html', 'blog/']), 'blog/');
+            test.equal(provider.returnFirstThatExists(['blog/article1.md', 'blog/article1.html', 'blog/article1/']), 'blog/article1.md');
+            test.equal(provider.returnFirstThatExists([404]), 404);
+            test.equal(provider.returnFirstThatExists([]), 404);
+            test.equal(provider.returnFirstThatExists(undefined), 404);
+            test.equal(provider.returnFirstThatExists(null), 404);
+            test.equal(provider.returnFirstThatExists(""), 404);
+            test.equal(provider.returnFirstThatExists(0), 404);
+            test.equal(provider.returnFirstThatExists(1), 404);
+            test.equal(provider.returnFirstThatExists(NaN), 404);
+            test.equal(provider.returnFirstThatExists(true), 404);
+            test.equal(provider.returnFirstThatExists(false), 404);
+            test.equal(provider.returnFirstThatExists(), 404);
             test.done();
           }
         })
@@ -323,7 +338,7 @@ module.exports = testCase({
           },
           '2': function(test) {
             var testprovider = new cc.resource.provider.test.TestResourceProvider("test");
-            console.log(testprovider.readList("blog/"));
+            test.deepEqual(testprovider.readList("blog/")["resources"], ["1/", "2/"]);
             test.done();
           }
         }),

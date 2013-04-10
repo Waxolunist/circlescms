@@ -6,8 +6,9 @@ define(function(require) {
   var dejavu = require('dejavu'),
       provider = require('./cc.resource.provider.js'),  
       util = require('./cc.util.js'),
-      filecache = require('filecache');
-
+      filecache = require('filecache'),
+      nodefs = require('fs'),
+      _ = require('underscore');
 
   var fs = {};
 
@@ -31,9 +32,16 @@ define(function(require) {
     initialize: function(name, path) {
       util.Preconditions.checkNotEmptyString(name);
       util.Preconditions.checkNotEmptyString(path);
+      if(!nodefs.existsSync(path)) {
+        util.ExceptionUtil.throwResourceNotFoundException(path);
+      }
       this._name = name;
       this._path = path;
-      this._fc = filecache(path, this.$static.__fcoptions);
+      var fc = filecache(path, this.$static.__fcoptions);
+      var that = this;
+      fc.load(path, function(e, c) { 
+         that._fc = c;
+      });
     },
 
     getName: function() { 
@@ -60,8 +68,8 @@ define(function(require) {
             p = p.slice(0, -1);
             isDir = true;
           }
-          //TODO doesfileexist
-          if(fileexists) {
+          console.log(this._fc);
+          if(nodefs.existsSync(p)) {
             return paths[idx];
           }
           

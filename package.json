@@ -1,27 +1,35 @@
 {
-  "name": "circlescms",
-  "description": "Easy to use and easy to program, single page html5 content management system and blog engine built around websockets",
-  "version": "0.0.1",
-  "author": "Christian Sterzl <christian.sterzl@gmail.com>",
-  "private": true,
+  "name": "OpenShift-Sample-App",
+  "version": "1.0.0",
+  "description": "OpenShift Sample Application",
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "application",
+    "openshift"
+  ],
+  "author": {
+    "name": "OpenShift",
+    "email": "ramr@example.org",
+    "url":  "http://openshift.redhat.com/"
+  },
+  "homepage": "http://openshift.redhat.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://gitub.com/openshift/crankcase"
+  },
+
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
   },
+
   "dependencies": {
-    "socketstream": "0.3.x",
-    "express": "3.x.x",
-    "ss-jade": "0.1.x",
-    "ss-stylus": "0.1.x",
-    "ss-handlebars": "0.1.x",
-    "underscore": "1.4.x",
-    "underscore.string": "2.3.x",
-    "amdefine": "0.0.x",
-    "metamd": "0.3.x",
-    "dejavu": "0.4.x",
-    "filecache": "0.2.x",
-    "requirejs": "2.1.x"
+    "express": "*"
   },
-  "scripts": {
-    "start": "node app.js"
-  }
+  "devDependencies": {},
+  "bundleDependencies": [],
+
+  "private": true,
+  "main": "server.js"
 }

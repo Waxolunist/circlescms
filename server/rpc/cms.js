@@ -1,12 +1,13 @@
 var cc = require('./cc.js')('resource.provider.fs', 'parser.markdown'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    path = require('path');
 
 exports.actions = function(req, res, ss) {
 
   req.use('session');
 
   var factory = new cc.resource.provider.ResourceFactory();
-  var fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "content", function() {});
+  var fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", path.join(process.env.OPENSHIFT_REPO_DIR, "content"), function() {});
   cc.resource.provider.ProviderRegistry.getInstance().registerProvider(fsprovider.getName(), fsprovider);
   cc.parser.ParserRegistry.getInstance().registerParser('md', new cc.parser.markdown.MarkdownParser());
 

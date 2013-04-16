@@ -1,4 +1,4 @@
-var cc = require('./cc.js')('resource.provider.test', 'parser'),
+var cc = require('./cc.js')('resource.provider.fs', 'parser.markdown'),
     _ = require('underscore');
 
 exports.actions = function(req, res, ss) {
@@ -6,16 +6,15 @@ exports.actions = function(req, res, ss) {
   req.use('session');
 
   var factory = new cc.resource.provider.ResourceFactory();
-  var testprovider = new cc.resource.provider.test.TestResourceProvider("test");
-  cc.resource.provider.ProviderRegistry.getInstance().registerProvider(testprovider.getName(), testprovider);
-  cc.parser.ParserRegistry.getInstance().registerParser('', new cc.parser.DefaultParser());
+  var fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "../circlescms-content", function() {});
+  cc.resource.provider.ProviderRegistry.getInstance().registerProvider(fsprovider.getName(), fsprovider);
+  cc.parser.ParserRegistry.getInstance().registerParser('md', new cc.parser.markdown.MarkdownParser());
 
   return {
 
-    loadcontent: function(message) {
+    loadcontent: function (message) {
       try {
-        var r = factory.getResource("test", message.substr(1));
-        console.inspect(r);
+        var r = factory.getResource("fs", message.substr(1));
         res(r);
       } catch (err) {
         console.log(err);

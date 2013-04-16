@@ -1,23 +1,27 @@
 {
   "name": "circlescms",
-  "description": "An awesome real time application",
+  "description": "Easy to use and easy to program, single page html5 content management system and blog engine built around websockets",
   "version": "0.0.1",
-  "author": "Me <me@mydomain.com>",
+  "author": "Christian Sterzl <christian.sterzl@gmail.com>",
   "private": true,
   "engines": {
-    "node": ">= 0.6.0"
+    "node": ">= 0.8.0"
   },
   "dependencies": {
     "socketstream": "0.3.x",
     "express": "3.x.x",
     "ss-jade": "0.1.x",
     "ss-stylus": "0.1.x",
-    "ss-hogan": "0.1.x"
+    "ss-handlebars": "0.1.x",
+    "underscore": "1.4.x",
+    "underscore.string": "2.3.x",
+    "amdefine": "0.0.x",
+    "metamd": "0.3.x",
+    "dejavu": "0.4.x",
+    "filecache": "0.2.x",
+    "requirejs": "2.1.x"
   },
   "scripts": {
     "start": "node app.js"
-  },
-  "devDependencies": {
-    "grunt-contrib-nodeunit": "~0.1.2"
   }
 }

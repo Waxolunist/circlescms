@@ -1,18 +1,18 @@
 if (typeof define !== 'function') {
-    var define = require('amdefine')(module);
+  var define = require('amdefine')(module);
 }
 
-define(function(require) {
+define(function (require) {
   var dejavu = require('dejavu');
 
-  return function() {
+  return function () {
     var cc = {};
 
     cc.util = require('./cc.util.js');
 
     for(var i = 0; i < arguments.length; i++) {
       var pkgname = arguments[i];
-      
+
       var pkgnamesplit = pkgname.split('.');
       var tmpPkg = cc;
       pkgnamesplit.forEach(function(el, idx, array) {
@@ -32,10 +32,10 @@ define(function(require) {
         }
         tmpPkg = tmpPkg[subpkg];
       });
-      
+
     }
-    
+
     return cc;
   };
-//define end
+  //define end
 });

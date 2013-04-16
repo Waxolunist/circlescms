@@ -16,6 +16,7 @@ define(function(require) {
 
   parser.DefaultParser = dejavu.Class.declare({
     $implements: [parser.IParser],
+    $name: 'parser.DefaultParser',
 
     $statics: { 
       getSuffix: function() { return "html"; }

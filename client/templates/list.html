@@ -1,8 +1,8 @@
 <ol class="blog grid_12">
-{{#res}}
+{{#res.items}}
   <li class="grid_9">
     <time class="grid_2" datetime="{{date}}" pubdate>{{dateFormat date format="MMM D, YYYY"}}</time>
     <a class="grid_6" href="#{{path}}" rel="bookmark" title="{{title}}">{{title}}</a>
   </li>
-{{/res}}
+{{/res.items}}
 </ol>

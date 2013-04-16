@@ -1,6 +1,9 @@
-var testCase  = require('nodeunit').testCase,
-    cc = require('../server/rpc/cc.js')('parser', 'resource.provider.git', 'resource.provider.fs', 'resource.provider.test'),
-    dejavu = require('dejavu');
+var testCase  = require('nodeunit').testCase;
+var cc = require('../server/rpc/cc.js')('parser', 'resource.provider.git', 'resource.provider.fs', 'resource.provider.test');
+var dejavu = require('dejavu');
+var  _ = require('underscore');
+_.str = require('underscore.string');
+_.mixin(_.str.exports());
 
 module.exports = testCase({
   'provider': testCase({
@@ -80,6 +83,7 @@ module.exports = testCase({
           test.deepEqual(resolver.resolveContent("blog/a"), ["blog/a", "blog/a/", 404]);
           test.deepEqual(resolver.resolveContent("blog/a.asp"), ["blog/a.asp", "blog/a.asp/", 404]);
           test.deepEqual(resolver.resolveContent("blog/"), ["blog/", 404]);
+          test.deepEqual(resolver.resolveContent("blog"), ["blog", "blog/", 404]);
           test.deepEqual(resolver.resolveContent(null), [404]);
           test.deepEqual(resolver.resolveContent(undefined), [404]);
           test.deepEqual(resolver.resolveContent(""), [404]);
@@ -184,6 +188,23 @@ module.exports = testCase({
           test.deepEqual(r.getTemplates(), ["a.list", "list"]);
           cc.resource.provider.ProviderRegistry.getInstance().unregisterProvider("test");
           test.done();
+        },
+        '4': function(test) {
+          var factory = new cc.resource.provider.ResourceFactory();
+          var fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
+          cc.parser.ParserRegistry.getInstance().registerParser('md', new cc.parser.markdown.MarkdownParser());
+          cc.resource.provider.ProviderRegistry.getInstance().registerProvider(fsprovider.getName(), fsprovider);
+          var r = factory.getResource("fs", "blog");
+          test.equal(r.getType(), "list");
+          test.equal(r.getSuperType(), "list");
+          test.equal(r.getUri(), "blog");
+          test.equal(r.getPath(), "blog/");
+          test.deepEqual(r.getTemplates(), ["blog.list", "list"]);
+          test.deepEqual(_.pluck(r.items, 'path'), ["blog/article1.md", "blog/article2.md"]);
+          cc.resource.provider.ProviderRegistry.getInstance().unregisterProvider("fs");
+          cc.parser.ParserRegistry.getInstance().unregisterParser('md');
+          test.deepEqual(cc.parser.ParserRegistry.getInstance().getAllRegisteredSuffixes(), ['']);
+          test.done();
         }
       }) 
     }),
@@ -231,12 +252,23 @@ module.exports = testCase({
             test.done();
           },
           '2': function(test) {
-            //Test default behaviour
+            //Test default behaviour, no cache
             var fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
             test.ok(!!fsprovider);
             test.done();
           },
           '3': function(test) {
+            //Test default behaviour, with cache
+            var fsprovider;
+            var oncacheinit = function(provider) {
+              test.strictEqual(provider, fsprovider);
+              test.expect(2);
+              test.done();
+            }
+            fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent", oncacheinit);
+            test.ok(!!fsprovider);
+          },
+          '4': function(test) {
             //Test with non existent path
             test.throws(function() {
               new cc.resource.provider.fs.FsResourceProvider("fs", "doesnotexist");
@@ -264,14 +296,40 @@ module.exports = testCase({
         }),
         'readItem': testCase({
           '1': function(test) {
-            //TODO
+            var fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
+            test.ok(_(fsprovider.readItem("about.md")["content"]).startsWith('About'));
             test.done();
+          },
+          '2': function(test) {
+            var fsprovider;
+            var oninitcache = function(provider) {
+              test.strictEqual(provider, fsprovider);
+              test.ok(_(provider.readItem("about.md")["content"]).startsWith('About'));
+              test.expect(2);
+              test.done();
+            };
+
+            fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent", oninitcache);
           }
         }),
         'readList': testCase({
           '1': function(test) {
-            //TODO
+            //without cache
+            var provider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
+            test.deepEqual(_.pluck(provider.readList("blog/").items, 'path'), ["blog/article1.md", "blog/article2.md"]);
             test.done();
+          },
+          '2': function(test) {
+            //Test with cache
+            var fsprovider;
+            var oninitcache = function(provider) {
+              test.strictEqual(provider, fsprovider);
+              test.deepEqual(_.pluck(provider.readList("blog/")["items"], 'path'), ["blog/article1.md", "blog/article2.md"]);
+              test.expect(2);
+              test.done();
+            };
+
+            fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent", oninitcache);
           }
         }),
         'returnFirstThatExists': testCase({
@@ -298,18 +356,30 @@ module.exports = testCase({
             test.done();
           },
           '3': function(test) {
-            //TODO
-            //test directories
+            //test directories, without cache
             var provider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
             test.equal(provider.returnFirstThatExists(['blog.md', 'blog.html', 'blog/']), 'blog/');
+            test.equal(provider.returnFirstThatExists(['blog', 'blog/', 404]), 'blog/');
             test.done();
           },
           '4': function(test) {
-            //TODO
             //test files
             var provider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
             test.equal(provider.returnFirstThatExists(['blog/article1.md', 'blog/article1.html', 'blog/article1/']), 'blog/article1.md');
             test.done();
+          },
+          '5': function(test) {
+            //tests with cache
+            test.expect();
+            var fsprovider;
+            var oncacheinit = function(provider) {
+              test.equal(provider.returnFirstThatExists(['blog/article1.md', 'blog/article1.html', 'blog/article1/']), 'blog/article1.md');
+              test.equal(provider.returnFirstThatExists(['blog.md', 'blog.html', 'blog/']), 'blog/');
+              test.expect(2);
+              test.done();
+            }
+
+            fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent", oncacheinit);
           }
         })
       })

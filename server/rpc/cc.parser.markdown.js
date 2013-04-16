@@ -5,7 +5,8 @@ if (typeof define !== 'function') {
 define(function(require) {
   var dejavu = require('dejavu'),
       parser = require('./cc.parser.js'),
-      metamd = require('metamd');
+      metamd = require('metamd'),
+      _ = require('underscore');
 
   var markdown = {};
 
@@ -16,9 +17,11 @@ define(function(require) {
       getSuffix: function() { return "md"; }
     },
 
-    parseContent: function(data) {
-      //TODO
-      return {};
+    parseContent: function (data) {
+      var metaobject = metamd(data);
+      var metadata = metaobject.getData();
+      var html = { content: metaobject.getHtml() };
+      return _.extend(metadata, html);
     }
   });
 

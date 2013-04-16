@@ -2,7 +2,7 @@
 
 //Get the environment variables we need.
 var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
-var port    = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var port    = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 // My SocketStream 0.3 app
 var ss = require('socketstream');
@@ -39,7 +39,7 @@ app.get('/', function (req, res) {
 });
 
 // Start SocketStream
-var server = app.listen(process.env.OPENSHIFT_INTERNAL_PORT, process.env.OPENSHIFT_INTERNAL_IP);
+var server = app.listen(port, ipaddr);
 ss.start(server);
 
 // Append SocketStream middleware to the stack

@@ -33,7 +33,7 @@ app.get('/', function (req, res) {
 });
 
 // Start SocketStream
-var server = app.listen(3000);
+var server = app.listen(process.env.OPENSHIFT_INTERNAL_PORT);
 ss.start(server);
 
 // Append SocketStream middleware to the stack

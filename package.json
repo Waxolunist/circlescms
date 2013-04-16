@@ -1,7 +1,7 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "circlescms",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "description": "Easy to use and easy to program, single page html5 content management system and blog engine built around websockets",
   "keywords": [
     "OpenShift",
     "Node.js",
@@ -9,23 +9,34 @@
     "openshift"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
+    "name": "Christian Sterzl",
+    "email": "christian.sterzl@gmail.com",
     "url":  "http://openshift.redhat.com/"
   },
   "homepage": "http://openshift.redhat.com/",
   "repository": {
     "type": "git",
-    "url": "https://gitub.com/openshift/crankcase"
+    "url": "https://gitub.com/Waxolunist/circlescms"
   },
 
   "engines": {
-    "node": ">= 0.6.0",
+    "node": ">= 0.10.0",
     "npm": ">= 1.0.0"
   },
 
   "dependencies": {
-    "express": "*"
+    "socketstream": "0.3.x",
+    "express": "3.x.x",
+    "ss-jade": "0.1.x",
+    "ss-stylus": "0.1.x",
+    "ss-handlebars": "0.1.x",
+    "underscore": "1.4.x",
+    "underscore.string": "2.3.x",
+    "amdefine": "0.0.x",
+    "metamd": "0.3.x",
+    "dejavu": "0.4.x",
+    "filecache": "0.2.x",
+    "requirejs": "2.1.x"
   },
   "devDependencies": {},
   "bundleDependencies": [],

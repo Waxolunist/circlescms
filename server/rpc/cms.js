@@ -14,6 +14,7 @@ exports.actions = function(req, res, ss) {
   return {
 
     loadcontent: function (message) {
+      console.log(message);
       try {
         var r = factory.getResource("fs", message.substr(1));
         res(r);

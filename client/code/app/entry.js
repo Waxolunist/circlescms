@@ -11,18 +11,19 @@ ss.server.on('reconnect', function(){
   console.log('Connection back up :-)');
 });
 
-/*
+
 ss.server.on('ready', function(){
+  console.log('ss ready');
 
   // Wait for the DOM to finish loading
   jQuery(function(){
-    
-    // Load app
-    require('/app');
-
+    deactivateAll();
+    setContent($(contentId));
+    activateLink(window.location.hash);
+    $(contentId).addClass(activeClass);
   });
 
 });
-*/
+
 
 window.moment = require('/moment');

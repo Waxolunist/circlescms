@@ -3,10 +3,13 @@
 //Get the environment variables we need.
 var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 var port    = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var rootdir = process.env.OPENSHIFT_REPO_DIR || ".";
 
 // My SocketStream 0.3 app
 var ss = require('socketstream');
 var express = require('express');
+
+ss.root = rootdir;
 
 var app = express();
 

@@ -38,6 +38,7 @@ function activateLink(href) {
 function restartAnimation(el) {
   el.removeClass(activeClass);
   var elClone = el.clone(true);
+  elClone.html('');
   setContent(elClone);
   el.before(elClone);
   el.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend',
@@ -52,18 +53,20 @@ function restartAnimation(el) {
 function setContent(el) {
   var hash = window.location.hash;
   var link = $('a[href="' + hash + '"]');
-  var op = link.attr('data-op') ? link.attr('data-op') : 'content';
-  var tmpl = link.attr('data-tmpl') ? link.attr('data-tmpl') : op;
-  ss.rpc('cms.loadcontent', hash, function (response) {
-    console.log(response);
-    var tmpl;
-    for(i in response.templates) {
-      var t = response.templates[i];
-      if(ss.tmpl[t]) {
-        tmpl = ss.tmpl[t];
-        el.html(tmpl({res: response}));
-        break;
+  if (ss.server.event === 'ready' || ss.server.event === 'reconnect') {
+    console.log('loadcontent');
+    ss.rpc('cms.loadcontent', hash, function (response) {
+      console.log(response);
+      for(var i in response.templates) {
+        var t = response.templates[i];
+        if (ss.tmpl[t]) {
+        var tmpl = ss.tmpl[t];
+          el.html(tmpl({res: response}));
+          break;
+        }
       }
-    }
-  });
+    });
+  } else {
+    console.log('Connection down');
+  }
 }

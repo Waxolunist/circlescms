@@ -126,7 +126,6 @@ footer
   padding-bottom 5em
   border-top 1px black solid
 
-/* TODO */
 article
   height auto
   max-height 0px
@@ -134,7 +133,7 @@ article
   opacity 0
   transition-property opacity,max-height
   &.active
-    max-height 1500px
+    max-height 1800px
     background-color white
     opacity 1
   &#content
@@ -188,6 +187,7 @@ ol.blog
   
   header
     margin-top 0.7em
+    padding-left 0.7em
     > hgroup
       > h1
         font-size 1.45em
@@ -221,3 +221,22 @@ ol.blog
             border-bottom none
             border-top nav-activeborder black solid
             margin-top (nav-activeborder * -1)
+  
+  article
+    &#content
+      calculate min-width, '' + (nav-circlesize * 2 - colmargin-right) + ' - 2em'
+
+  .container_12
+    ol.blog
+      margin-before 0
+      margin-left -1em
+      margin-after 0
+      & li
+        margin-left 0
+        margin-right 0
+        width 100%
+      & .grid_7
+        calculate width, "100% / 12 * 8"
+      & .grid_2
+        width auto
+

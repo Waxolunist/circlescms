@@ -54,20 +54,15 @@ function setContent(el) {
   var hash = window.location.hash;
   var link = $('a[href="' + hash + '"]');
   console.log(ss.server.event);
-  if (ss.server.event === 'ready' || ss.server.event === 'reconnect') {
-    console.log('loadcontent');
-    ss.rpc('cms.loadcontent', hash, function (response) {
-      console.log(response);
-      for(var i in response.templates) {
-        var t = response.templates[i];
-        if (ss.tmpl[t]) {
-        var tmpl = ss.tmpl[t];
-          el.html(tmpl({res: response}));
-          break;
-        }
+  ss.rpc('cms.loadcontent', hash, function (response) {
+    console.log(response);
+    for(var i in response.templates) {
+      var t = response.templates[i];
+      if (ss.tmpl[t]) {
+      var tmpl = ss.tmpl[t];
+        el.html(tmpl({res: response}));
+        break;
       }
-    });
-  } else {
-    console.log('Connection down');
-  }
+    }
+  });
 }

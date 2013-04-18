@@ -7,6 +7,31 @@ ss.server.on('disconnect', function(){
   console.log('Connection down :-(');
 });
 
+ss.server.on('connect', function() {
+  console.log('Event connect');
+});
+ss.server.on('connecting', function() {
+  console.log('Event connecting');
+});
+ss.server.on('connect_failed', function() {
+  console.log('Event connect_failed');
+});
+ss.server.on('error', function() {
+  console.log('Event error');
+});
+ss.server.on('message', function(message) {
+  console.log('Event message: ' + message);
+});
+ss.server.on('anything', function(data) {
+  console.log('Event anything: ' + data);
+});
+ss.server.on('reconnect_failed', function() {
+  console.log('Event reconnect_failed');
+});
+ss.server.on('reconnecting', function() {
+  console.log('Event reconnecting');
+});
+
 ss.server.on('reconnect', function(){
   console.log('Connection back up :-)');
   setContent($(contentId));

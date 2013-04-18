@@ -16,12 +16,14 @@ ss.server.on('ready', function(){
   console.log('ss ready');
 
   // Wait for the DOM to finish loading
-  jQuery(function(){
-    deactivateAll();
-    setContent($(contentId));
-    activateLink(window.location.hash);
-    $(contentId).addClass(activeClass);
-  });
+  if(window.location.hash) {
+    jQuery(function(){
+      deactivateAll();
+      setContent($(contentId));
+      activateLink(window.location.hash);
+      $(contentId).addClass(activeClass);
+    });
+  }
 
 });
 

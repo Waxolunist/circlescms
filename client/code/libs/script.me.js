@@ -53,6 +53,7 @@ function restartAnimation(el) {
 function setContent(el) {
   var hash = window.location.hash;
   var link = $('a[href="' + hash + '"]');
+  console.log(ss.server.event);
   if (ss.server.event === 'ready' || ss.server.event === 'reconnect') {
     console.log('loadcontent');
     ss.rpc('cms.loadcontent', hash, function (response) {

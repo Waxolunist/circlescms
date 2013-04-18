@@ -1,7 +1,7 @@
 #!/bin/env node
 
 //Get the environment variables we need.
-var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || null;
 var port    = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var rootdir = process.env.OPENSHIFT_REPO_DIR || ".";
 

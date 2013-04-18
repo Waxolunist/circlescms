@@ -34,7 +34,7 @@ ss.client.define('me', {
   tmpl: '*'
 });
 
-//ss.client.packAssets();
+ss.client.packAssets();
 
 app.get('/', function (req, res) {
   res.serveClient('me');

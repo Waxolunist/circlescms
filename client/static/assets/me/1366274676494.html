@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=0.6"><link href="http://fonts.googleapis.com/css?family=Permanent+Marker|Ubuntu" rel="stylesheet" type="text/css"><link href="/assets/me/1366274676494.css" media="screen" rel="stylesheet" type="text/css"><script src="/assets/me/1366274676494.js" type="text/javascript"></script><script type="text/javascript">(function(){var ht=Handlebars.template,t=require('socketstream').tmpl;t['error']= ht(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, functionType="function";
+
+
+  stack1 = depth0.res;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.message;
+  stack1 = typeof stack1 === functionType ? stack1() : stack1;
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n";
+  return buffer;});t['item']= ht(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, functionType="function";
+
+
+  stack1 = depth0.res;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.content;
+  stack1 = typeof stack1 === functionType ? stack1() : stack1;
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n";
+  return buffer;});t['list']= ht(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this, blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, stack2, foundHelper;
+  buffer += "\n  <li class=\"grid_10\">\n    <time class=\"grid_2\" datetime=\"";
+  foundHelper = helpers.date;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.date; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\" pubdate>";
+  stack1 = depth0.date;
+  stack2 = {};
+  stack2['format'] = "MMM D, YYYY";
+  foundHelper = helpers.dateFormat;
+  stack1 = foundHelper ? foundHelper.call(depth0, stack1, {hash:stack2}) : helperMissing.call(depth0, "dateFormat", stack1, {hash:stack2});
+  buffer += escapeExpression(stack1) + "</time>\n    <a class=\"grid_7\" href=\"#";
+  foundHelper = helpers.path;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.path; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\" rel=\"bookmark\" title=\"";
+  foundHelper = helpers.title;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "\">";
+  foundHelper = helpers.title;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + "</a>\n  </li>\n";
+  return buffer;}
+
+  buffer += "<ol class=\"blog grid_12\">\n";
+  stack1 = depth0.res;
+  stack1 = stack1 == null || stack1 === false ? stack1 : stack1.items;
+  stack1 = typeof stack1 === functionType ? stack1() : stack1;
+  stack1 = stack1 = blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</ol>\n";
+  return buffer;});}).call(this);</script><title>Christian Sterzl vCard</title></head><body class="container_12"><header class="grid_12 clearfix"><hgroup><h1>Christian Sterzl</h1><h2> 
+Enterprise Architect <nobr>and Software Developer</nobr></h2></hgroup></header><nav class="grid_12 clearfix animated"><a href="#about" class="overlap grid_3 alpha animated">About</a><a href="#resume" class="overlap grid_3 animated">Resume</a><a href="#projects" class="overlap grid_3 animated">Projects</a><a href="#blog" data-op="list" class="overlap grid_3 omega animated">Blog</a></nav><article id="content" class="grid_12 clearfix animated"></article><footer class="grid_12 clearfix"> </footer><div class="topbar"><a href="#contact">Contact</a><a href="#circlescms" class="omega">Circlescms</a></div></body></html>

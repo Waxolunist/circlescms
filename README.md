@@ -4,6 +4,10 @@ CirclesCMS (or just Circles) is an easy to use and easy to program, single page 
 
 It accomodates some ideas of various projects like [Wheat](https://github.com/creationix/wheat) or [Sling](http://sling.apache.org/).
 
+## Releases
+
+### V 0.1.0
+
 ## General
 
 ### Architecture

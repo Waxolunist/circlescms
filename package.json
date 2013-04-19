@@ -45,6 +45,6 @@
   "main": "server.js",
 
   "scripts": {
-    "start": "SS_PACK=1 node server.js"
+    "start": "node server.js"
   }
 }

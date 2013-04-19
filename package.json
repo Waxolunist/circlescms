@@ -1,12 +1,29 @@
 {
   "name": "circlescms",
+  "version": "1.0.0",
   "description": "Easy to use and easy to program, single page html5 content management system and blog engine built around websockets",
-  "version": "0.0.1",
-  "author": "Christian Sterzl <christian.sterzl@gmail.com>",
-  "private": true,
-  "engines": {
-    "node": ">= 0.8.0"
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "application",
+    "openshift"
+  ],
+  "author": {
+    "name": "Christian Sterzl",
+    "email": "christian.sterzl@gmail.com",
+    "url":  "http://openshift.redhat.com/"
   },
+  "homepage": "http://openshift.redhat.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://gitub.com/Waxolunist/circlescms"
+  },
+
+  "engines": {
+    "node": ">= 0.10.0",
+    "npm": ">= 1.0.0"
+  },
+
   "dependencies": {
     "socketstream": "0.3.x",
     "express": "3.x.x",
@@ -21,7 +38,14 @@
     "filecache": "0.2.x",
     "requirejs": "2.1.x"
   },
+  "devDependencies": {},
+  "bundleDependencies": [],
+
+  "private": true,
+  "main": "server.js",
+
   "scripts": {
-    "start": "node app.js"
+    "start": "SS_PACK=1 node server.js"
   }
+
 }

@@ -24,12 +24,10 @@ ss.client.templateEngine.use(require('ss-handlebars'));
 ss.client.define('me', {
   view: 'me.jade',
   css: ['me.styl'],
-  code: ['app/moment.js',
-         'app/entry.js',
-         'libs/jquery.min.js',
-         'libs/jquery.ba-bbq.min.js',
-         'libs/handlebar-helpers.js',
-         'libs/script.me.js'
+  code: ['app/entry.js',
+         'libs/script.me.js',
+         'libs/moment.js',
+         'libs/handlebar-helpers.js'
     ],
   tmpl: '*'
 });

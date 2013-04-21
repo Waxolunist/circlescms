@@ -3,55 +3,56 @@
 // Make 'ss' available to all modules and the browser console
 window.ss = require('socketstream');
 
-ss.server.on('disconnect', function(){
+window.ss.server.on('disconnect', function () {
   console.log('Connection down :-(');
 });
 
-ss.server.on('connect', function() {
+window.ss.server.on('connect', function () {
   console.log('Event connect');
 });
-ss.server.on('connecting', function() {
+
+window.ss.server.on('connecting', function () {
   console.log('Event connecting');
 });
-ss.server.on('connect_failed', function() {
+
+window.ss.server.on('connect_failed', function () {
   console.log('Event connect_failed');
 });
-ss.server.on('error', function() {
+
+window.ss.server.on('error', function () {
   console.log('Event error');
 });
-ss.server.on('message', function(message) {
+
+window.ss.server.on('message', function (message) {
   console.log('Event message: ' + message);
 });
-ss.server.on('anything', function(data) {
+
+window.ss.server.on('anything', function (data) {
   console.log('Event anything: ' + data);
 });
-ss.server.on('reconnect_failed', function() {
+
+window.ss.server.on('reconnect_failed', function () {
   console.log('Event reconnect_failed');
 });
-ss.server.on('reconnecting', function() {
+
+window.ss.server.on('reconnecting', function () {
   console.log('Event reconnecting');
 });
 
-ss.server.on('reconnect', function(){
+window.ss.server.on('reconnect', function () {
   console.log('Connection back up :-)');
-  setContent($(contentId));
+  window.cc.setContent(document.getElementById(window.cc.contentId));
 });
 
 
-ss.server.on('ready', function(){
+window.ss.server.on('ready', function () {
   console.log('ss ready');
-
   // Wait for the DOM to finish loading
-  if(window.location.hash) {
-    jQuery(function(){
-      deactivateAll();
-      setContent($(contentId));
-      activateLink(window.location.hash);
-      $(contentId).addClass(activeClass);
-    });
+  if (window.location.hash) {
+    (function () {
+      window.cc.setContent(document.getElementById(window.cc.contentId));
+      window.cc.activateLink(window.location.hash);
+      document.getElementById(window.cc.contentId).classList.add(window.cc.activeClass);
+    }());
   }
-
 });
-
-
-window.moment = require('/moment');

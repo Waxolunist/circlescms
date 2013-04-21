@@ -1,4 +1,4 @@
-var cc = require('./cc.js')('resource.provider.fs', 'parser.markdown'),
+var cc = require('../../lib/cc.js')('resource.provider.fs', 'parser.markdown'),
     _ = require('underscore'),
     path = require('path');
 

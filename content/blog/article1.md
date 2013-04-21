@@ -1,5 +1,5 @@
 title: Christian Sterzl
-date: 2013-02-03
+date: 03 02 2013
 
 Some content
 And some more content

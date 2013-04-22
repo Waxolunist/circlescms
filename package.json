@@ -45,6 +45,6 @@
   "main": "server.js",
 
   "scripts": {
-    "start": "node server.js"
+    "start": "SS_ENV=production SS_PACK=1 node server.js"
   }
 }

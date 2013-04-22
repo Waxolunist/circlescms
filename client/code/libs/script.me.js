@@ -62,7 +62,7 @@ var cc = {
     if (contentEl.classList.contains(cc.activeClass)) {
       cc.restartAnimation(contentEl);
     } else if (!!href) {
-      contentEl.addClass(cc.activeClass);
+      contentEl.classList.add(cc.activeClass);
       cc.setContent(contentEl);
     }
   }

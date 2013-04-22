@@ -20,6 +20,15 @@ ss.client.formatters.add(require('ss-stylus'));
 ss.client.templateEngine.use(require('ss-handlebars'));
 
 //ss.ws.transport.use(require('ss-sockjs'));
+ss.ws.transport.use('engineio', {
+  client: {
+    transports: ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']
+    //, port: 8080
+  },
+  server: {
+    //port: 8080
+  }
+});
 
 ss.client.define('me', {
   view: 'me.jade',
@@ -32,7 +41,9 @@ ss.client.define('me', {
   tmpl: '*'
 });
 
-//ss.client.packAssets();
+if (ss.env === 'production') {
+  ss.client.packAssets();
+}
 
 app.get('/', function (req, res) {
   res.serveClient('me');

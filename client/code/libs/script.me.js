@@ -7,6 +7,13 @@ var cc = {
     Array.prototype.forEach.call(list, callback, context);
   },
 
+  addEventListener: function (target, types, listener, useCapture) {
+    types.split(' ').forEach(function (el, idx, a) {
+      target.addEventListener(el, listener, useCapture);
+    });
+  },
+
+  //CMS core client
   activateLink: function (href) {
     cc.forEach(document.links, function (link) {
       var parent = href.split('/')[0];
@@ -42,20 +49,7 @@ var cc = {
     elClone.innerHTML = '';
     cc.setContent(elClone);
     el.parentNode.insertBefore(elClone, el);
-    el.addEventListener('transitionend',
-      (function (oldEl, newEl) {
-        console.log('addEventListener');
-        return function () {
-          setTimeout(function () {
-            console.log('activate');
-            if (oldEl.parentNode) {
-              oldEl.parentNode.removeChild(oldEl);
-            }
-            newEl.classList.add(cc.activeClass);
-          }, 1000);
-        };
-      }(el, elClone)), false);
-    el.addEventListener('webkitTransitionEnd',
+    cc.addEventListener(el, 'transitionend webkitTransitionEnd',
       (function (oldEl, newEl) {
         console.log('addEventListener');
         return function () {

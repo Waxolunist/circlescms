@@ -44,13 +44,15 @@ var cc = {
     el.parentNode.insertBefore(elClone, el);
     el.addEventListener('transitionend',
       (function (oldEl, newEl) {
+        console.log('addEventListener');
         return function () {
           setTimeout(function () {
+            console.log('activate');
             if (oldEl.parentNode) {
               oldEl.parentNode.removeChild(oldEl);
             }
             newEl.classList.add(cc.activeClass);
-          }, 200);
+          }, 1000);
         };
       }(el, elClone)), false);
   },

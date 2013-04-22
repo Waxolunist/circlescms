@@ -55,6 +55,19 @@ var cc = {
           }, 1000);
         };
       }(el, elClone)), false);
+    el.addEventListener('webkitTransitionEnd',
+      (function (oldEl, newEl) {
+        console.log('addEventListener');
+        return function () {
+          setTimeout(function () {
+            console.log('activate');
+            if (oldEl.parentNode) {
+              oldEl.parentNode.removeChild(oldEl);
+            }
+            newEl.classList.add(cc.activeClass);
+          }, 1000);
+        };
+      }(el, elClone)), false);
   },
 
   changeLocation: function () {

@@ -77,3 +77,19 @@ window.onload = function scroll() {
 window.onhashchange = cc.changeLocation;
 
 window.cc = cc;
+
+if (typeof console !== "undefined") {
+  if (typeof console.log !== 'undefined') {
+    console.olog = console.log;
+  } else {
+    console.olog = function () {};
+  }
+}
+
+console.log = function (message) {
+  console.olog(message);
+  var logmessage = document.createElement('p');
+  logmessage.innerHTML = message;
+  document.getElementById('debug').appendChild(logmessage);
+};
+console.error = console.debug = console.info =  console.log;

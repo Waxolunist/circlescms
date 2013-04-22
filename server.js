@@ -1,7 +1,7 @@
 #!/bin/env node
 
 //Get the environment variables we need.
-var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || null;
+var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || 'localhost';
 var port    = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var rootdir = process.env.OPENSHIFT_REPO_DIR || ".";
 
@@ -20,15 +20,15 @@ ss.client.formatters.add(require('ss-stylus'));
 ss.client.templateEngine.use(require('ss-handlebars'));
 
 //ss.ws.transport.use(require('ss-sockjs'));
-ss.ws.transport.use('engineio', {
-  client: {
-    transports: ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']
-    //, port: 8080
-  },
-  server: {
-    //port: 8080
-  }
-});
+// nodejs is executed in openshift
+// see https://www.openshift.com/blogs/paas-websockets
+if (process.env.OPENSHIFT_NODEJS_PORT) {
+  ss.ws.transport.use('engineio', {
+    client: {
+      port: 8000
+    }
+  });
+}
 
 ss.client.define('me', {
   view: 'me.jade',

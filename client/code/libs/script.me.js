@@ -59,7 +59,7 @@ var cc = {
               oldEl.parentNode.removeChild(oldEl);
             }
             newEl.classList.add(cc.activeClass);
-          }, 1000);
+          }, 200);
         };
       }(el, elClone)), false);
   },

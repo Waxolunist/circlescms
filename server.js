@@ -1,7 +1,7 @@
 #!/bin/env node
 
 //Get the environment variables we need.
-var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || 'localhost';
+var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || null;
 var port    = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var rootdir = process.env.OPENSHIFT_REPO_DIR || ".";
 
@@ -35,6 +35,7 @@ ss.client.define('me', {
   css: ['me.styl'],
   code: ['app/entry.js',
          'libs/script.me.js',
+         'libs/uri.js',
          'libs/moment.js',
          'libs/handlebar-helpers.js'
     ],

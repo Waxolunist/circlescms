@@ -1,6 +1,16 @@
 var cc = {
   activeClass: 'active',
   contentId: 'content',
+  urlParams: new (function (sSearch) {
+    if (sSearch.length > 1) {
+      var aItKey, nKeyId = 0, aCouples;
+      for (aCouples = sSearch.substr(1).split("&"); nKeyId < aCouples.length; nKeyId++) {
+        aItKey = aCouples[nKeyId].split("=");
+        this[window.unescape(aItKey[0])] = aItKey.length > 1 ? window.unescape(aItKey[1]) : "";
+      }
+    }
+  })(window.location.search),
+  debug: false,
 
   //Some uttilitymethods
   forEach: function (list, callback, context) {
@@ -31,7 +41,6 @@ var cc = {
       link = document.querySelector('a[href="' + hash + '"]');
     //filter here this.eio.Socket.sockets[*].readyState 
     window.ss.rpc('cms.loadcontent', hash, function (response) {
-      console.log(response);
       cc.forEach(response.templates, function (val) {
         var tmpl;
         if (window.ss.tmpl[val]) {
@@ -74,13 +83,48 @@ var cc = {
       contentEl.classList.add(cc.activeClass);
       cc.setContent(contentEl);
     }
+  },
+
+  checkIfDebugIsEnabled: function () {
+    cc.debug = !!cc.urlParams.debug;
+    console.log('Debug: ' + cc.debug);
+    if (!cc.debug) {
+      document.getElementById('debug').style.display = 'none';
+    }
   }
 };
+
+function drag_start(event) {
+  var style = window.getComputedStyle(event.target, null);
+  event.dataTransfer.setData("text/plain",
+    (parseInt(style.getPropertyValue("left"), 10) - event.clientX)
+    + ',' + (parseInt(style.getPropertyValue("top"), 10) - event.clientY));
+}
+
+function drag_over(event) {
+  event.preventDefault();
+  return false;
+}
+
+function drop(event) {
+  var offset = event.dataTransfer.getData("text/plain").split(','),
+    dm = document.getElementById('debug');
+  dm.style.left = (event.clientX + parseInt(offset[0], 10)) + 'px';
+  dm.style.top = (event.clientY + parseInt(offset[1], 10)) + 'px';
+  event.preventDefault();
+  return false;
+}
 
 window.onload = function scroll() {
   setTimeout(function () {
     window.scrollTo(0, 1);
   }, 0);
+  cc.checkIfDebugIsEnabled();
+
+  var dm = document.getElementById('debug');
+  dm.addEventListener('dragstart', drag_start, false);
+  document.all[0].addEventListener('dragover', drag_over, false);
+  document.all[0].addEventListener('drop', drop, false);
 };
 
 window.onhashchange = cc.changeLocation;
@@ -97,8 +141,9 @@ if (typeof console !== "undefined") {
 
 console.log = function (message) {
   console.olog(message);
-  var logmessage = document.createElement('p');
+  var logmessage = document.createElement('pre');
   logmessage.innerHTML = message;
   document.getElementById('debug').appendChild(logmessage);
 };
-console.error = console.debug = console.info =  console.log;
+
+console.error = console.debug = console.info = console.log;

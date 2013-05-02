@@ -17,4 +17,4 @@ After at least two hours of search on the web I found a way of installing bookma
 First go to this site: [iPhone bookmarklet, for saving bookmarklets](http://www.thecssninja.com/javascript/iphone-bookmarklet)
 Follow the instructions there and install this bookmarklet.
 
-Now you can go back to the Firebug Lite page and install a bookmarklet there and I think about if I should throw my little console div away or keep it.
+Now you can go back to the Firebug Lite page and install a bookmarklet there. In the meantime I will think about if I should throw my little console div away or keep it but probably I will keep it. You never know.

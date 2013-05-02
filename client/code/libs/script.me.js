@@ -10,7 +10,6 @@ var cc = {
       }
     }
   })(window.location.search),
-  debug: false,
 
   //Some uttilitymethods
   forEach: function (list, callback, context) {
@@ -83,67 +82,15 @@ var cc = {
       contentEl.classList.add(cc.activeClass);
       cc.setContent(contentEl);
     }
-  },
-
-  checkIfDebugIsEnabled: function () {
-    cc.debug = !!cc.urlParams.debug;
-    console.log('Debug: ' + cc.debug);
-    if (!cc.debug) {
-      document.getElementById('debug').style.display = 'none';
-    }
   }
 };
-
-function drag_start(event) {
-  var style = window.getComputedStyle(event.target, null);
-  event.dataTransfer.setData("text/plain",
-    (parseInt(style.getPropertyValue("left"), 10) - event.clientX)
-    + ',' + (parseInt(style.getPropertyValue("top"), 10) - event.clientY));
-}
-
-function drag_over(event) {
-  event.preventDefault();
-  return false;
-}
-
-function drop(event) {
-  var offset = event.dataTransfer.getData("text/plain").split(','),
-    dm = document.getElementById('debug');
-  dm.style.left = (event.clientX + parseInt(offset[0], 10)) + 'px';
-  dm.style.top = (event.clientY + parseInt(offset[1], 10)) + 'px';
-  event.preventDefault();
-  return false;
-}
 
 window.onload = function scroll() {
   setTimeout(function () {
     window.scrollTo(0, 1);
   }, 0);
-  cc.checkIfDebugIsEnabled();
-
-  var dm = document.getElementById('debug');
-  dm.addEventListener('dragstart', drag_start, false);
-  document.all[0].addEventListener('dragover', drag_over, false);
-  document.all[0].addEventListener('drop', drop, false);
 };
 
 window.onhashchange = cc.changeLocation;
 
 window.cc = cc;
-
-if (typeof console !== "undefined") {
-  if (typeof console.log !== 'undefined') {
-    console.olog = console.log;
-  } else {
-    console.olog = function () {};
-  }
-}
-
-console.log = function (message) {
-  console.olog(message);
-  var logmessage = document.createElement('pre');
-  logmessage.innerHTML = message;
-  document.getElementById('debug').appendChild(logmessage);
-};
-
-console.error = console.debug = console.info = console.log;

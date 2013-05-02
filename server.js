@@ -50,6 +50,8 @@ app.get('/', function (req, res) {
   res.serveClient('me');
 });
 
+app.use("/assets", express.static(rootdir + "/content/assets"));
+
 // Start SocketStream
 var server = app.listen(port, ipaddr);
 ss.start(server);

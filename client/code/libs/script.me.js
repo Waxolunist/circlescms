@@ -22,6 +22,14 @@ var cc = {
     });
   },
 
+  setTargetForExternal: function () {
+    cc.forEach(document.links, function (link) {
+      if (link.hostname !== window.location.hostname) {
+        link.target = '_blank';
+      }
+    });
+  },
+
   //CMS core client
   activateLink: function (href) {
     cc.forEach(document.links, function (link) {
@@ -45,6 +53,7 @@ var cc = {
         if (window.ss.tmpl[val]) {
           tmpl = window.ss.tmpl[val];
           el.innerHTML = tmpl({res: response});
+          cc.setTargetForExternal();
           return false;
         }
       });
@@ -85,12 +94,14 @@ var cc = {
   }
 };
 
+window.cc = cc;
+
 window.onload = function scroll() {
   setTimeout(function () {
     window.scrollTo(0, 1);
   }, 0);
+  
+  cc.setTargetForExternal();
 };
 
 window.onhashchange = cc.changeLocation;
-
-window.cc = cc;

@@ -1,3 +1,5 @@
+Download [Resume (German)](/assets/Lebenslauf-ChristianSterzl.pdf)
+
 # Resume
 
 ## Personal
@@ -34,22 +36,56 @@ Degree with distinction
     - based on ... 
         - JEE5
         - Vaadin 7 + GWT
+        - Vaadin Touchkit
         - Google Guice
+- Design and Development of a solution for centralized printing (called CentralOM - **Central** **O**utput **M**anagement) composed of a .NET webapplication and some Windows Services
 - Development of an Java application for synchronizing user account data between different applications like Microsoft Active Directory, Adobe CQ5, intern CRM
 - Development of a java library and swing application for easier encryption and decryption of credentials and other data
+- Development of various webservice and JMS-Clients for .NET and Java
 - Assembling the java development environment for continuous build and continuous integration
-- Organization of 
+- Organization of the centralized documentation platform based on [Atlassian Confluence](http://www.atlassian.com/software/confluence/)
+- Second and Third Level support for the above named applications
 
-✕ Entwicklung einer Java Library und Swing Applikation zum Ver- und Entschlüs-
-seln von Credentials und anderen Daten
-• Aufbau der Java-Entwicklungsumgebung (IDE, VCS / SVN, Continuous Build,
-Apache Archiva / Maven)
-• Aufbau einer zentralen internen Informationsplattform (Atlassian Confluence
-und Atlassian JIRA für Bugtracking) und Entwicklung von Plugins für Atlas-
-sian Confluence
-• Architektur und Entwicklung einer Webapplikation für das zentrale Drucken
-und Verpacken der Tageskorrespondenz basierend auf .NET, sowie dazuge-
-höriger Windows Services
-• Entwicklung verschiedener Webservice- und JMS- Clients in .NET und Java
-• Second- und Third-Level-Support für Eigenentwicklungen und diverse We-
-bapplikationen
+**2009:** Sideline job
+
+- Development of the web application "Speicherseen" for the [Swiss Federal Office of Energy SFOE](http://www.bfe.admin.ch/index.html?lang=en) based on Python and  [Django](http://www.bfe.admin.ch/index.html?lang=en)
+
+**2007 - 2009:** [bdh. Solutions AG](http://bdh.ch/)
+
+- Assumption of lead development position for SEEK! v3, a HR-Tool based on ASP.NET and Java SE (Swing)
+- Member of the development team for SEEK! v4 based on JBoss Seam
+- Development of a ASP.NET webapplication for [Federal Office of Transport FOT](http://www.bav.admin.ch/index.html?lang=en)
+- Initiation of [Joomla](http://www.joomla.org/) as CMS for the Homepage
+- Introduction of [Atlassian JIRA](http://www.atlassian.com/de/software/jira/) for issuetracking
+
+**2005 - 2007:** [PDTS - Prozessdatentechnik und Systeme GmbH](http://www.pdts.at)
+
+- Member of the development team for the project [Prepaid](http://www.prepaid-karten.at/)
+    Tasks: 
+    - Database programming (PLSQL)
+    - Java programming (ORM, Servlets)
+    - Authorization and Authentication
+    - Test automation
+- Support for the internal wiki based on [Atlassian Confluence](http://www.atlassian.com/software/confluence/)
+
+**2004:** Internship at CocoSoftware Engineering GmbH
+
+- Participation in the project [BEHA](http://beha.at/)
+- Design and implementation of a module for delay prediction of the on-deman public transit bus, which was actually also topic of my diploma thesis
+
+## Training and certificates
+
+- **2012:** Java Enterprise Ed. 5 Enterprise Architect Certiﬁed Master
+- **2011:** Developing Architectures for Enterprise Java Applications (Training)
+- **2011:** Oracle Weblogic Server Administrator (Training)
+- **2009:** Day CQ5 Administrator and Developer (Training)
+- **2009:** ITIL v3 Certificate
+- **2003:** Sun Certified Programmer for the Java 2 Platform 1.4
+- **2003:** Cisco Certiﬁed Network Associate
+- **1999:** Cambridge First Certiﬁcate in English
+
+## Languages
+
+- Native German
+- Fluent English
+- Basic French

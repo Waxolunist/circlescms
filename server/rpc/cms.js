@@ -10,6 +10,7 @@ exports.actions = function(req, res, ss) {
   var fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", path.join(process.env.OPENSHIFT_REPO_DIR || "", "content"), function() {});
   cc.resource.provider.ProviderRegistry.getInstance().registerProvider(fsprovider.getName(), fsprovider);
   cc.parser.ParserRegistry.getInstance().registerParser('md', new cc.parser.markdown.MarkdownParser());
+  cc.parser.ParserRegistry.getInstance().registerParser('html', new cc.parser.DefaultParser());
 
   return {
 
@@ -17,6 +18,7 @@ exports.actions = function(req, res, ss) {
       console.log(message);
       try {
         var r = factory.getResource("fs", message.substr(1));
+        console.log(r);
         res(r);
       } catch (err) {
         console.log(err);

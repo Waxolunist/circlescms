@@ -1,5 +1,5 @@
 var testCase  = require('nodeunit').testCase;
-var cc = require('../server/rpc/cc.js')();
+var cc = require('../lib/cc.js')();
 
 module.exports = testCase({
   'util': testCase({

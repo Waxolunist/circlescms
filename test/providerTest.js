@@ -1,5 +1,5 @@
 var testCase  = require('nodeunit').testCase;
-var cc = require('../server/rpc/cc.js')('parser', 'resource.provider.git', 'resource.provider.fs', 'resource.provider.test');
+var cc = require('../lib/cc.js')('parser', 'parser.markdown', 'resource.provider.git', 'resource.provider.fs', 'resource.provider.test');
 var dejavu = require('dejavu');
 var  _ = require('underscore');
 _.str = require('underscore.string');
@@ -172,6 +172,7 @@ module.exports = testCase({
           test.ok(/Content of g/g.test(r.content));
           test.deepEqual(r.getTemplates(), ["g.item", "item"]);
           cc.resource.provider.ProviderRegistry.getInstance().unregisterProvider("test");
+          cc.parser.ParserRegistry.getInstance().unregisterParser('');
           test.done();
         },
         '3': function(test) {
@@ -187,6 +188,7 @@ module.exports = testCase({
           test.deepEqual(r.resources, ['b', 'c', 'd/']);
           test.deepEqual(r.getTemplates(), ["a.list", "list"]);
           cc.resource.provider.ProviderRegistry.getInstance().unregisterProvider("test");
+          cc.parser.ParserRegistry.getInstance().unregisterParser('');
           test.done();
         },
         '4': function(test) {
@@ -203,9 +205,26 @@ module.exports = testCase({
           test.deepEqual(_.pluck(r.items, 'path'), ["blog/article1.md", "blog/article2.md"]);
           cc.resource.provider.ProviderRegistry.getInstance().unregisterProvider("fs");
           cc.parser.ParserRegistry.getInstance().unregisterParser('md');
-          test.deepEqual(cc.parser.ParserRegistry.getInstance().getAllRegisteredSuffixes(), ['']);
+          test.deepEqual(cc.parser.ParserRegistry.getInstance().getAllRegisteredSuffixes(), []);
           test.done();
-        }
+        },
+       '5': function(test) {
+          //test with 2 suffixes
+          var factory = new cc.resource.provider.ResourceFactory();
+          var fsprovider = new cc.resource.provider.fs.FsResourceProvider("fs", "test/fstestcontent");
+          cc.parser.ParserRegistry.getInstance().registerParser('html', new cc.parser.DefaultParser());
+          test.deepEqual(cc.parser.ParserRegistry.getInstance().getAllRegisteredSuffixes(), ['html']);
+          cc.resource.provider.ProviderRegistry.getInstance().registerProvider(fsprovider.getName(), fsprovider);
+          var r = factory.getResource("fs", "projects");
+          test.equal(r.getType(), "item");
+          test.equal(r.getSuperType(), "item");
+          test.equal(r.getUri(), "projects");
+          test.equal(r.getPath(), "projects.html");
+          cc.resource.provider.ProviderRegistry.getInstance().unregisterProvider("fs");
+          cc.parser.ParserRegistry.getInstance().unregisterParser('html');
+          test.deepEqual(cc.parser.ParserRegistry.getInstance().getAllRegisteredSuffixes(), []);
+          test.done();
+       }
       }) 
     }),
     'git': testCase({
@@ -375,7 +394,8 @@ module.exports = testCase({
             var oncacheinit = function(provider) {
               test.equal(provider.returnFirstThatExists(['blog/article1.md', 'blog/article1.html', 'blog/article1/']), 'blog/article1.md');
               test.equal(provider.returnFirstThatExists(['blog.md', 'blog.html', 'blog/']), 'blog/');
-              test.expect(2);
+              test.equal(provider.returnFirstThatExists(['projects.md', 'projects.html', 'projects/']), 'projects.html');
+              test.expect(3);
               test.done();
             }
 

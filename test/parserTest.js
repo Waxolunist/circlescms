@@ -1,5 +1,5 @@
 var testCase  = require('nodeunit').testCase,
-    cc = require('../server/rpc/cc.js')('parser'),
+    cc = require('../lib/cc.js')('parser'),
     dejavu = require('dejavu');
 
 module.exports = testCase({

@@ -37,6 +37,7 @@ ss.client.define('me', {
          'libs/script.me.js',
          'libs/uri.js',
          'libs/moment.js',
+         'libs/underscore.js',
          'libs/handlebar-helpers.js'
     ],
   tmpl: '*'

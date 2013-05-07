@@ -11,7 +11,6 @@ var cc = {
     }
   })(window.location.search),
 
-  //Some uttilitymethods
   forEach: function (list, callback, context) {
     Array.prototype.forEach.call(list, callback, context);
   },
@@ -52,7 +51,11 @@ var cc = {
         var tmpl;
         if (window.ss.tmpl[val]) {
           tmpl = window.ss.tmpl[val];
-          el.innerHTML = tmpl({res: response});
+          var output = tmpl({res: response});
+          //el.innerHTML = tmpl({res: response});
+          var ustmpl = _.template("<% print(" + output + ");%>");
+          
+          el.innerHTML = ustmpl({});
           cc.setTargetForExternal();
           return false;
         }

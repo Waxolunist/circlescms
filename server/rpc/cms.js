@@ -18,7 +18,6 @@ exports.actions = function(req, res, ss) {
       console.log(message);
       try {
         var r = factory.getResource("fs", message.substr(1));
-        console.log(r);
         res(r);
       } catch (err) {
         console.log(err);

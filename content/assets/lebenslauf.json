@@ -1,9 +1,9 @@
 {
     "timeline":
     {
-        "headline":"The Main Timeline Headline Goes here",
+        "headline":"The Story of My Life",
         "type":"default",
-        "text":"<p>Intro body text goes here, some HTML is ok</p>",
+        "text": "Life? Don't talk to me about life!<footer><a class='cite' href='http://www.imdb.com/title/tt0371724/quotes?item=qt0351047'>Marvin (in &quot;The Hitchhiker's Guide to the Galaxy&quot;)</a></footer>",
         "asset": {
             "media":"http://yourdomain_or_socialmedialink_goes_here.jpg",
             "credit":"Credit Name Goes Here",

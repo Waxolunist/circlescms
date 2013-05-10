@@ -1,1 +1,15 @@
-<script type='text/javascript'>alert('hello');</script>
+<div id="timeline-embed" class="mypersonaltimeline"></div>
+<script type='text/javascript'>
+    createStoryJS({
+        type:           'timeline',
+        width:          '100%',
+        height:         '450',
+        source:         '/assets/lebenslauf.json',
+        embed_id:       'timeline-embed',
+        hash_bookmark:  false, 
+        font:           'Bevan-PotanoSans',
+        lang:           'en',
+        css:            '/timeline/css/timeline.css',
+        js:             '/timeline/js/timeline-min.js'
+    });
+</script>

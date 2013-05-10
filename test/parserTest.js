@@ -58,7 +58,7 @@ module.exports = testCase({
         }
       }),
       'getAllRegisteredSuffixes': testCase({
-        '1': function(test) {
+        '1': function (test) {
           var registry = cc.parser.ParserRegistry.getInstance();
           test.deepEqual(registry.getAllRegisteredSuffixes(), ['md', 'html', 'asp']);
           test.done();

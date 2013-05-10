@@ -47,19 +47,15 @@ var cc = {
       link = document.querySelector('a[href="' + hash + '"]');
     //filter here this.eio.Socket.sockets[*].readyState 
     window.ss.rpc('cms.loadcontent', hash, function (response) {
-      cc.forEach(response.templates, function (val) {
-        var tmpl;
-        if (window.ss.tmpl[val]) {
-          tmpl = window.ss.tmpl[val];
-          var output = tmpl({res: response});
-          //el.innerHTML = tmpl({res: response});
-          var ustmpl = _.template("<% print(" + output + ");%>");
-          
-          el.innerHTML = ustmpl({});
-          cc.setTargetForExternal();
-          return false;
-        }
+      var tmpl = _.find(response.templates, function (tmpl) {
+        return window.ss.tmpl[tmpl];
       });
+      if (tmpl) {
+        //el.innerHTML = tmpl({res: response});
+        $(el).html(window.ss.tmpl[tmpl]({res: response}));
+        cc.setTargetForExternal();
+        return false;
+      }
     });
   },
 
@@ -69,19 +65,18 @@ var cc = {
     elClone.innerHTML = '';
     cc.setContent(elClone);
     el.parentNode.insertBefore(elClone, el);
-    cc.addEventListener(el, 'transitionend webkitTransitionEnd',
-      (function (oldEl, newEl) {
-        console.log('addEventListener');
-        return function () {
-          setTimeout(function () {
-            console.log('activate');
-            if (oldEl.parentNode) {
-              oldEl.parentNode.removeChild(oldEl);
-            }
-            newEl.classList.add(cc.activeClass);
-          }, 200);
-        };
-      }(el, elClone)), false);
+    $(el).one('transitionend', [el, elClone],
+      function (event) {
+        var oldEl = event.data[0],
+          newEl = event.data[1];
+        $(event.currentTarget).attr('data-time', new Date().getTime());
+        setTimeout(function () {
+          if (oldEl.parentNode) {
+            oldEl.parentNode.removeChild(oldEl);
+          }
+          newEl.classList.add(cc.activeClass);
+        }, 200);
+      });
   },
 
   changeLocation: function () {

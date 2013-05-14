@@ -5,35 +5,29 @@
         "type":"default",
         "text": "Life? Don't talk to me about life!<footer><a class='cite' href='http://www.imdb.com/title/tt0371724/quotes?item=qt0351047'>Marvin (in &quot;The Hitchhiker's Guide to the Galaxy&quot;)</a></footer>",
         "asset": {
-            "media":"http://yourdomain_or_socialmedialink_goes_here.jpg",
-            "credit":"Credit Name Goes Here",
-            "caption":"Caption text goes here"
+          "media": "http://twitter.com/search?q=%23MeaningOfLife&src=hash&lang=en&count=1",
+          "thumbnail": "/images/42.png"
         },
         "date": [
             {
-                "startDate":"2011,12,10",
-                "endDate":"2011,12,11",
-                "headline":"Headline Goes Here",
-                "text":"<p>Body text goes here, some HTML is OK</p>",
-                "tag":"This is Optional",
-                "classname":"optionaluniqueclassnamecanbeaddedhere",
-                "asset": {
-                    "media":"http://twitter.com/ArjunaSoriano/status/164181156147900416",
-                    "thumbnail":"optional-32x32px.jpg",
-                    "credit":"Credit Name Goes Here",
-                    "caption":"Caption text goes here"
-                }
-            }
-        ],
-        "era": [
+              "startDate":"1981,12,02",
+              "endDate":"1981,12,02",
+              "headline":"Birth",
+              "text":"<p>I was born in Vienna.</p>",
+              "asset": {
+                "media": "https://maps.google.ch/maps/ms?msid=206337973910685319944.0004dc9647d95eccbf461&msa=0&ll=48.229947,16.378579&spn=0.000913,0.002494&iwloc=A"
+              }
+            },
             {
-                "startDate":"2011,12,10",
-                "endDate":"2011,12,11",
-                "headline":"Headline Goes Here",
-                "text":"<p>Body text goes here, some HTML is OK</p>",
-                "tag":"This is Optional"
+              "startDate": "1986,09,01",
+              "endDate": "1990,06,28",
+              "headline": "Primary School",
+              "text": "<p>My primary school St. Elisabeth</p>",
+              "classname": "leaflet-map",
+              "asset": {
+                "media": "<iframe src='/leaflet/maps/birth.html'></iframe>"
+              }
             }
-
         ]
     }
 }

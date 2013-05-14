@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+
+	<link rel="stylesheet" href="../leaflet.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="../leaflet.ie.css" /><![endif]-->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .map {
+      top: 0;
+      left: 0;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map" class="map"></div>
+
+	<script src="../leaflet.js"></script>
+	<script>
+		var map = L.map('map').setView([51.5, -0.09], 13);
+
+		L.tileLayer('http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png', {
+			key: '4cafc530b539407dad5b00ab78da5497'
+		}).addTo(map);
+
+		var LeafIcon = L.Icon.extend({
+			options: {
+				shadowUrl: 'leaf-shadow.png',
+				iconSize:     [38, 95],
+				shadowSize:   [50, 64],
+				iconAnchor:   [22, 94],
+				shadowAnchor: [4, 62],
+				popupAnchor:  [-3, -76]
+			}
+		});
+
+		var greenIcon = new LeafIcon({iconUrl: 'leaf-green.png'}),
+			redIcon = new LeafIcon({iconUrl: 'leaf-red.png'}),
+			orangeIcon = new LeafIcon({iconUrl: 'leaf-orange.png'});
+
+		L.marker([51.5, -0.09], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
+		L.marker([51.495, -0.083], {icon: redIcon}).bindPopup("I am a red leaf.").addTo(map);
+		L.marker([51.49, -0.1], {icon: orangeIcon}).bindPopup("I am an orange leaf.").addTo(map);
+
+	</script>
+</body>
+</html>

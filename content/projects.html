@@ -3,13 +3,19 @@
     createStoryJS({
         type:           'timeline',
         width:          '100%',
-        height:         '450',
+        height:         '600',
         source:         '/assets/lebenslauf.json',
         embed_id:       'timeline-embed',
         hash_bookmark:  false, 
         font:           'Bevan-PotanoSans',
         lang:           'en',
         css:            '/timeline/css/timeline.css',
-        js:             '/timeline/js/timeline-min.js'
+        js:             '/timeline/js/timeline.js',
+        maptype:        'ROADMAP',
+        gmap_key:       'AIzaSyDclEHoYYfabDCzyRwGQjSa08DwPe5jmUo',
+        debug:          true
     });
+    $('html, body').animate({
+      scrollTop: $("nav").offset().top - 10
+    }, 2000);
 </script>

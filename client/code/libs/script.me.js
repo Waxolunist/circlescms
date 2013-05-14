@@ -1,15 +1,6 @@
 var cc = {
   activeClass: 'active',
   contentId: 'content',
-  urlParams: new (function (sSearch) {
-    if (sSearch.length > 1) {
-      var aItKey, nKeyId = 0, aCouples;
-      for (aCouples = sSearch.substr(1).split("&"); nKeyId < aCouples.length; nKeyId++) {
-        aItKey = aCouples[nKeyId].split("=");
-        this[window.unescape(aItKey[0])] = aItKey.length > 1 ? window.unescape(aItKey[1]) : "";
-      }
-    }
-  })(window.location.search),
 
   forEach: function (list, callback, context) {
     Array.prototype.forEach.call(list, callback, context);
@@ -102,4 +93,4 @@ window.onload = function scroll() {
   cc.setTargetForExternal();
 };
 
-window.onhashchange = cc.changeLocation;
+window.addEventListener('hashchange', cc.changeLocation);

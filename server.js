@@ -44,12 +44,23 @@ ss.client.define('me', {
   tmpl: '*'
 });
 
+ss.client.define('newgrid', {
+  view: 'newgrid.jade',
+  css: ['newgrid.styl'],
+  code: [],
+  tmpl: '*'
+});
+
 if (ss.env === 'production') {
   ss.client.packAssets();
 }
 
 app.get('/', function (req, res) {
   res.serveClient('me');
+});
+
+app.get('/new', function (req, res) {
+  res.serveClient('newgrid');
 });
 
 app.use("/assets", express.static(rootdir + "/content/assets"));

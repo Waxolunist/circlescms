@@ -1,0 +1,17 @@
+!!! 5
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport",content="width=device-width,initial-scale=1.0")
+    != SocketStream
+    title New Semantic Grid
+  body
+    header
+      h1 A new Grid
+    nav.nav-primary
+      a(href='#about') About
+      a(href='#resume') Resume
+      a(href='#projects') Projects
+      a(href='#blog', data-op='list') Blog
+    article#content Some Content
+    footer.footer A footer

@@ -24,7 +24,7 @@
 
 	<script src="../leaflet.js"></script>
 	<script>
-		var map = L.map('map').setView([51.5, -0.09], 13);
+		var map = L.map('map').setView([48.229947, 16.378579], 14);
 
 		L.tileLayer('http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png', {
 			key: '4cafc530b539407dad5b00ab78da5497'
@@ -43,12 +43,13 @@
 
 		var greenIcon = new LeafIcon({iconUrl: 'leaf-green.png'}),
 			redIcon = new LeafIcon({iconUrl: 'leaf-red.png'}),
-			orangeIcon = new LeafIcon({iconUrl: 'leaf-orange.png'});
+			orangeIcon = new LeafIcon({iconUrl: 'leaf-orange.png'}),
+			blueIcon = new LeafIcon({iconUrl: 'leaf-blue.png'});
 
-		L.marker([51.5, -0.09], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
-		L.marker([51.495, -0.083], {icon: redIcon}).bindPopup("I am a red leaf.").addTo(map);
-		L.marker([51.49, -0.1], {icon: orangeIcon}).bindPopup("I am an orange leaf.").addTo(map);
-
+		L.marker([48.229947, 16.378579], {icon: greenIcon}).bindPopup("My Home").addTo(map);
+    L.marker([48.229485,16.375781], {icon: redIcon}).bindPopup("Secondary school <a href='http://www.grgorg20.asn-wien.ac.at'>Gymnasium Unterbergergasse</a>").addTo(map);
+    L.marker([48.2223,16.37553], {icon: orangeIcon}).bindPopup("Primary school <a href='http://www.nms-st-elisabeth.at'>St. Elisabeth</a>").addTo(map);
+		L.marker([48.231034,16.371683], {icon: blueIcon}).bindPopup("Kindergarten").addTo(map);
 	</script>
 </body>
 </html>

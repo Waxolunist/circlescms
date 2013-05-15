@@ -15,17 +15,17 @@
               "headline":"Birth",
               "text":"<p>I was born in Vienna.</p>",
               "asset": {
-                "media": "https://maps.google.ch/maps/ms?msid=206337973910685319944.0004dc9647d95eccbf461&msa=0&ll=48.229947,16.378579&spn=0.000913,0.002494&iwloc=A"
+                "media": "/assets/viennahere.png"
               }
             },
             {
-              "startDate": "1986,09,01",
-              "endDate": "1990,06,28",
-              "headline": "Primary School",
-              "text": "<p>My primary school St. Elisabeth</p>",
-              "classname": "leaflet-map",
+              "startDate": "1987,09",
+              "endDate": "2000,05",
+              "headline": "School Years",
+              "text": "<ul class='legend'><li class='blue'>Kindergarten</li><li class='orange'>Primary school</li><li class='red'>Secondary school</li></ul><p class='small-info'>Click on the leafs for more information.</p>",
+              "classname": "iframe",
               "asset": {
-                "media": "<iframe src='/leaflet/maps/birth.html'></iframe>"
+                "media": "<iframe src='/leaflet/maps/school.html'></iframe>"
               }
             }
         ]

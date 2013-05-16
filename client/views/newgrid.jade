@@ -8,10 +8,12 @@ html(lang="en")
   body
     header
       h1 A new Grid
-    nav.nav-primary
-      a(href='#about') About
-      a(href='#resume') Resume
-      a(href='#projects') Projects
-      a(href='#blog', data-op='list') Blog
-    article#content Some Content
-    footer.footer A footer
+    nav.nav-primary.grid.circles.circles-overlap
+      a.grid__item.palm-one-half.one-quarter(href='#about') About
+      a.grid__item.palm-one-half.one-quarter(href='#resume') Resume
+      a.grid__item.palm-one-half.one-quarter(href='#projects') Projects
+      a.grid__item.palm-one-half.one-quarter(href='#blog', data-op='list') Blog
+    div.content-wrapper.grid
+      article#content.content.grid__item.one-whole Some Content
+    div.content-wrapper.grid
+      footer.content.grid__item.one-whole A footer

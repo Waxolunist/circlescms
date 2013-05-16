@@ -1,0 +1,166 @@
+/*------------------------------------*\
+	$VARIABLES
+\*------------------------------------*/
+/**
+ * If you are building a non-responsive site but would still like to use
+ * csswizardry-grids, set this to false:
+ */
+responsive =			true
+
+
+/**
+ * Is this build mobile first? Setting to true means that all grids will be 100%
+ * width if you do not apply a more specific class to them.
+ */
+mobile-first =			true
+
+
+/**
+ * Set the spacing between your grid items.
+ */
+gutter =				1em
+
+
+/**
+ * At which point should lap and desk breakpoints kick in?
+ */
+lap-start =				481px
+desk-start =			1024px
+
+
+/**
+ * Do not edit the following variables.
+ */
+class-type =			unquote(".")
+
+
+
+/*------------------------------------*\
+	$MIXINS
+\*------------------------------------*/
+/**
+ * Mixin to create the different sizes dynamically
+ */
+create-size(namespace, width, sizes = null)
+	if sizes
+		for size, i in sizes
+			plural = i is 0 ? "" : "s"
+			{class-type}{namespace}{size}-{width}{(plural)}
+				width: ((i + 1) / (length(sizes) + 1)) * 100%
+	else
+		{class-type}{namespace}one-whole
+			width: 100%
+	
+
+
+/*------------------------------------*\
+	$GRID SETUP
+\*------------------------------------*/
+/**
+ * 1. Allow the grid system to be used on lists.
+ * 2. Remove any margins and paddings that might affect the grid system.
+ * 3. Apply a negative `margin-left` to negate the columns’ gutters.
+ */
+{class-type}grid
+	list-style: none 				/* [1] */
+	margin: 0 						/* [2] */
+	padding: 0 						/* [2] */
+	margin-left: -(gutter) 			/* [3] */
+
+/**
+ * 1. Cause columns to stack side-by-side.
+ * 2. Space columns apart.
+ * 3. Align columns to the tops of each other.
+ * 4. Full-width unless told to behave otherwise.
+ * 5. Required to combine fluid widths and fixed gutters.
+ */
+{class-type}grid__item
+	float: left 					/* [1] */
+	padding-left: gutter 			/* [2] */
+	vertical-align: top 			/* [3] */
+	width: 100% if mobile-first		/* [4] */
+	-webkit-box-sizing: border-box 	/* [5] */
+	-moz-box-sizing: border-box 	/* [5] */
+	box-sizing: border-box 			/* [5] */
+
+
+
+/*------------------------------------*\
+	$WIDTHS
+\*------------------------------------*/
+/**
+ * These next bits get worked out for you.
+ */
+palm-end =				lap-start - 1px
+lap-end =				desk-start - 1px
+
+palm-media = "only screen and (max-width: " + palm-end + ")"
+lap-media = "only screen and (min-width: " + lap-start + ") and (max-width: " + lap-end + ")"
+portable-media = "only screen and (max-width: " + lap-end + ")"
+desk-media = "only screen and (min-width: " + desk-start + ")"
+
+device-type(namespace = "")
+	/**
+	 * Whole
+	 */
+	create-size namespace, whole
+
+
+	/**
+	 * Halves
+	 */
+	create-size namespace, half, one
+
+	/**
+	 * Thirds
+	 */
+	create-size namespace, third, one two
+
+	/**
+	 * Quarters
+	 */
+	create-size namespace, quarter, one two three
+
+	/**
+	 * Fifths
+	 */
+	create-size namespace, fifth, one two three four
+
+	/**
+	 * Sixths
+	 */
+	create-size namespace, sixth, one two three four five
+
+	/**
+	 * Eighths
+	 */
+	create-size namespace, eighth, one two three four five six seven
+
+	/**
+	 * Tenths
+	 */
+	create-size namespace, tenth, one two three four five six seven eight nine
+
+	/**
+	 * Twelfths
+	 */
+	create-size namespace, twelfth, one two three four five six seven eight nine ten eleven
+
+/**
+ * Our breakpoint specific widths classes.
+ */
+
+device-type()
+
+if responsive
+	@media palm-media
+		device-type palm-
+
+	@media lap-media
+		device-type lap-
+
+	@media portable-media
+		device-type portable-
+
+	@media desk-media
+		device-type desk-

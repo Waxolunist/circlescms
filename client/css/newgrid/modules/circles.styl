@@ -1,0 +1,21 @@
+circles-overlap := 25px
+circles-count := 4
+
+// Assuming all circles are in row
+.circles
+  overflow hidden
+  > *
+    border-radius 50%
+    padding-bottom (100% / circles-count / 2)
+    padding-top (100% / circles-count / 2)
+
+.circles-overlap
+  > *
+    margin-left (circles-overlap * -1)
+  > :first-child
+    margin-left 0
+
+// Grid correction
+.grid.circles-overlap
+  > :first-child
+    margin-left 1em

@@ -1,2 +1,38 @@
+header
+.footer-wrapper
 .content-wrapper
   overflow hidden
+
+.center
+  margin-left auto
+  margin-right auto
+
+header > *
+  margin-before 0
+  margin-after 0
+
+.content
+  background-color white
+  padding-left 1em
+  padding-right 1em
+
+footer
+  padding-bottom 5em
+  border-top 1px black solid
+
+//////////////////////////////////////////////////////////
+// States                                               //
+//////////////////////////////////////////////////////////
+.content
+  opacity 0
+  max-height 0px
+  &.active
+    opacity 1
+    max-height 2500px
+  
+
+//////////////////////////////////////////////////////////
+// Animations                                           //
+//////////////////////////////////////////////////////////
+.content
+  transition-property opacity,max-height

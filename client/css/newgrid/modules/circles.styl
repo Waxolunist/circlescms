@@ -1,21 +1,165 @@
-circles-overlap := 25px
-circles-count := 4
+orange := #D15600
+green := #73880A
+blue := #3F4C6B
+red := #D01F3C
 
+circles-colors := orange green blue red
+
+// Works with pixels and percentages
+circles-overlap := 25px
+// Count should be even
+circles-count := length(circles-colors)
+
+circles-fontsize := 1.7em
+
+// Helper variables
+_overlap-width = (circles-overlap * (circles-count - 1))
+
+//////////////////////////////////////////////////////////
+// Layout                                               //
+//////////////////////////////////////////////////////////
 // Assuming all circles are in row
 .circles
   overflow hidden
   > *
+    font-size circles-fontsize
+    line-height circles-fontsize
     border-radius 50%
-    padding-bottom (100% / circles-count / 2)
-    padding-top (100% / circles-count / 2)
+    calculate padding-bottom, '' +  (100% / circles-count / 2) '' + ' - ' + (circles-fontsize / 2)
+    calculate padding-top, '' +  (100% / circles-count / 2) '' + ' - ' + (circles-fontsize / 2)
 
-.circles-overlap
+.circles.circles-overlap
+  for row in 1..circles-count
+    &:nth-child({row})
+      z-index circles-count + 1 - row
   > *
     margin-left (circles-overlap * -1)
   > :first-child
     margin-left 0
+  // Corrigation if centered
+  &.center > :first-child
+    margin-left (_overlap-width / 2)
 
-// Grid correction
-.grid.circles-overlap
-  > :first-child
-    margin-left 1em
+// Use this class to set the width to exactly match the width of your circles
+.grid.circles-overlap-width
+  calculate width, '100% - ' + _overlap-width
+  
+if responsive
+  // switching to break in half
+	@media portable-media
+    .circles > *
+      calculate padding-bottom, '' +  (100% / circles-count) '' + ' - ' + (circles-fontsize / 2)
+      calculate padding-top, '' +  (100% / circles-count) '' + ' - ' + (circles-fontsize / 2)
+    .circles.circles-overlap
+      > *
+        margin-left (_overlap-width * -1)
+      > :nth-child({(circles-count / 2) + 1})
+        margin-left (_overlap-width / 2)
+      > :nth-child(n+{(circles-count / 2) + 1})
+        margin-top _overlap-width * -1
+
+
+//////////////////////////////////////////////////////////
+// Text                                                 //
+//////////////////////////////////////////////////////////
+.circles > *
+  text-align center
+  text-transform lowercase
+  text-decoration none // links are underlined by default
+
+
+//////////////////////////////////////////////////////////
+// Colors                                               //
+//////////////////////////////////////////////////////////
+.circles > *
+  color white
+  opacity .8
+  for row in 1..circles-count
+    &:nth-child({row})
+      background-color circles-colors[row - 1]
+
+
+//////////////////////////////////////////////////////////
+// Cool Borders                                         //
+//////////////////////////////////////////////////////////
+.circles > *
+  position relative
+  &::after
+    content ""
+    position absolute
+    top 0
+    bottom 0
+    left 0
+    right 0
+    background-image url(/images/hover-circle.png)
+    background-repeat no-repeat
+    background-size 100%
+
+
+//////////////////////////////////////////////////////////
+// Animations                                           //
+//////////////////////////////////////////////////////////
+.circles
+  transition-delay 0.1s 
+  transition-property none
+  &.animated > *
+    transition-property padding-top,padding-bottom,border-radius
+    &:hover::after
+      animation rotateIn 2s linear
+
+
+//////////////////////////////////////////////////////////
+// User Interaction                                     //
+//////////////////////////////////////////////////////////
+.circles > *
+    &:hover
+      z-index circles-count + 1
+
+
+//////////////////////////////////////////////////////////
+// States                                               //
+//////////////////////////////////////////////////////////
+.circles.active 
+  > *
+    border-radius 0
+    padding-top 0
+    padding-bottom 0
+    //Disable background
+    &:after 
+      content normal
+
+// Active border
+.circles.active 
+  & > .active
+    border-bottom 5px black solid
+    
+
+//Disable overlap
+.circles.circles-overlap.active 
+  @extend .grid.circles-overlap-width
+  > *
+    margin-left 0
+  // Corrigation if centered
+  &.center > :first-child
+    margin-left 0
+
+if responsive
+  // switching to break in half
+	@media portable-media
+    .circles.active
+      > *
+        padding-top 0
+        padding-bottom 0
+    .circles.circles-overlap.active
+      > *
+        margin-left 0 
+        margin-top 0
+
+    // Active border
+    .circles.active
+      padding-top 5px
+      > .active:nth-child(-n+{(circles-count / 2)})
+        border-bottom none
+        margin-top -5px
+        border-top 5px black solid
+

@@ -1,0 +1,41 @@
+bullet()
+  content '\25A0\25A0\25A0'
+  font-family Arial Black
+  padding-right 7px
+  font-size 1.5em
+  letter-spacing -4px
+
+#timeline-embed .legend
+.legend
+  list-style none
+  & li
+    padding-left 1em
+    text-indent -.7em
+    line-height 1.5em
+    &.blue
+      &:before
+        color #0899DA
+        bullet()
+    &.red
+      &:before
+        color #E24D6E
+        bullet()
+    &.orange
+      &:before
+        color #F0B138
+        bullet()
+    &.green
+      &:before
+        color #AEDB58
+        bullet()
+
+
+#timeline-embed .pad-top .legend
+.pad-top .legend
+  text-align left
+
+#timeline-embed .pad-top .legend li
+.pad-top .legend li
+  font-size 0.85em
+  display inline
+

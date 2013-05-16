@@ -1,11 +1,26 @@
 @import "helper/normalize"
 @import "helper/mixin"
 @import "helper/animations"
+
+body
+  min-width 360px
+
+@import "themes/colors-flat"
+@import "themes/font-flat"
+@import "themes/animation-flat"
+@import "themes/base-flat"
+
+gutter = 0
+desk-start = 720px
 @import "csswizardry-grids"
 
 @import "modules/content"
 
-circles-overlap = 25px
+circles-overlap = 4%
+circles-fontsize = nav-fontsize
 @import "modules/circles"
 
-@import "helper/debug"
+@import "modules/blog"
+@import "modules/legend"
+@import "modules/timeline"
+//@import "helper/debug"

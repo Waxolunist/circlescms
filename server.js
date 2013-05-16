@@ -47,7 +47,14 @@ ss.client.define('me', {
 ss.client.define('newgrid', {
   view: 'newgrid.jade',
   css: ['newgrid/newgrid.styl'],
-  code: ['app/entry.js'],
+  code: ['app/entry.js',
+         'libs/script.me.js',
+         'libs/uri.js',
+         'libs/moment.js',
+         'libs/underscore.js',
+         'libs/jquery-2.0.0.min.js',
+         'libs/handlebar-helpers.js'
+    ],
   tmpl: '*'
 });
 

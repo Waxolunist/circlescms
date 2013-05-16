@@ -1,0 +1,25 @@
+gray := #757575
+
+.blog
+  list-style-type none
+  padding-start 0
+  > *
+    line-height 3em
+    border-bottom 1px lighten(gray,40) solid
+  time
+    margin-right 2ex
+    color gray
+    text-transform uppercase
+  a
+    text-decoration none
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
+    word-wrap normal
+
+//////////////////////////////////////////////////////////
+// States                                               //
+//////////////////////////////////////////////////////////
+.blog > *
+  &:hover
+    background-color lighten(gray,45)

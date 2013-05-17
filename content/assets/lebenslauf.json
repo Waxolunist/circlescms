@@ -27,6 +27,11 @@
               "asset": {
                 "media": "<iframe src='/leaflet/maps/school.html'></iframe>"
               }
+            },
+            {
+              "startDate": "2001",
+              "endDate": "2002",
+              "headline": "What's next?" 
             }
         ]
     }

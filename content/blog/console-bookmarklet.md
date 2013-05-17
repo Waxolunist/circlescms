@@ -1,5 +1,5 @@
 author: Christian Sterzl
-date: 04-30-2013
+date: 2013-04-30
 title: Console-Bookmarklet - A small debugging tool for mobile
 
 # Console-Bookmarklet - A small debugging tool for mobile

@@ -1,8 +1,8 @@
-<ol class="blog grid_12">
+<div class="blog">
 {{#res.items}}
-  <li class="grid_10">
-    <time class="grid_2" datetime="{{date}}" pubdate>{{dateFormat date format="MMM D, YYYY"}}</time>
-    <a class="grid_7" href="#{{path}}" rel="bookmark" title="{{title}}">{{title}}</a>
-  </li>
+  <div class="grid">
+    <time class="grid__item portable-one-whole one-fifth" datetime="{{date}}" pubdate>{{dateFormat date format="MMM D, YYYY"}}</time>
+    <a class="grid__item portable-one-whole four-fifths" href="#{{path}}" rel="bookmark" title="{{title}}">{{title}}</a>
+  </div>
 {{/res.items}}
-</ol>
+</div>

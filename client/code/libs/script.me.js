@@ -2,10 +2,6 @@ var cc = {
   activeClass: 'active',
   contentId: 'content',
 
-  forEach: function (list, callback, context) {
-    Array.prototype.forEach.call(list, callback, context);
-  },
-
   addEventListener: function (target, types, listener, useCapture) {
     types.split(' ').forEach(function (el, idx, a) {
       target.addEventListener(el, listener, useCapture);
@@ -13,24 +9,27 @@ var cc = {
   },
 
   setTargetForExternal: function () {
-    cc.forEach(document.links, function (link) {
-      if (link.hostname !== window.location.hostname) {
-        link.target = '_blank';
+    $.each(document.links, function () {
+      if (this.hostname !== window.location.hostname) {
+        this.target = '_blank';
       }
     });
   },
 
   //CMS core client
   activateLink: function (href) {
-    cc.forEach(document.links, function (link) {
-      var parent = href.split('/')[0];
-      if (link.getAttribute('href') === parent) {
-        link.classList.add(cc.activeClass);
-      } else {
-        link.classList.remove(cc.activeClass);
-        link.parentElement.classList.add(cc.activeClass);
-      }
-    });
+    $('a').each((function (reference, activeClass) {
+      var parent = reference.split('/')[0];
+      return function (index) {
+        var link = $(this);
+        if (link.attr('href') === parent) {
+          link.addClass(activeClass);
+        } else {
+          link.removeClass(activeClass);
+          link.parent().addClass(activeClass);
+        }
+      };
+    }(href, cc.activeClass)));
   },
 
   setContent: function (el) {
@@ -56,6 +55,7 @@ var cc = {
     elClone.innerHTML = '';
     cc.setContent(elClone);
     el.parentNode.insertBefore(elClone, el);
+    $(el).bind('trans-end', function () { console.log('trans-end'); });
     $(el).one('transitionend', [el, elClone],
       function (event) {
         var oldEl = event.data[0],
@@ -73,24 +73,38 @@ var cc = {
   changeLocation: function () {
     var href = window.location.hash,
       contentEl = document.getElementById(cc.contentId);
-    cc.activateLink(href);
-    if (contentEl.classList.contains(cc.activeClass)) {
-      cc.restartAnimation(contentEl);
-    } else if (!!href) {
-      contentEl.classList.add(cc.activeClass);
-      cc.setContent(contentEl);
-    }
+
+    (function (reference, el) {
+      cc.activateLink(href);
+      if ($(el).hasClass(cc.activeClass)) {
+        cc.restartAnimation(el);
+      } else if (!!reference) {
+        $(el).addClass(cc.activeClass);
+        cc.setContent(el);
+      }
+    }(href, contentEl));
+  },
+
+  start: function () {
+    // call this method at start of the application
+    // should maybe later a constructor (TODO?)
+    
+    // scroll down a little bit for iphone
+    setTimeout(function () {
+      window.scrollTo(0, 1);
+    }, 0);
+
+    cc.setTargetForExternal();
+    window.addEventListener('hashchange', cc.changeLocation);
+
+    $('.animated').on('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd',
+      function () {
+        $(this).trigger('trans-end');
+      });
   }
 };
 
 window.cc = cc;
 
-window.onload = function scroll() {
-  setTimeout(function () {
-    window.scrollTo(0, 1);
-  }, 0);
-  
-  cc.setTargetForExternal();
-};
+window.onload = cc.start;
 
-window.addEventListener('hashchange', cc.changeLocation);

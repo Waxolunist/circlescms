@@ -1,6 +1,7 @@
 author: Christian Sterzl
 date: 2013-04-23
 title: How to install Bookmarklets in iOS Safari
+tags: bookmarklet ios safari javascript
 
 # How to install Bookmarklets in iOS Safari
 
@@ -12,9 +13,11 @@ They write:
 
 But have you ever tried to store a link in Safari on your iPhone which does not start with http? It does not work. Really. Try it. No chance.
 
-After at least two hours of search on the web I found a way of installing bookmarklets. You need a bookmarklet to install bookmarklets. Don't be confused I will explain and provide the links to it.
-
-First go to this site: [iPhone bookmarklet, for saving bookmarklets](http://www.thecssninja.com/javascript/iphone-bookmarklet)
+After at least two hours of search on the web I found a way of installing bookmarklets. You need a bookmarklet to install bookmarklets. Don't be confused, here is the link, where you will find the instructions.
 Follow the instructions there and install this bookmarklet.
 
-Now you can go back to the Firebug Lite page and install a bookmarklet there. In the meantime I will think about if I should throw my little console div away or keep it but probably I will keep it. You never know.
+[iPhone bookmarklet, for saving bookmarklets](http://www.thecssninja.com/javascript/iphone-bookmarklet)
+
+Now you can go back to the Firebug Lite page and install a bookmarklet there. 
+
+And I will think about if I should throw my little console div away or keep it but probably I will keep it. You never know.

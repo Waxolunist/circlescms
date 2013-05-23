@@ -1,10 +1,11 @@
 author: Christian Sterzl
 date: 2013-04-30
 title: Console-Bookmarklet - A small debugging tool for mobile
+tags: bookmarklet ios safari javascript github
 
 # Console-Bookmarklet - A small debugging tool for mobile
 
-I added some debugging code to this site to see what's going on on my iPhone. I blogged about it: [How to install Bookmarklets in iOS Safari](http://christian.sterzl.info/#blog/how-to-install-bookmarklets-in-ios). But I didn't wanted to convolute my code with too much debugging code.
+I added some debugging code to this site to see what's going on on my iPhone. I blogged about it: [How to install Bookmarklets in iOS Safari](#blog/how-to-install-bookmarklets-in-ios). But I didn't wanted to convolute my code with too much debugging code.
 
 So I searched again for a good bookmarklet, which plays nice on mobiles, to see the output of _console.log_ but I couldn't find any.
 

@@ -30,6 +30,7 @@
     "ss-jade": "0.1.x",
     "ss-stylus": "0.1.x",
     "ss-handlebars": "0.1.x",
+    "ss-angular": "0.6.x",
     "underscore": "1.4.x",
     "underscore.string": "2.3.x",
     "amdefine": "0.0.x",

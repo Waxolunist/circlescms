@@ -18,6 +18,10 @@ ss.client.formatters.add(require('ss-jade'));
 ss.client.formatters.add(require('ss-stylus'));
 
 ss.client.templateEngine.use(require('ss-handlebars'));
+//ss.client.templateEngine.use('angular');
+
+
+//ss.responders.add(require('ss-angular'), {pollFreq: 1000});
 
 //ss.ws.transport.use(require('ss-sockjs'));
 // nodejs is executed in openshift

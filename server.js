@@ -39,7 +39,8 @@ ss.client.define('me', {
          'libs/moment.js',
          'libs/underscore.js',
          'libs/jquery-2.0.0.min.js',
-         'libs/handlebar-helpers.js'
+         'libs/handlebar-helpers.js',
+         'libs/swag.js'
     ],
   tmpl: '*'
 });
@@ -53,7 +54,8 @@ ss.client.define('newgrid', {
          'libs/moment.js',
          'libs/underscore.js',
          'libs/jquery-2.0.0.min.js',
-         'libs/handlebar-helpers.js'
+         'libs/handlebar-helpers.js',
+         'libs/swag.js'
     ],
   tmpl: '*'
 });

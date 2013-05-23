@@ -1,8 +1,8 @@
 <div class="blog">
-{{#res.items}}
+{{#withSortRev res.items "date"}}
   <div class="grid">
     <time class="grid__item portable-one-whole one-fifth" datetime="{{date}}" pubdate>{{dateFormat date format="MMM D, YYYY"}}</time>
     <a class="grid__item portable-one-whole four-fifths" href="#{{path}}" rel="bookmark" title="{{title}}">{{title}}</a>
   </div>
-{{/res.items}}
+{{/withSortRev}}
 </div>

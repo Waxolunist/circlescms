@@ -1,5 +1,5 @@
 author: Christian Sterzl
-date: 2013-05-23
+date: 2013-05-24
 title: A responsive fluid css grid built with stylus
 tags: css3 css grid responsive
 
@@ -19,4 +19,4 @@ I wanted a
 
 I found the [csswizardry-grids](https://github.com/csswizardry/csswizardry-grids). The system is very easy to use and implement into an existing application. That obsoletes my 960-stylus port. I will share this port as a gist [here](https://gist.github.com/Waxolunist/5635811).
 
-I will definitely use the new grid system in a lot of future projects, because it fits the SMACSS concept perfectly.
+I will definitely use the new grid system in a lot of future projects, because it fits the SMACSS concept perfectly. The complete overworked design will soon be available on my site.

@@ -17,11 +17,11 @@ var app = express();
 ss.client.formatters.add(require('ss-jade'));
 ss.client.formatters.add(require('ss-stylus'));
 
-ss.client.templateEngine.use(require('ss-handlebars'));
-//ss.client.templateEngine.use('angular');
+//ss.client.templateEngine.use(require('ss-handlebars'));
+ss.client.templateEngine.use('angular');
 
 
-//ss.responders.add(require('ss-angular'), {pollFreq: 1000});
+ss.responders.add(require('ss-angular'), {pollFreq: 1000});
 
 //ss.ws.transport.use(require('ss-sockjs'));
 // nodejs is executed in openshift
@@ -34,6 +34,7 @@ if (process.env.OPENSHIFT_NODEJS_PORT) {
   });
 }
 
+/*
 ss.client.define('me', {
   view: 'me.jade',
   css: ['me.styl'],
@@ -47,17 +48,20 @@ ss.client.define('me', {
     ],
   tmpl: '*'
 });
+*/
 
 ss.client.define('newgrid', {
   view: 'newgrid.jade',
   css: ['newgrid/newgrid.styl'],
   code: ['app/entry.js',
-         'libs/script.me.js',
-         'libs/uri.js',
-         'libs/moment.js',
-         'libs/underscore.js',
+         'app/controllers.js',
+//         'libs/script.me.js',
+//         'libs/uri.js',
+//         'libs/moment.js',
+//         'libs/underscore.js',
          'libs/jquery-2.0.0.min.js',
-         'libs/handlebar-helpers.js'
+         'libs/angular.js'
+//         'libs/handlebar-helpers.js'
     ],
   tmpl: '*'
 });
@@ -66,15 +70,11 @@ if (ss.env === 'production') {
   ss.client.packAssets();
 }
 
-app.get('/', function (req, res) {
-  res.serveClient('me');
-});
+app.use("/assets", express.static(rootdir + "/content/assets"));
 
-app.get('/new', function (req, res) {
+app.get(['/', '/*'], function (req, res) {
   res.serveClient('newgrid');
 });
-
-app.use("/assets", express.static(rootdir + "/content/assets"));
 
 // Start SocketStream
 var server = app.listen(port, ipaddr);

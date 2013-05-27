@@ -1,23 +1,23 @@
 !!! 5
-html(lang="en")
+html(lang="en",ng-app='circlescms')
   head
     meta(charset="utf-8")
     meta(name="viewport",content="width=device-width,initial-scale=1.0")
     != SocketStream
     title Christian Sterzl vCard
-  body
+    base(href='/')
+  body(ng-controller='CCCtrl')
     header.header-primary.grid.circles-overlap-width.center
       h1.grid__item.one-whole Christian Sterzl
       h2.grid__item.one-whole 
         | Enterprise Architect 
         nobr and Software Developer
-    nav.nav-primary.grid.circles.circles-overlap.center.animated
-      a.grid__item.portable-one-half.one-quarter.animated(href='#about') About
-      a.grid__item.portable-one-half.one-quarter.animated(href='#resume') Resume
-      a.grid__item.portable-one-half.one-quarter.animated(href='#projects') Projects
-      a.grid__item.portable-one-half.one-quarter.animated(href='#blog', data-op='list') Blog
-    div.content-wrapper.grid.circles-overlap-width.center.animated
-      article#content.content.grid__item.one-whole.animated
+    nav.nav-primary.grid.circles.circles-overlap.center.animated(ng-class="{'active': isActive}")
+      a.grid__item.portable-one-half.one-quarter.animated(href='/about',cc-active='active') About
+      a.grid__item.portable-one-half.one-quarter.animated(href='/resume',cc-active='active') Resume
+      a.grid__item.portable-one-half.one-quarter.animated(href='/projects',cc-active='active') Projects
+      a.grid__item.portable-one-half.one-quarter.animated(href='/blog',cc-active='active') Blog
+    div.content-wrapper.grid.circles-overlap-width.center.animated(ng-view)
     div.footer-wrapper.grid.circles-overlap-width.center
       footer.grid__item.one-whole
     script(type="text/javascript",src="/timeline/js/storyjs-embed.js")

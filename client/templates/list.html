@@ -1,8 +1,8 @@
-<div class="blog">
-{{#res.items}}
-  <div class="grid">
-    <time class="grid__item portable-one-whole one-fifth" datetime="{{date}}" pubdate>{{dateFormat date format="MMM D, YYYY"}}</time>
-    <a class="grid__item portable-one-whole four-fifths" href="#{{path}}" rel="bookmark" title="{{title}}">{{title}}</a>
+<article id="content" class="content grid__item one-whole animated" ng-class="{'active': isActive}">
+  <div class="blog">
+    <div class="grid" ng-repeat="item in r.items">
+      <time class="grid__item portable-one-whole one-fifth" datetime="{{item.date}}" pubdate>{{item.date | date:'MMM d, yyyy'}}</time>
+      <a class="grid__item portable-one-whole four-fifths" href="/{{item.path}}" rel="bookmark" title="{{item.title}}">{{item.title}}</a>
+    </div>
   </div>
-{{/res.items}}
-</div>
+</article>

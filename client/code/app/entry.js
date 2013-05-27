@@ -41,11 +41,12 @@ window.ss.server.on('reconnecting', function () {
 
 window.ss.server.on('reconnect', function () {
   console.log('Connection back up :-)');
-  window.cc.setContent(document.getElementById(window.cc.contentId));
+//  window.cc.setContent(document.getElementById(window.cc.contentId));
 });
 
-
-window.ss.server.on('ready', function () {
+require('ssAngular');
+require('/controllers');
+/*window.ss.server.on('ready', function () {
   console.log('ss ready');
   // Wait for the DOM to finish loading
   if (window.location.hash) {
@@ -56,3 +57,4 @@ window.ss.server.on('ready', function () {
     }());
   }
 });
+*/

@@ -13,6 +13,16 @@ header.header-primary
     margin-before 0
     margin-after 0
 
+if responsive
+  // switching to break in half
+	@media portable-media
+    header.header-primary
+      margin-bottom 0.1em
+      h1
+        font-size 5.5vw
+      h2
+        font-size 3.4vw
+
 .content
   background-color white
   padding-left 1em

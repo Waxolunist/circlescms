@@ -61,7 +61,7 @@ ss.client.define('newgrid', {
 //         'libs/moment.js',
 //         'libs/underscore.js',
          'libs/jquery-2.0.0.min.js',
-         'libs/angular.js'
+         'libs/angular.min.js'
 //         'libs/handlebar-helpers.js'
     ],
   tmpl: '*'

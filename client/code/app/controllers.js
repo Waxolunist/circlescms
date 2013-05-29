@@ -7,11 +7,11 @@ angular.module('circlescms', ['ssAngular'])
       });
     $locationProvider.html5Mode(true);
   }])
-  .factory('CCCache', function ($cacheFactory) {
+  .factory('CCCache', ['$cacheFactory', function ($cacheFactory) {
     return $cacheFactory('CCCache', {
       capacity: 20
     });
-  })
+  }])
   .controller('CCCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'rpc', 'CCCache',
     function ($scope, $rootScope, $location, $routeParams, $rpc, $cache) {
 

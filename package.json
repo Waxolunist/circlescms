@@ -11,19 +11,17 @@
   "author": {
     "name": "Christian Sterzl",
     "email": "christian.sterzl@gmail.com",
-    "url":  "http://openshift.redhat.com/"
+    "url": "http://openshift.redhat.com/"
   },
   "homepage": "http://openshift.redhat.com/",
   "repository": {
     "type": "git",
     "url": "https://gitub.com/Waxolunist/circlescms"
   },
-
   "engines": {
     "node": ">= 0.10.0",
     "npm": ">= 1.0.0"
   },
-
   "dependencies": {
     "socketstream": "0.3.x",
     "express": "3.x.x",
@@ -38,12 +36,12 @@
     "filecache": "0.2.x",
     "requirejs": "2.1.x"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt-html-snapshot": "~0.2.3"
+  },
   "bundleDependencies": [],
-
   "private": true,
   "main": "server.js",
-
   "scripts": {
     "start": "SS_ENV=production SS_PACK=1 node server.js"
   }

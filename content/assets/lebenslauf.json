@@ -2,11 +2,10 @@
     "timeline":
     {
         "headline":"The Story of My Life",
-        "type":"default",
+        "type": "default",
         "text": "Life? Don't talk to me about life!<footer><a class='cite' href='http://www.imdb.com/title/tt0371724/quotes?item=qt0351047'>Marvin (in &quot;The Hitchhiker's Guide to the Galaxy&quot;)</a></footer>",
         "asset": {
-          "media": "http://twitter.com/search?q=%23MeaningOfLife&src=hash&lang=en&count=1",
-          "thumbnail": "/images/42.png"
+          "media": "/assets/nerdglasses.jpg"
         },
         "date": [
             {

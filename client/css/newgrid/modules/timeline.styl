@@ -9,6 +9,18 @@
   footer
     border-top 1px lighten(gray,30) solid 
     padding-bottom 0.2em
+  .content
+    padding-left 0
+    padding-right 0
+  .slider-item-container
+    & > .slider-item:first-child .media-shadow
+    & > .slider-item:first-child .media-shadow img
+      box-shadow none
+      border none
+    & > .slider-item:first-child .media-shadow:after
+    & > .slider-item:first-child .media-shadow:before
+      content normal
+      
   // Show iFrame at max size
   .iframe 
     .content
@@ -59,3 +71,12 @@
     opacity 1
     max-height none
 
+
+if responsive
+	@media portable-media
+    #timeline-embed
+      .vco-slider .slider-item
+        margin-left 0px
+      .slider-item-container
+        & > .slider-item:first-child
+          margin-left 8px

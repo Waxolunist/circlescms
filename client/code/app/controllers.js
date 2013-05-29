@@ -1,4 +1,3 @@
-
 angular.module('circlescms', ['ssAngular'])
   .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider.
@@ -8,32 +7,55 @@ angular.module('circlescms', ['ssAngular'])
       });
     $locationProvider.html5Mode(true);
   }])
-  .controller('CCCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'rpc',
-    function ($scope, $rootScope, $location, $routeParams, $rpc) {
+  .factory('CCCache', function ($cacheFactory) {
+    return $cacheFactory('CCCache', {
+      capacity: 20
+    });
+  })
+  .controller('CCCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'rpc', 'CCCache',
+    function ($scope, $rootScope, $location, $routeParams, $rpc, $cache) {
 
-      function loadContent(scope, location, routeParams, rpc) {
-        var path = location.path();
+      function setTemplate(scope, templates) {
+        var tmplIds = $('script[type="text/ng-template"]').map(function (idx, tmpl) {
+          return this.id;
+        }).get(),
+          greppedArray = $.grep(templates, function (val, idx) {
+            return $.inArray(val + '.html', tmplIds) > -1;
+          });
+        scope.templateUrl = greppedArray[0] + '.html';
+      }
+
+      function loadContent(scope, location, routeParams, rpc, cache) {
+        var path = location.path(),
+          cached = cache.get(path);
+
         scope.isActive = !!routeParams.resource;
-        scope.r = rpc('cms.loadcontent', path);
-        scope.r.then(
-          function success(result) {
-            var tmplIds = $('script[type="text/ng-template"]').map(function (idx, tmpl) {
-              return this.id;
-            }).get();
-            var greppedArray = $.grep(result.templates, function (val, idx) {
-              return $.inArray(val + '.html', tmplIds) > -1;
-            });
-            scope.templateUrl = greppedArray[0] + '.html';
-          },
-          function error() {}
-        );
+        if (angular.isUndefined(cached)) {
+          scope.r = rpc('cms.loadcontent', path);
+          scope.r.then(
+            function success(result) {
+              setTemplate(scope, result.templates);
+              //store result in cache
+              console.log('Result of ' + path + ' in cache.');
+              cache.put(path, result);
+            },
+            function error() {}
+          );
+        } else {
+          console.log('Hit cache for ' + path + '.');
+          scope.r = cached;
+          setTemplate(scope, cached.templates);
+        }
       }
 
       window.ss.server.on('ready', function () {
-        loadContent($scope, $location, $routeParams, $rpc);
+        loadContent($scope, $location, $routeParams, $rpc, $cache);
       });
-      $scope.$on('$routeChangeSuccess', function () {
-        loadContent($scope, $location, $routeParams, $rpc);
+      $scope.$on('$routeChangeSuccess', function (angularEvent, current, previous) {
+        if (angular.isUndefined(previous)
+            || current.pathParams.resource !== previous.pathParams.resource) {
+          loadContent($scope, $location, $routeParams, $rpc, $cache);
+        }
       });
     }])
   .directive('ccActive', ['$location', function (location) {

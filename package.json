@@ -43,6 +43,6 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "SS_ENV=production SS_PACK=1 node server.js"
+    "start": "SS_ENV=debug SS_PACK=1 node server.js"
   }
 }

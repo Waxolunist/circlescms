@@ -30,7 +30,7 @@ if (process.env.OPENSHIFT_NODEJS_PORT) {
   ss.ws.transport.use('engineio', {
     client: {
       port: 80,
-      transports: ['polling']
+      transports: ['polling', 'polling-xhr', 'websocket', 'flashsocket']
     }
   });
 }

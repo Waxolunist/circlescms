@@ -24,6 +24,7 @@ _overlap-width = (circles-overlap * (circles-count - 1))
   > *
     font-size circles-fontsize
     line-height 0
+    height 0
     border-radius 50%
     padding-bottom (100% / circles-count / 2)
     padding-top (100% / circles-count / 2)
@@ -127,6 +128,7 @@ if responsive
     padding-top 0
     padding-bottom 0
     line-height circles-fontsize
+    height auto
     //Disable background
     &:after 
       content normal

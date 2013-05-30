@@ -15,6 +15,11 @@
         gmap_key:       'AIzaSyDclEHoYYfabDCzyRwGQjSa08DwPe5jmUo',
         debug:          false
     });
+    //fix for firefox
+    setTimeout(function () {
+        console.log('fix height');
+        //$('#timeline-embed .iframe .content-container iframe').height($('#timeline-embed .iframe .content-container').height());
+        }, 2000);
 //    $('html, body').animate({
 //      scrollTop: $("nav").offset().top - 10
 //    }, 100);

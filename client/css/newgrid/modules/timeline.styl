@@ -20,27 +20,7 @@
     & > .slider-item:first-child .media-shadow:after
     & > .slider-item:first-child .media-shadow:before
       content normal
-  // Small Info class
-  .small-info
-    font-size smaller
-    padding-top 3em
-  .pad-top .small-info
-    padding-top 0
-  // Corrections - timeline uses the class content as well
-  .content
-    opacity 1
-    max-height none
-
-if responsive
-	@media portable-media
-    #timeline-embed
-      .vco-slider .slider-item
-        margin-left 0px
-      .slider-item-container
-        & > .slider-item:first-child
-          margin-left 8px
-
-#timeline-embed 
+      
   // Show iFrame at max size
   .iframe 
     .content
@@ -50,16 +30,13 @@ if responsive
       width 100%
     .content-container
       width 100%
-    .content-container
-    .content
-    .media 
-    .text-media
-    .text-media div
+    & *
       height 100%
     .media 
       .text-media
         padding-right 0
       .plain-text
+        display table
         width 100%
       .media-container
         max-width none !important
@@ -67,7 +44,8 @@ if responsive
       .media-container
         display block
       .container
-        display block
+        display flex
+        width 100%
       iframe
         border 0
         width 100%
@@ -80,3 +58,23 @@ if responsive
         display table-row
         iframe
           padding-top 0
+  // Small Info class
+  .small-info
+    font-size smaller
+    padding-top 3em
+  .pad-top .small-info
+    padding-top 0
+  // Corrections - timeline uses the class content as well
+  .content
+    opacity 1
+    max-height none
+
+
+if responsive
+	@media portable-media
+    #timeline-embed
+      .vco-slider .slider-item
+        margin-left 0px
+      .slider-item-container
+        & > .slider-item:first-child
+          margin-left 8px

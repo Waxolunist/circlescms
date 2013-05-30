@@ -57,13 +57,8 @@ ss.client.define('newgrid', {
   css: ['newgrid/newgrid.styl'],
   code: ['app/entry.js',
          'app/controllers.js',
-//         'libs/script.me.js',
-//         'libs/uri.js',
-//         'libs/moment.js',
-//         'libs/underscore.js',
          'libs/jquery-2.0.0.min.js',
          'libs/angular.min.js'
-//         'libs/handlebar-helpers.js'
     ],
   tmpl: '*'
 });
@@ -72,7 +67,7 @@ if (ss.env === 'production') {
   ss.client.packAssets();
 }
 
-app.use("/assets", express.static(rootdir + "/content/assets"));
+app.use("/assets", express.static(rootdir + "/resources/assets"));
 
 app.get(['/', '/*'], function (req, res) {
   res.serveClient('newgrid');

@@ -29,7 +29,7 @@ ss.responders.add(require('ss-angular'), {pollFreq: 1000});
 if (process.env.OPENSHIFT_NODEJS_PORT) {
   ss.ws.transport.use('engineio', {
     client: {
-      port: 80,
+      port: 8000,
       transports: ['websocket', 'polling', 'flashsocket']
     }
   });

@@ -12,6 +12,12 @@ angular.module('circlescms', ['ssAngular'])
       capacity: 20
     });
   }])
+  .filter('split', [function () {
+    return function (input, delim) {
+      delim = delim || ' ';
+      return input.split(delim);
+    };
+  }])
   .controller('CCCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'rpc', 'CCCache',
     function ($scope, $rootScope, $location, $routeParams, $rpc, $cache) {
 

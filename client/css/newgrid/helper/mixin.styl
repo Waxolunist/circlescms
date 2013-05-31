@@ -47,6 +47,13 @@ font-size-adjust()
 box-shadow()
   allvendors box-shadow arguments
 
+displayflex()
+  for vendor in vendors
+    if vendor == official
+      display: flex
+    else
+      display: unquote(join('','-',vendor,'-flex'))
+
 calculate(prop, val)
   for vendor in vendors
     if vendor == official

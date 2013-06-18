@@ -18,6 +18,21 @@ angular.module('circlescms', ['ssAngular'])
       return input.split(delim);
     };
   }])
+  .filter('extractLabels', [function () {
+    /*
+     * This filter extracts a property from an objectlist.
+     */
+    return function (input, property) {
+      if (!angular.isUndefined(input) && !angular.isUndefined(property)) {
+        return $.map(input, function(n, i) {
+          return n[property];
+        }).reduce(function(previousValue, currentValue, index, array){
+          return previousValue + currentValue;
+        });
+      }
+      return undefined;
+    };
+  }])
   .controller('CCCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'rpc', 'CCCache',
     function ($scope, $rootScope, $location, $routeParams, $rpc, $cache) {
 
@@ -35,6 +50,7 @@ angular.module('circlescms', ['ssAngular'])
         var path = location.path(),
           cached = cache.get(path);
 
+        //Set value isActive to true depending on if a resource is loaded
         scope.isActive = !!routeParams.resource;
         if (angular.isUndefined(cached)) {
           scope.r = rpc('cms.loadcontent', path);
@@ -65,6 +81,9 @@ angular.module('circlescms', ['ssAngular'])
       });
     }])
   .directive('ccActive', ['$location', function (location) {
+    /*
+     * Adds the class in the ccActive directive given to the element matching the resource given in its href.
+     */
     return {
       restrict: 'A',
       priority: -1,
@@ -81,3 +100,4 @@ angular.module('circlescms', ['ssAngular'])
       }
     };
   }]);
+

@@ -1,6 +1,6 @@
 .taglist
   font-size 80%
-  float right
+  float left
   margin-top 0.5em
   margin-bottom 0.5em
   line-height 1.5em
@@ -8,11 +8,16 @@
     float left
     text-transform lowercase
     background-color lightblue
-    border-radius 10px
-    margin-left 0.5em
+    margin-bottom 0.5em
     margin-right 0.5em
-    margin-bottom 1em
     padding 0.3em 0.5em
     color blue
-  > .tag:first-child
-    margin-left 0
+
+.tagcloud
+  @extends .taglist
+  padding-left 1em
+  & .tagcloud_item
+    @extends .taglist > .tag
+  & a
+    text-decoration none
+    

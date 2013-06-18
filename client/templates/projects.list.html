@@ -1,14 +1,23 @@
 <article id="content" class="content grid__item one-whole animated" ng-class="{'active': isActive}">
-  <div class="projects">
-    <div class="grid" ng-repeat="item in r.items | orderBy:'-date'">
-      <time class="grid__item portable-one-whole one-fifth" datetime="{{item.time}}" pubdate>{{item.time}}</time>
-      <a class="grid__item portable-one-whole four-fifths" href="/{{item.path}}" rel="bookmark" title="{{item.name}}">{{item.name}}</a>
-      <div class="grid__item portable-one-whole four-fifths taglist">
-        <div class="tag" ng-repeat="tag in item.tags | split">{{tag}}</div>
+  <div class="grid">
+    <div class="projects grid__item two-thirds">
+      <div class="grid" ng-repeat="item in r.items | orderBy:'-date'">
+        <time class="grid__item portable-one-whole one-fifth" datetime="{{item.time}}" pubdate>{{item.time}}</time>
+        <a class="grid__item portable-one-whole four-fifths" href="/{{item.path}}" rel="bookmark" title="{{item.name}}">{{item.name}}</a>
+        <div class="grid__item portable-one-whole four-fifths push-desk-one-fifth taglist">
+          <div class="tag" ng-repeat="tag in item.tags | split">{{tag}}</div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="tagcloud" ng-repeat="item in r.items">
-    <div class="tagcloud_item" ng-repeat="tag in item.tags | split">{{tag}}</div>
+    <div class="tagcloud grid__item one-third">
+      {{r.items | extract:'tags'}}
+      <!--
+      <div ng-repeat="item in r.items">
+        <div class="tagcloud_item" ng-repeat="tag in item.tags | split">
+          <a href="#">{{tag}}</a>
+        </div>
+      </div>
+      -->
+    </div>
   </div>
 </article>

@@ -8,4 +8,7 @@
       </div>
     </div>
   </div>
+  <div class="tagcloud" ng-repeat="item in r.items">
+    <div class="tagcloud_item" ng-repeat="tag in item.tags | split">{{tag}}</div>
+  </div>
 </article>

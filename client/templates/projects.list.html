@@ -10,14 +10,9 @@
       </div>
     </div>
     <div class="tagcloud grid__item one-third">
-      {{r.items | extract:'tags'}}
-      <!--
-      <div ng-repeat="item in r.items">
-        <div class="tagcloud_item" ng-repeat="tag in item.tags | split">
-          <a href="#">{{tag}}</a>
-        </div>
+      <div class="tagcloud_item" ng-repeat="(key, value) in (r.items | extractLabels:'tags') track by $id(key)">
+        <a href="#">{{key}} ({{value}})</a>
       </div>
-      -->
     </div>
   </div>
 </article>

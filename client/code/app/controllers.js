@@ -22,13 +22,19 @@ angular.module('circlescms', ['ssAngular'])
     /*
      * This filter extracts a property from an objectlist.
      */
-    return function (input, property) {
+    return function (input, property, delim) {
       if (!angular.isUndefined(input) && !angular.isUndefined(property)) {
-        return $.map(input, function(n, i) {
+        var retVal = {};
+        delim = delim || ' ';
+        $.map(input, function (n, i) {
           return n[property];
-        }).reduce(function(previousValue, currentValue, index, array){
-          return previousValue + currentValue;
-        });
+        }).reduce(function (previousValue, currentValue, index, array) {
+          return previousValue + delim + currentValue;
+        }).split(delim).forEach(function (val, idx, arr) {
+          this[val] = (this[val] || 0) + 1;
+        }, retVal);
+        console.log(retVal);
+        return retVal;
       }
       return undefined;
     };

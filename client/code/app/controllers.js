@@ -39,6 +39,23 @@ angular.module('circlescms', ['ssAngular'])
       return undefined;
     };
   }])
+  .filter('containsLabel', [function () {
+    return function (input, property, label, delim) {
+      if (!angular.isUndefined(input) && !angular.isUndefined(property)) {
+        if (angular.isUndefined(label)) {
+          return input;
+        }
+        var retVal = [];
+        delim = delim || ' ';
+        $.map(input, function (n, i) {
+          return n[property].split(delim);
+        });
+        console.log(label);
+        return [input[0]];
+      }
+      return undefined;
+    };
+  }])
   .controller('CCCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'rpc', 'CCCache',
     function ($scope, $rootScope, $location, $routeParams, $rpc, $cache) {
 
@@ -74,6 +91,8 @@ angular.module('circlescms', ['ssAngular'])
           scope.r = cached;
           setTemplate(scope, cached.templates);
         }
+
+        scope.location = location;
       }
 
       window.ss.server.on('ready', function () {
@@ -105,5 +124,12 @@ angular.module('circlescms', ['ssAngular'])
         });
       }
     };
+  }])
+  .directive('preventDefault', [function() {
+      return function(scope, element, attrs) {
+          $(element).click(function(event) {
+              event.preventDefault();
+          });
+      }
   }]);
 

@@ -70,7 +70,7 @@ if (ss.env === 'production') {
 
 app.use("/assets", express.static(rootdir + "/resources/assets"));
 
-app.get(['/', '/*'], function (req, res) {
+app.get('/*', function (req, res) {
   res.serveClient('newgrid');
 });
 

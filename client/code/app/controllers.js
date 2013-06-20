@@ -44,7 +44,7 @@ angular.module('circlescms', ['ssAngular'])
   .filter('containsLabel', [function () {
     return function (input, property, label, delim) {
       if (!_.isUndefined(input) && !_.isUndefined(property)) {
-        if (_.isEmpty(label)) {
+        if (_.isEmpty(label) || label === '_') {
           return input;
         }
         var retVal = [];

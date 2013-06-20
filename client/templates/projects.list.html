@@ -10,9 +10,9 @@
       </div>
     </div>
     <div class="tagcloud grid__item one-third">
-      <div class="tagcloud_item" ng-repeat="(key, value) in (r.items | extractLabels:'tags') track by $id(key)" ng-class="{'active': key == location.hash()}">
-        <a href="{{location.path()}}#{{key == location.hash() ? '' : key}}" ng-class="{'active': key == location.hash()}" title="{{key}}">{{key}} ({{value}})</a>
-      </div>
+      <a class="tagcloud_item" ng-repeat="(key, value) in (r.items | extractLabels:'tags') track by $id(key)" ng-class="{'active': key == location.hash()}" href="{{location.path()}}#{{key == location.hash() ? '_' : key}}" title={{key}}>
+        {{key}} ({{value}})
+      </a>
       <div class="description">
         <p>Click on a label to filter.<br/>Click again to clear the filter.</p>
       </div>

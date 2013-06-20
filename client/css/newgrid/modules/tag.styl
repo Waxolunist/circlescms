@@ -18,10 +18,17 @@
   padding-left 1em
   & .tagcloud_item
     @extends .taglist > .tag
-    &.active
-      line-height 2
-  & a
     text-decoration none
     &.active
+      background-color darken(lightblue, 30)
+
+if responsive
+	@media lap-media
+    .tagcloud .tagcloud_item.active
+      line-height 2
       font-size 2em
-    
+	@media desk-media
+    .tagcloud .tagcloud_item.active
+      line-height 2
+      font-size 2em
+  

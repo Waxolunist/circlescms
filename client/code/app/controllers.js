@@ -100,9 +100,11 @@ angular.module('circlescms', ['ssAngular'])
         scope.location = location;
       }
 
-      window.ss.server.on('ready', function () {
-        loadContent($scope, $location, $routeParams, $rpc, $cache);
-      });
+      if(window.ss.server.listeners('ready').length <= 2) {
+        window.ss.server.on('ready', function () {
+          loadContent($scope, $location, $routeParams, $rpc, $cache);
+        });
+      }
       $scope.$on('$routeChangeSuccess', function (angularEvent, current, previous) {
         if (angular.isUndefined(previous)
             || current.pathParams.resource !== previous.pathParams.resource) {

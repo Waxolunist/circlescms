@@ -14,8 +14,11 @@ angular.module('circlescms', ['ssAngular'])
   }])
   .filter('split', [function () {
     return function (input, delim) {
-      delim = delim || ' ';
-      return input.split(delim);
+      if (!angular.isUndefined(input)) {
+        delim = delim || ' ';
+        return input.split(delim);
+      }
+      return undefined;
     };
   }])
   .filter('extractLabels', [function () {
@@ -26,14 +29,13 @@ angular.module('circlescms', ['ssAngular'])
       if (!angular.isUndefined(input) && !angular.isUndefined(property)) {
         var retVal = {};
         delim = delim || ' ';
-        $.map(input, function (n, i) {
+        input.map(function (n) {
           return n[property];
         }).reduce(function (previousValue, currentValue, index, array) {
           return previousValue + delim + currentValue;
         }).split(delim).forEach(function (val, idx, arr) {
           this[val] = (this[val] || 0) + 1;
         }, retVal);
-        console.log(retVal);
         return retVal;
       }
       return undefined;
@@ -41,17 +43,20 @@ angular.module('circlescms', ['ssAngular'])
   }])
   .filter('containsLabel', [function () {
     return function (input, property, label, delim) {
-      if (!angular.isUndefined(input) && !angular.isUndefined(property)) {
-        if (angular.isUndefined(label)) {
+      if (!_.isUndefined(input) && !_.isUndefined(property)) {
+        if (_.isEmpty(label)) {
           return input;
         }
         var retVal = [];
         delim = delim || ' ';
-        $.map(input, function (n, i) {
+        input.map(function (n) {
           return n[property].split(delim);
+        }).forEach(function (val, idx, arr) {
+          if (val.indexOf(label) > -1) {
+            retVal.push(input[idx]);
+          }
         });
-        console.log(label);
-        return [input[0]];
+        return retVal;
       }
       return undefined;
     };

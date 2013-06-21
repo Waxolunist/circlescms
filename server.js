@@ -59,7 +59,8 @@ ss.client.define('newgrid', {
          'app/controllers.js',
          'libs/underscore.js',
          'libs/jquery-2.0.0.min.js',
-         'libs/angular.min.js'
+         'libs/angular.min.js',
+         'libs/prism.js'
     ],
   tmpl: '*'
 });

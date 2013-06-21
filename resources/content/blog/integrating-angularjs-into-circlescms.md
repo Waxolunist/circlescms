@@ -22,32 +22,32 @@ AngularJS is developed by Google and provides exhaustive documentation and has a
 First of all, I had to define the `ng-app` tag on my site, by adding the attribute `ng-app='circlescms'` to the html-Element of my view. That way I connect the angular-application to the view.
 [Jade](http://jade-lang.com/) let's you define any arbitrary attribute with ease. The result reads as follows:
 
-```
+```html
 html(lang="en",ng-app='circlescms')
 ```
 
 Then I had to register a controller on an element. I chose the body element.
 
-```
+```markup
 body(ng-controller='CCCtrl')
 ```
 
 And I defined the content-wrapper div as viewport.
 
-```
+```markup
 div.content-wrapper(ng-view)
 ```
 
 And in the entry.js file, which belongs to socketstream I had to load the modules ssAngular and controllers.
 
-```
+```javascript
 require('ssAngular');
 require('/controllers');
 ```
 
 In the main file on the server side I had to add the modules and libraries to the client definition:
 
-```
+```javascript
 ss.client.define('newgrid', {
   view: 'newgrid.jade',
   css: ['newgrid/newgrid.styl'],
@@ -66,13 +66,13 @@ I could now start to write the controller code.
 
 First, I created the angular-module.
 
-```
+```javascript
 angular.module('circlescms', ['ssAngular'])
 ```
 
 Then I configured the routes. Because I allow any url as resource except the well defined ones, such as those e.g. for static content, I wanted to call my controller on every url.
 
-```
+```javascript
 .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider.
       when('/*resource', {controller: 'CCCtrl', templateUrl: 'item.html'});
@@ -85,7 +85,7 @@ The parameter `*resource` is also important, as it defines not to react only on 
 
 To react on changes of the url, I defined in the controller a listener on changes of the route.
 
-```
+```javascript
 .controller('CCCtrl', ['$scope', '$location', 'rpc', function ($scope, $location, rpc) {
     $scope.$on('$routeChangeSuccess', function () {
       var path = $location.path();
@@ -100,13 +100,13 @@ ss-angular provides the result of a rpc call as [$q](http://docs.angularjs.org/a
 
 Thus, I can call the remote procedure as follows:
 
-```
+```javascript
 $scope.r = rpc('cms.loadcontent', path);
 ```
 
 And in the template I can bind the html returned with following line:
 
-```
+```markup
 <article id="content" ng-bind-html-unsafe="r.content">
 </article>
 ```

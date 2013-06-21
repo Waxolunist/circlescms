@@ -69,9 +69,9 @@ angular.module('circlescms', ['ssAngular'])
           return this.id;
         }).get(),
           greppedArray = $.grep(templates, function (val, idx) {
-            return $.inArray(val + '.html', tmplIds) > -1;
+            return $.inArray(val.replace(/\//gi,".") + '.html', tmplIds) > -1;
           });
-        scope.templateUrl = greppedArray[0] + '.html';
+        scope.templateUrl = greppedArray[0].replace(/\//gi,".") + '.html';
       }
 
       function loadContent(scope, location, routeParams, rpc, cache) {
@@ -132,11 +132,36 @@ angular.module('circlescms', ['ssAngular'])
       }
     };
   }])
-  .directive('preventDefault', [function() {
+  .directive('preventDefault', [function () {
       return function(scope, element, attrs) {
           $(element).click(function(event) {
               event.preventDefault();
           });
+      };
+  }])
+  .directive('highlight', [function () {
+    return {
+      restrict: 'A',
+      priority: -1,
+      link: function postLink($scope, $element, $attrs) {
+        $scope.$watch("r.content", function (value) {
+            var val = value || null;            
+            if (val) {
+              $('pre code').each(function(i, e) {
+                var element = $(e),
+                  classList = element.attr('class');
+                if(_.isString(classList)) {
+                  classList = classList.split(/\s+/);
+                  classList = classList.map(function(c) {return c.replace(/^lang-/, 'language-')});
+                  if(classList.length > 0) {
+                    element.attr('class', classList.join(' ').trim());
+                  }
+                }
+              }); 
+              Prism.highlightAll(true);
+            }
+        });
       }
+    };
   }]);
 

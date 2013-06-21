@@ -96,7 +96,7 @@ To react on changes of the url, I defined in the controller a listener on change
 
 Now I could react on changes of the url and load the appropriate resource.
 
-ss-angular provides the result of a rpc call as [$q](http://docs.angularjs.org/api/ng.$q) promise. That's good, because that way I a callback is optional, which leads to more readable code.
+ss-angular provides the result of a rpc call as [$q](http://docs.angularjs.org/api/ng.$q) promise. That's good, because that way a callback is optional, which leads to more readable code.
 
 Thus, I can call the remote procedure as follows:
 

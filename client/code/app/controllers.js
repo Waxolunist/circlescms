@@ -69,9 +69,9 @@ angular.module('circlescms', ['ssAngular'])
           return this.id;
         }).get(),
           greppedArray = $.grep(templates, function (val, idx) {
-            return $.inArray(val.replace(/\//gi,".") + '.html', tmplIds) > -1;
+            return $.inArray(val.replace(/\//gi, ".") + '.html', tmplIds) > -1;
           });
-        scope.templateUrl = greppedArray[0].replace(/\//gi,".") + '.html';
+        scope.templateUrl = greppedArray[0].replace(/\//gi, ".") + '.html';
       }
 
       function loadContent(scope, location, routeParams, rpc, cache) {
@@ -100,7 +100,7 @@ angular.module('circlescms', ['ssAngular'])
         scope.location = location;
       }
 
-      if(window.ss.server.listeners('ready').length <= 2) {
+      if (window.ss.server.listeners('ready').length <= 2) {
         window.ss.server.on('ready', function () {
           loadContent($scope, $location, $routeParams, $rpc, $cache);
         });
@@ -114,7 +114,8 @@ angular.module('circlescms', ['ssAngular'])
     }])
   .directive('ccActive', ['$location', function (location) {
     /*
-     * Adds the class in the ccActive directive given to the element matching the resource given in its href.
+     * Adds the class in the ccActive directive given to 
+     * the element matching the resource given in its href.
      */
     return {
       restrict: 'A',
@@ -133,11 +134,11 @@ angular.module('circlescms', ['ssAngular'])
     };
   }])
   .directive('preventDefault', [function () {
-      return function(scope, element, attrs) {
-          $(element).click(function(event) {
-              event.preventDefault();
-          });
-      };
+    return function (scope, element, attrs) {
+      $(element).click(function (event) {
+        event.preventDefault();
+      });
+    };
   }])
   .directive('highlight', [function () {
     return {
@@ -145,23 +146,24 @@ angular.module('circlescms', ['ssAngular'])
       priority: -1,
       link: function postLink($scope, $element, $attrs) {
         $scope.$watch("r.content", function (value) {
-            var val = value || null;            
-            if (val) {
-              $('pre code').each(function(i, e) {
-                var element = $(e),
-                  classList = element.attr('class');
-                if(_.isString(classList)) {
-                  classList = classList.split(/\s+/);
-                  classList = classList.map(function(c) {return c.replace(/^lang-/, 'language-')});
-                  if(classList.length > 0) {
-                    element.attr('class', classList.join(' ').trim());
-                  }
+          var val = value || null;
+          if (val) {
+            $('pre code').each(function (i, e) {
+              var element = $(e),
+                classList = element.attr('class');
+              if (_.isString(classList)) {
+                classList = classList.split(/\s+/);
+                classList = classList.map(function (c) {
+                  return c.replace(/^lang-/, 'language-');
+                });
+                if (classList.length > 0) {
+                  element.attr('class', classList.join(' ').trim());
                 }
-              }); 
-              Prism.highlightAll(true);
-            }
+              }
+            });
+            window.Prism.highlightAll(true);
+          }
         });
       }
     };
   }]);
-

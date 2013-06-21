@@ -37,7 +37,8 @@ I tried all 4 above, but every of it had its disadvantages.
 
 **Prettify** didn't work at all for me. I don't know what the issue has been but because I didn't wanted to waste to much time, I didn't dig into.
 
-**Highlight.js** is pretty much straightforward and easy to integrate, but I does always try to detect automatically the language which does sometimes fail. So if I marked the code snippet as javascript like so:
+**Highlight.js** is pretty much straightforward and easy to Finally I found a working one: [Prism](http://prismjs.com)
+integrate, but I does always try to detect automatically the language which does sometimes fail. So if I marked the code snippet as javascript like so:
 
 ```markup
 <pre>
@@ -58,6 +59,6 @@ The result after running highlight.js was, no matter in which way I called the a
 
 **Prism** did fulfill all of my requirements. It is easy to use and uses a very appealing syntax in code and markup.
 
-Every syntax highlighter demanded for a different markup and used different hints for detecting the language. So I wrote a angular directive to convert the markup [marked](https://github.com/chjj/marked) generates into the markup the syntax highlighter uses. For example marked adds a class `lang-html` to the code element and prism searches for `language-html`. This was pretty much all I needed to embed prism, besides loading the library. There is no init method, no method which runs only on `document.ready`, no dependencies.
+Every syntax highlighter demanded for a different markup and used different hints for detecting the language. So I wrote an angular directive to convert the markup [marked](https://github.com/chjj/marked) generates into the markup the syntax highlighter uses. For example marked adds a class `lang-html` to the code element and prism searches for `language-html`. This was pretty much all I needed to embed prism, besides loading the library. There is no init method, no method which runs only on `document.ready`, no dependencies.
 
 I like prism and will recommend it, if someone is in demand of a syntax highlighter, which runs on the client.

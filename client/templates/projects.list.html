@@ -1,15 +1,18 @@
 <article id="content" class="content grid__item one-whole animated" ng-class="{'active': isActive}" ng-hide="isLoading">
   <div class="grid">
-    <div class="projects grid__item two-thirds">
+    <div class="projects grid__item palm-two-thirds four-fifths">
       <div class="grid" ng-repeat="item in r.items | containsLabel:'tags':location.hash() | orderBy:'-time'">
         <time class="grid__item portable-one-whole one-fifth" datetime="{{item.time}}" pubdate>{{item.time}}</time>
-        <a class="grid__item portable-one-whole four-fifths" href="/{{item.path}}" rel="bookmark" title="{{item.name}}">{{item.name}}</a>
+        <a class="grid__item portable-one-whole four-fifths title" href="/{{item.path}}" rel="bookmark" title="{{item.name}}">{{item.name}}</a>
+        <div class="grid__item portable-one-whole three-fifths push-desk-one-fifth summary">
+          {{item.summary}}
+        </div>
         <div class="grid__item portable-one-whole three-fifths push-desk-one-fifth taglist">
           <div class="tag" ng-repeat="tag in item.tags | split">{{tag}}</div>
         </div>
       </div>
     </div>
-    <div class="tagcloud grid__item one-third">
+    <div class="tagcloud grid__item palm-one-third one-fifth">
       <h3>Skills <nobr class="subtitle">(Click to filter)</nobr></h3>
       <a class="tagcloud_item" ng-repeat="(key, value) in (r.items | extractLabels:'tags') track by $id(key)" ng-class="{'active': key == location.hash()}" href="{{location.path()}}#{{key == location.hash() ? '_' : key}}" title={{key}}>
         {{key}}&nbsp;({{value}})

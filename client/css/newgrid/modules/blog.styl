@@ -24,6 +24,14 @@ gray := #757575
     padding-left 0.5em
     margin-left 0
 
+if responsive
+  @media portable-media
+    .blog
+    .projects
+      &:first-child
+        border-top none
+    
+
 //////////////////////////////////////////////////////////
 // States                                               //
 //////////////////////////////////////////////////////////

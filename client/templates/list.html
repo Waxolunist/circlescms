@@ -1,4 +1,4 @@
-<article id="content" class="content grid__item one-whole animated" ng-class="{'active': isActive}" ng-class="{'loading': isLoading}">
+<article id="content" class="content grid__item one-whole animated" ng-class="{'active': isActive}" ng-show="isActive">
   <div class="blog">
     <div class="grid" ng-repeat="item in r.items | orderBy:'-date'">
       <time class="grid__item portable-one-whole one-fifth" datetime="{{item.date}}" pubdate>{{item.date | date:'MMM d, yyyy'}}</time>

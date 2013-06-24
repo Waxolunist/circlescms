@@ -1,4 +1,4 @@
-<article id="content" class="content grid__item one-whole animated" ng-class="{'active': isActive}" ng-class="{'loading': isLoading}">
+<article id="content" class="content grid__item one-whole animated" ng-class="{'active': isActive}" ng-show="isActive">
   <div class="grid">
     <div class="projects grid__item two-thirds">
       <div class="grid" ng-repeat="item in r.items | containsLabel:'tags':location.hash() | orderBy:'-time'">

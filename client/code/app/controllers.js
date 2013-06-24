@@ -72,7 +72,6 @@ angular.module('circlescms', ['ssAngular'])
             return $.inArray(val.replace(/\//gi, ".") + '.html', tmplIds) > -1;
           });
         scope.templateUrl = greppedArray[0].replace(/\//gi, ".") + '.html';
-        scope.isLoading = false;
       }
 
       function loadContent(scope, location, routeParams, rpc, cache) {
@@ -82,7 +81,6 @@ angular.module('circlescms', ['ssAngular'])
         //Set value isActive to true depending on if a resource is loaded
         scope.isActive = !!routeParams.resource;
         if (angular.isUndefined(cached)) {
-          scope.isLoading = true;
           scope.r = rpc('cms.loadcontent', path);
           scope.r.then(
             function success(result) {

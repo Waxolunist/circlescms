@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="tagcloud grid__item one-third">
-      <h3>Skills<span class="subtitle">(Click to filter)</span></h3>
+      <h3>Skills <nobr class="subtitle">(Click to filter)</nobr></h3>
       <a class="tagcloud_item" ng-repeat="(key, value) in (r.items | extractLabels:'tags') track by $id(key)" ng-class="{'active': key == location.hash()}" href="{{location.path()}}#{{key == location.hash() ? '_' : key}}" title={{key}}>
         {{key}}&nbsp;({{value}})
       </a>

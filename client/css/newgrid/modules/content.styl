@@ -42,13 +42,20 @@ footer
   color gray
   font-size 0.9em
 
+.subtitle
+  font-size 0.8em
+  color lighten(gray,30)
+  padding-left 1em
+
 //////////////////////////////////////////////////////////
 // States                                               //
 //////////////////////////////////////////////////////////
 .content
+  max-height 0
   opacity 0
   &.active
     opacity 1
+    max-height none
   
 
 //////////////////////////////////////////////////////////

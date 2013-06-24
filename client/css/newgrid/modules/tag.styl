@@ -16,6 +16,7 @@
 .tagcloud
   @extends .taglist
   padding-left 1em
+  //background-color lighten(gray,50)
   & .tagcloud_item
     @extends .taglist > .tag
     text-decoration none
@@ -24,6 +25,8 @@
 
 if responsive
 	@media lap-media
+    .tagcloud
+      padding-left 2em
     .tagcloud .tagcloud_item.active
       line-height 2
       font-size 2em
@@ -31,6 +34,8 @@ if responsive
       margin-right 0.25em
       padding 0.15em 0.25em
 	@media desk-media
+    .tagcloud
+      padding-left 2em
     .tagcloud .tagcloud_item.active
       line-height 2
       font-size 2em

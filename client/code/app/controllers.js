@@ -133,14 +133,14 @@ angular.module('circlescms', ['ssAngular'])
       }
     };
   }])
-  .directive('preventDefault', [function () {
+  .directive('ccPreventdefault', [function () {
     return function (scope, element, attrs) {
       $(element).click(function (event) {
         event.preventDefault();
       });
     };
   }])
-  .directive('highlight', [function () {
+  .directive('ccHighlightcode', [function () {
     return {
       restrict: 'A',
       priority: -1,

@@ -4,7 +4,7 @@
       <div class="grid" ng-repeat="item in r.items | containsLabel:'tags':location.hash() | orderBy:'-time'">
         <time class="grid__item portable-one-whole one-fifth" datetime="{{item.time}}" pubdate>{{item.time}}</time>
         <a class="grid__item portable-one-whole four-fifths" href="/{{item.path}}" rel="bookmark" title="{{item.name}}">{{item.name}}</a>
-        <div class="grid__item portable-one-whole four-fifths push-desk-one-fifth taglist">
+        <div class="grid__item portable-one-whole three-fifths push-desk-one-fifth taglist">
           <div class="tag" ng-repeat="tag in item.tags | split">{{tag}}</div>
         </div>
       </div>

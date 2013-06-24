@@ -9,10 +9,12 @@ html(lang="en",ng-app='circlescms')
     base(href='/')
   body(ng-controller='CCCtrl')
     header.header-primary.grid.circles-overlap-width.center
-      h1.grid__item.one-whole Christian Sterzl
+      h1.grid__item.one-whole
+        a(href='/') Christian Sterzl
       h2.grid__item.one-whole 
-        | Enterprise Architect 
-        nobr and Software Developer
+        a(href='/')
+          | Enterprise Architect 
+          nobr and Software Developer
     nav.nav-primary.grid.circles.circles-overlap.center.animated(ng-class="{'active': isActive}")
       a.grid__item.portable-one-half.one-quarter.animated(href='/about',cc-active='active') About
       a.grid__item.portable-one-half.one-quarter.animated(href='/resume',cc-active='active') Resume

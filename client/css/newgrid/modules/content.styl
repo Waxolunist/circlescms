@@ -28,7 +28,8 @@ if responsive
 
 .content
   background-color white
-  padding 1em
+  &.active
+    padding 1em
 
 if responsive
 	@media portable-media
@@ -71,3 +72,5 @@ if responsive
 .content-wrapper
   transition-property opacity
 
+.bounce
+  animation-name bounceIn

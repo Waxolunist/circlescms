@@ -88,6 +88,7 @@ angular.module('circlescms', ['ssAngular'])
               //store result in cache
               console.log('Result of ' + path + ' in cache.');
               cache.put(path, result);
+              scope.isLoading = false;
             },
             function error() {}
           );
@@ -95,6 +96,7 @@ angular.module('circlescms', ['ssAngular'])
           console.log('Hit cache for ' + path + '.');
           scope.r = cached;
           setTemplate(scope, cached.templates);
+          scope.isLoading = false;
         }
 
         scope.location = location;
@@ -108,6 +110,7 @@ angular.module('circlescms', ['ssAngular'])
       $scope.$on('$routeChangeSuccess', function (angularEvent, current, previous) {
         if (angular.isUndefined(previous)
             || current.pathParams.resource !== previous.pathParams.resource) {
+          $scope.isLoading = true;
           loadContent($scope, $location, $routeParams, $rpc, $cache);
         }
       });

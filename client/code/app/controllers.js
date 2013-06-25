@@ -61,6 +61,15 @@ angular.module('circlescms', ['ssAngular'])
       return undefined;
     };
   }])
+  .filter('markdown', [function () {
+    return function (input) {
+      if (!_.isUndefined(input)) {
+        var marked = window.marked || require('/marked');
+        return marked(input);
+      }
+      return undefined;
+    };
+  }])
   .controller('CCCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'rpc', 'CCCache',
     function ($scope, $rootScope, $location, $routeParams, $rpc, $cache) {
 

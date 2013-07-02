@@ -5,6 +5,28 @@ tags: web mobile jee java vaadin gwt jpa ejb guice guava saferpay maven jaxb
 site: http://tourist.sympany.ch
 summary: Tourist Subito is a webapplication to contract a travel insurance fast and uncomplicated, which I have designed and written for Sympany.
 
+<div class="flexslider">
+  <ul class="slides">
+    <li>
+      <img src="slide1.jpg" />
+    </li>
+    <li>
+      <img src="slide2.jpg" />
+    </li>
+    <li>
+      <img src="slide3.jpg" />
+    </li>
+    <li>
+      <img src="slide4.jpg" />
+    </li>
+  </ul>
+</div>
+<script type="text/javascript">
+$('.flexslider').flexslider({
+  animation: "slide"
+});
+</script>
+
 # Tourist Subito
 
 

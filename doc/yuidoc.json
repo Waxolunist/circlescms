@@ -3,7 +3,7 @@
     "description": "The CirclesCMS API: CirclesCMS (or just Circles) is an easy to use and easy to program, single page html5 content management system and blog engine built around websockets and angularjs.",
     "version": "0.2.0",
     "url": "https://github.com/Waxolunist/circlescms",
-    "logo": "../cc.png",
+    "logo": "../cc.svg",
     "options": {
         "outdir": "doc/apidocs",
         "linkNatives": true,

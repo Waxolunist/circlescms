@@ -1,2 +1,8 @@
-<article id="content" class="project content grid__item one-whole animated" ng-class="{'active': isActive}" ng-hide="isLoading" ng-bind-html-unsafe="r.content">
+<article id="content" class="project content grid__item one-whole animated" ng-class="{'active': isActive}" ng-hide="isLoading">
+  <div ng-bind-html-unsafe="r.content"></div>
+  <div class="grid">
+    <div class="grid__item portable-one-whole three-fifths push-desk-one-fifth taglist">
+      <div class="tag" ng-repeat="tag in r.tags | split">{{tag}}</div>
+    </div>
+  </div>
 </article>

@@ -1,6 +1,6 @@
 # About
 
-My name is Christian Sterzl and I am a software developer since the beginning of this millenium. I got into the world of software development during my academic studies in the field of communications engineering. Since then I steadily improved - and still do -  my skills of object oriented programming, web development and software architecture. In 2013 I achieved the Java Certification JEE5 Enterprise Architect or like Oracle calls it "the highest level of Java Certification one can achieve".
+My name is Christian Sterzl and I am a software developer since more then ten years. I got into the world of software development during my academic studies in the field of communications engineering. Since then I steadily improved - and still do -  my skills of object oriented programming, web development and software architecture. In 2013 I achieved the Java Certification JEE5 Enterprise Architect or like Oracle calls it "the highest level of Java Certification one can achieve".
 
 ## Experience and Skills 
 

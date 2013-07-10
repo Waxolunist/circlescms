@@ -70,8 +70,9 @@ angular.module('circlescms', ['ssAngular'])
       return undefined;
     };
   }])
-  .controller('CCCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'rpc', 'CCCache',
-    function ($scope, $rootScope, $location, $routeParams, $rpc, $cache) {
+  .controller('CCCtrl', ['$scope', '$rootScope', '$location', '$routeParams', '$compile',
+                         'rpc', 'CCCache',
+    function ($scope, $rootScope, $location, $routeParams, $compile, $rpc, $cache) {
 
       function setTemplate(scope, templates) {
         var tmplIds = $('script[type="text/ng-template"]').map(function (idx, tmpl) {
@@ -83,7 +84,7 @@ angular.module('circlescms', ['ssAngular'])
         scope.templateUrl = greppedArray[0].replace(/\//gi, ".") + '.html';
       }
 
-      function loadContent(scope, location, routeParams, rpc, cache) {
+      function loadContent(scope, location, routeParams, compile, rpc, cache) {
         var path = location.path(),
           cached = cache.get(path);
 
@@ -98,6 +99,7 @@ angular.module('circlescms', ['ssAngular'])
               console.log('Result of ' + path + ' in cache.');
               cache.put(path, result);
               scope.isLoading = false;
+              scope.content = compile(result.content)(scope);
             },
             function error() {}
           );
@@ -113,14 +115,14 @@ angular.module('circlescms', ['ssAngular'])
 
       if (window.ss.server.listeners('ready').length <= 2) {
         window.ss.server.on('ready', function () {
-          loadContent($scope, $location, $routeParams, $rpc, $cache);
+          loadContent($scope, $location, $routeParams, $compile, $rpc, $cache);
         });
       }
       $scope.$on('$routeChangeSuccess', function (angularEvent, current, previous) {
         if (angular.isUndefined(previous)
             || current.pathParams.resource !== previous.pathParams.resource) {
           $scope.isLoading = true;
-          loadContent($scope, $location, $routeParams, $rpc, $cache);
+          loadContent($scope, $location, $routeParams, $compile, $rpc, $cache);
         }
       });
     }])
@@ -178,4 +180,79 @@ angular.module('circlescms', ['ssAngular'])
         });
       }
     };
+  }])
+  .directive('ccTooltip', [function () {
+    return {
+      restrict: 'A',
+      priority: -1,
+      link: function postLink($scope, $element, $attrs) {
+        var tip = $attrs.title,
+          element = $($element),
+          tooltip = $('<div class="tooltip"></div>');
+
+        if (_.isString(tip) && !_.isEmpty(tip)) {
+          element.removeAttr('title');
+          tooltip.css('opacity', 0)
+            .html(tip)
+            .appendTo('body');
+
+          tooltip_init(tooltip, element);
+          $(window).resize(function () {
+            tooltip_init(tooltip, element);
+          });
+ 
+          element.bind('mouseleave', function () {
+            tooltip_remove(tooltip, element, tip);
+          });
+          tooltip.bind('click', function () {
+            tooltip_remove(tooltip, element, tip);
+          });
+        }
+      }
+    };
   }]);
+
+
+function tooltip_init(tooltip, element) {
+  if ($(window).width() < tooltip.outerWidth() * 1.5) {
+    tooltip.css('max-width', $(window).width() / 2);
+  } else {
+    tooltip.css('max-width', 340);
+  }
+
+  var pos_left = element.offset().left + (element.outerWidth() / 2) - (element.outerWidth() / 2),
+    pos_top  = element.offset().top - element.outerHeight() - 20;
+
+  if (pos_left < 0) {
+    pos_left = element.offset().left + element.outerWidth() / 2 - 20;
+    tooltip.addClass('left');
+  } else {
+    tooltip.removeClass('left');
+  }
+
+  if (pos_left + tooltip.outerWidth() > $(window).width()) {
+    pos_left = element.offset().left - tooltip.outerWidth() + element.outerWidth() / 2 + 20;
+    tooltip.addClass('right');
+  } else {
+    tooltip.removeClass('right');
+  }
+
+  if (pos_top < 0) {
+    pos_top  = element.offset().top + element.outerHeight();
+    tooltip.addClass('top');
+  } else {
+    tooltip.removeClass('top');
+  }
+
+  tooltip.css({left: pos_left, top: pos_top})
+    .animate({top: '+=10', opacity: 1 }, 50);
+
+}
+
+function tooltip_remove(tooltip, element, tip) {
+  tooltip.animate({top: '-=10', opacity: 0}, 50, function () {
+    $(this).remove();
+  });
+ 
+  element.attr('title', tip);
+}

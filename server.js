@@ -61,8 +61,7 @@ ss.client.define('newgrid', {
          'libs/jquery-2.0.0.js',
          'libs/angular-1.1.5.js',
          'libs/marked.js',
-         'libs/jquery.flexslider-min.js',
-         'libs/tooltip.js'
+         'libs/jquery.flexslider-min.js'
     ],
   tmpl: '*'
 });

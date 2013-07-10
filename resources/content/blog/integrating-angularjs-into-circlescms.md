@@ -5,7 +5,7 @@ tags: javascript angularjs circlescms
 
 # Integrating AngularJS into CirclesCMS
 
-After re-adding jQuery as dependency for executing scripts (and I had it anyway because of [TimelineJS](http://timeline.verite.co/) - see my blogpost [Difference between jQuery.html() and innerHTML](/blog/difference-jquery.html-innerHTML.md)), I wasn't quite satisified the way my client code was structured.
+After re-adding jQuery as dependency for executing scripts (and I had it anyway because of [TimelineJS](http://timeline.verite.co/) - see my blogpost [Difference between jQuery.html() and innerHTML](/cc/blog/difference-jquery.html-innerHTML.md)), I wasn't quite satisified the way my client code was structured.
 
 TimelineJS worked properly, but I couldn't use the bookmarkfeature of timelineJS, which works by reacting on the event hashchange, because I used this event already for navigating and loading of resources.
 

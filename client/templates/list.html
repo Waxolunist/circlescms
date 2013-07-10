@@ -2,7 +2,7 @@
   <div class="blog">
     <div class="grid" ng-repeat="item in r.items | orderBy:'-date'">
       <time class="grid__item portable-one-whole one-fifth" datetime="{{item.date}}" pubdate>{{item.date | date:'MMM d, yyyy'}}</time>
-      <a class="grid__item portable-one-whole four-fifths" href="/{{item.path}}" rel="bookmark" title="{{item.title}}">{{item.title}}</a>
+      <a class="grid__item portable-one-whole four-fifths" href="/cc/{{item.path}}" rel="bookmark" title="{{item.title}}">{{item.title}}</a>
     </div>
   </div>
 </article>

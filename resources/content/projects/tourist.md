@@ -12,13 +12,13 @@ summary: Tourist Subito is a webapplication to contract a travel insurance fast 
       <img src="/assets/projects/tourist/tourist-desktop.png" />
     </li>
     <li>
+      <img src="/assets/projects/tourist/tourist-admin.png" />
+    </li>
+    <li>
       <img src="/assets/projects/tourist/tourist-mobile.png" />
     </li>
     <li>
       <img src="/assets/projects/tourist/tourist-mobile2.png" />
-    </li>
-    <li>
-      <img src="/assets/projects/tourist/tourist-admin.png" />
     </li>
   </ul>
 </div>
@@ -35,7 +35,7 @@ Tourist Subito is a webapplication to contract a travel insurance fast and uncom
 
 The project started in august 2012 and went live with the first release in march 2013. I worked on it as architect and main developer together with another developer and designer.
 
-The goals were to replace the outdated current solution and embedd the application in the new infrastructure, we've built as part of the [portal project](/projects/extranet-sympany).
+The goals were to replace the outdated current solution and embedd the application in the new infrastructure, we've built as part of the [portal project](/cc/projects/extranet-sympany).
 
 At the beginning of the project we decided to base the application on Vaadin 7 and JEE5. Vaadin 7 was at this moment still in alpha, but we took the risk considering the long term advantages of developing against the latest features. During the development we invested just a minimum time for upgrading the vaadin versions as they saw the light of the day, which proofed us, that we met the right decision.
 

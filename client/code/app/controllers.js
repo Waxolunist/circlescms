@@ -1,7 +1,13 @@
+var base = '/cc';
+
 angular.module('circlescms', ['ssAngular'])
   .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider.
-      when('/cc/*resource', {
+      when('/*resource', {
+        controller: 'CCCtrl',
+        template: '<div ng-include="templateUrl">Loading...</div>'
+      })
+      .when('/', {
         controller: 'CCCtrl',
         template: '<div ng-include="templateUrl">Loading...</div>'
       });
@@ -85,7 +91,7 @@ angular.module('circlescms', ['ssAngular'])
       }
 
       function loadContent(scope, location, routeParams, compile, rpc, cache) {
-        var path = location.path(),
+        var path = '/' + routeParams.resource,
           cached = cache.get(path);
 
         //Set value isActive to true depending on if a resource is loaded
@@ -138,7 +144,8 @@ angular.module('circlescms', ['ssAngular'])
         var elementPath = $attrs.href;
         $scope.$location = location;
         $scope.$watch('$location.path()', function (newValue, oldValue) {
-          if (newValue.substring(0, elementPath.length) === elementPath && newValue !== '/') {
+          if ((base + newValue).substring(0, elementPath.length) === (elementPath) &&
+              !(newValue === '/' || newValue === base)) {
             $element.addClass($attrs.ccActive);
           } else {
             $element.removeClass($attrs.ccActive);

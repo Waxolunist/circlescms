@@ -70,9 +70,11 @@ if (ss.env === 'production') {
   ss.client.packAssets();
 }
 
+//Middleware
+app.use(express.compress());
 app.use("/assets", express.static(rootdir + "/resources/assets"));
-
-app.get('/*', function (req, res) {
+app.all(/^\/{0,1}$/, function (req, res) { res.redirect('/cc'); });
+app.get(/^\/cc(\/|$)/, function (req, res) {
   res.serveClient('newgrid');
 });
 

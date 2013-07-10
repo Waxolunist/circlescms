@@ -6,4 +6,18 @@ summary: CentralOM (**C**entral **O**utput**M**anagement) is an application to m
 
 # CentralOM
 
-
+<div class="flex-container">
+<div class="flexslider">
+  <ul class="slides">
+    <li>
+      <img src="/assets/projects/centralom/webui.png" />
+    </li>
+    <li>
+      <img src="/assets/projects/centralom/cmp.png" />
+    </li>
+  </ul>
+</div>
+</div>
+<script type="text/javascript">
+$('.flexslider').flexslider();
+</script>

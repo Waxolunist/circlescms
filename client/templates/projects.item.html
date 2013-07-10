@@ -5,4 +5,5 @@
       <div class="tag" ng-repeat="tag in r.tags | split">{{tag}}</div>
     </div>
   </div>
+  <a href="{{r.site}}" class="externalLink" title="{{r.name}}" ng-show="r.site">{{r.name}}</a> 
 </article>

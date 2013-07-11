@@ -199,7 +199,8 @@ angular.module('circlescms', ['ssAngular'])
             calculateHeight: true,
             autoplay: 5000,
             pagination: paginationel,
-            paginationClickable: true
+            paginationClickable: true,
+            resizeReInit: true
           });
         $(paginationel.children[0]).addClass("swiper-pagination-switch swiper-visible-switch");
       }

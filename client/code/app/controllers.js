@@ -200,7 +200,11 @@ angular.module('circlescms', ['ssAngular'])
             autoplay: 5000,
             pagination: paginationel,
             paginationClickable: true,
-            resizeReInit: true
+            resizeReInit: true,
+            updateOnImagesReady: true,
+            momentumBounce: false,
+            slidesPerView: 1,
+            loop: true
           });
         $(paginationel.children[0]).addClass("swiper-pagination-switch swiper-visible-switch");
       }

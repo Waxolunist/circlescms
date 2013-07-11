@@ -8,9 +8,6 @@ summary: Tourist Subito is a webapplication to contract a travel insurance fast 
 <div class="swiper-container" cc-slider>
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <img src="/assets/projects/tourist/tourist-desktop.png">
-    </div>
-    <div class="swiper-slide">
       <img src="/assets/projects/tourist/tourist-admin.png">
     </div>
     <div class="swiper-slide">
@@ -18,6 +15,9 @@ summary: Tourist Subito is a webapplication to contract a travel insurance fast 
     </div>
     <div class="swiper-slide">
       <img src="/assets/projects/tourist/tourist-mobile2.png">
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/projects/tourist/tourist-desktop.png">
     </div>
   </div>
   <div class="swiper-pagination"></div>

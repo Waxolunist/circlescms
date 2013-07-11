@@ -9,10 +9,10 @@ summary: CentralOM (**C**entral **O**utput**M**anagement) is an application to m
 <div class="swiper-container" cc-slider>
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <img src="/assets/projects/centralom/webui.png">
+      <img src="/assets/projects/centralom/cmp.png">
     </div>
     <div class="swiper-slide">
-      <img src="/assets/projects/centralom/cmp.png">
+      <img src="/assets/projects/centralom/webui.png">
     </div>
   </div>
   <div class="swiper-pagination"></div>

@@ -105,7 +105,7 @@ angular.module('circlescms', ['ssAngular'])
               console.log('Result of ' + path + ' in cache.');
               cache.put(path, result);
               scope.isLoading = false;
-              //scope.content = compile(result.content)(scope);
+              scope.contentCompiled = compile(result.content)(scope);
             },
             function error() {}
           );
@@ -188,12 +188,19 @@ angular.module('circlescms', ['ssAngular'])
       }
     };
   }])
-  .directive('ccFlexslider', [function () {
+  .directive('ccSlider', [function () {
     return {
       restrict: 'A',
       priority: -1,
       link: function postLink($scope, $element, $attrs) {
-        
+        var paginationel = $element.find('.swiper-pagination')[0],
+          swiper = $element.swiper({
+            calculateHeight: true,
+            autoplay: 5000,
+            pagination: paginationel,
+            paginationClickable: true
+          });
+        $(paginationel.children[0]).addClass("swiper-pagination-switch swiper-visible-switch");
       }
     };
   }]);

@@ -114,6 +114,7 @@ angular.module('circlescms', ['ssAngular'])
           scope.r = cached;
           setTemplate(scope, cached.templates);
           scope.isLoading = false;
+          scope.contentCompiled = compile(cached.content)(scope);
         }
 
         scope.location = location;

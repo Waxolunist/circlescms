@@ -6,15 +6,14 @@ summary: CentralOM (**C**entral **O**utput**M**anagement) is an application to m
 
 # CentralOM
 
-<div class="flex-container">
-<div class="flexslider" cc-flexslider>
-  <ul class="slides">
-    <li>
-      <img src="/assets/projects/centralom/webui.png" />
-    </li>
-    <li>
-      <img src="/assets/projects/centralom/cmp.png" />
-    </li>
-  </ul>
-</div>
+<div class="swiper-container" cc-slider>
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <img src="/assets/projects/centralom/webui.png">
+    </div>
+    <div class="swiper-slide">
+      <img src="/assets/projects/centralom/cmp.png">
+    </div>
+  </div>
+  <div class="swiper-pagination"></div>
 </div>

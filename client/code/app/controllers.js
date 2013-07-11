@@ -187,4 +187,13 @@ angular.module('circlescms', ['ssAngular'])
         });
       }
     };
+  }])
+  .directive('ccFlexslider', [function () {
+    return {
+      restrict: 'A',
+      priority: -1,
+      link: function postLink($scope, $element, $attrs) {
+        
+      }
+    };
   }]);

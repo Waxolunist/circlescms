@@ -24,7 +24,9 @@ summary: Tourist Subito is a webapplication to contract a travel insurance fast 
 </div>
 </div>
 <script type="text/javascript">
-$('.flexslider').flexslider();
+$('.flexslider').flexslider({
+  animation: "slide"
+});
 </script>
 
 # Tourist Subito

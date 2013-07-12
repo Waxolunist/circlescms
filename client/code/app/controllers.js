@@ -1,18 +1,19 @@
 var base = '/cc';
 
 angular.module('circlescms', ['ssAngular'])
-  .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-    $routeProvider.
-      when('/*resource', {
-        controller: 'CCCtrl',
-        template: '<div ng-include="templateUrl">Loading...</div>'
-      })
-      .when('/', {
-        controller: 'CCCtrl',
-        template: '<div ng-include="templateUrl">Loading...</div>'
-      });
-    $locationProvider.html5Mode(true);
-  }])
+  .config(['$routeProvider', '$locationProvider',
+          function ($routeProvider, $locationProvider) {
+      $routeProvider.
+        when('/*resource', {
+          controller: 'CCCtrl',
+          template: '<div ng-include="templateUrl">Loading...</div>'
+        })
+        .when('/', {
+          controller: 'CCCtrl',
+          template: '<div ng-include="templateUrl">Loading...</div>'
+        });
+      $locationProvider.html5Mode(true);
+    }])
   .factory('CCCache', ['$cacheFactory', function ($cacheFactory) {
     return $cacheFactory('CCCache', {
       capacity: 20
@@ -31,21 +32,10 @@ angular.module('circlescms', ['ssAngular'])
     /*
      * This filter extracts a property from an objectlist.
      */
-    return function (input, property, delim) {
-      if (!angular.isUndefined(input) && !angular.isUndefined(property)) {
-        var retVal = {};
-        delim = delim || ' ';
-        input.map(function (n) {
-          return n[property];
-        }).reduce(function (previousValue, currentValue, index, array) {
-          return previousValue + delim + currentValue;
-        }).split(delim).forEach(function (val, idx, arr) {
-          this[val] = (this[val] || 0) + 1;
-        }, retVal);
-        return retVal;
-      }
-      return undefined;
-    };
+    return extractLabels;
+  }])
+  .filter('toArray', [function () {
+    return toArray;
   }])
   .filter('containsLabel', [function () {
     return function (input, property, label, delim) {
@@ -106,12 +96,14 @@ angular.module('circlescms', ['ssAngular'])
               cache.put(path, result);
               scope.isLoading = false;
               scope.contentCompiled = compile(result.content)(scope);
+              scope.resp = result;
             },
             function error() {}
           );
         } else {
           console.log('Hit cache for ' + path + '.');
           scope.r = cached;
+          scope.resp = cached;
           setTemplate(scope, cached.templates);
           scope.isLoading = false;
           scope.contentCompiled = compile(cached.content)(scope);
@@ -209,4 +201,38 @@ angular.module('circlescms', ['ssAngular'])
         $(paginationel.children[0]).addClass("swiper-pagination-switch swiper-visible-switch");
       }
     };
+  }])
+  .directive('ccBuildlabellist', [function () {
+    return {
+      scope: {
+        ccItems: '=',
+        ccLocation: '='
+      },
+      restrict: 'E',
+      controller: function ($scope) {
+        $scope.labellist = toArray(extractLabels($scope.ccItems, 'tags'));
+      }
+    };
   }]);
+
+function extractLabels(input, property, delim) {
+  if (!angular.isUndefined(input) && !angular.isUndefined(property)) {
+    var retVal = {};
+    delim = delim || ' ';
+    input.map(function (n) {
+      return n[property];
+    }).reduce(function (previousValue, currentValue, index, array) {
+      return previousValue + delim + currentValue;
+    }).split(delim).forEach(function (val, idx, arr) {
+      this[val] = (this[val] || 0) + 1;
+    }, retVal);
+    return retVal;
+  }
+  return undefined;
+}
+
+function toArray(input) {
+  return _.map(input, function (v, k) {
+    return {'key': k, 'value': v};
+  });
+}

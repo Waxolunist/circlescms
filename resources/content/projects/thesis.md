@@ -1,6 +1,7 @@
 author: Christian Sterzl
 time: 2005
 name: Thesis
+site: http://www.beha.at
 tags: mobile java gps embedded j2me latex
 summary: This thesis deals with alternative services in public transport in general and especially with the project BEHA, a public on-demand bus service. Furthermore, it deals particularly with location of vehicles, management of information and delay-prediction. The technical implementation of such services is of special interest. The thesis is written in german.
 

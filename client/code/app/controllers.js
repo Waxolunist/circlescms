@@ -1,4 +1,25 @@
 var base = '/cc';
+var extractLabels = function (input, property, delim) {
+  if (!angular.isUndefined(input) && !angular.isUndefined(property)) {
+    var retVal = {};
+    delim = delim || ' ';
+    input.map(function (n) {
+      return n[property];
+    }).reduce(function (previousValue, currentValue, index, array) {
+      return previousValue + delim + currentValue;
+    }).split(delim).forEach(function (val, idx, arr) {
+      this[val] = (this[val] || 0) + 1;
+    }, retVal);
+    return retVal;
+  }
+  return undefined;
+};
+
+var toArray = function (input) {
+  return _.map(input, function (v, k) {
+    return {'key': k, 'value': v};
+  });
+};
 
 angular.module('circlescms', ['ssAngular'])
   .config(['$routeProvider', '$locationProvider',
@@ -209,30 +230,9 @@ angular.module('circlescms', ['ssAngular'])
         ccLocation: '='
       },
       restrict: 'E',
-      controller: function ($scope) {
+      controller: ['$scope', function ($scope) {
         $scope.labellist = toArray(extractLabels($scope.ccItems, 'tags'));
-      }
+      }]
     };
   }]);
 
-function extractLabels(input, property, delim) {
-  if (!angular.isUndefined(input) && !angular.isUndefined(property)) {
-    var retVal = {};
-    delim = delim || ' ';
-    input.map(function (n) {
-      return n[property];
-    }).reduce(function (previousValue, currentValue, index, array) {
-      return previousValue + delim + currentValue;
-    }).split(delim).forEach(function (val, idx, arr) {
-      this[val] = (this[val] || 0) + 1;
-    }, retVal);
-    return retVal;
-  }
-  return undefined;
-}
-
-function toArray(input) {
-  return _.map(input, function (v, k) {
-    return {'key': k, 'value': v};
-  });
-}

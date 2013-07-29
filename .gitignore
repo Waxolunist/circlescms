@@ -1,3 +1,4 @@
 node_modules
 tags
 client/static/assets
+.DS_Store

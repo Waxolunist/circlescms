@@ -66,7 +66,7 @@ ss.client.define('newgrid', {
   tmpl: '*'
 });
 
-if (ss.env === 'production') {
+if (ss.env === 'production' || process.env.OPENSHIFT_CLOUD_DOMAIN) {
   ss.client.packAssets();
 }
 

@@ -63,7 +63,6 @@ kv-> plan deploy-datacenter -name "VM-1" -rf 3 -wait
 kv-> plan deploy-sn -dc dc1 -host ubuntu -port 5000 -wait
 kv-> plan deploy-admin -sn sn1 -port 5001 -wait 
 kv-> pool create -name VMPool
-kv-> plan deploy-sn -dc dc1 -host ubuntu -port 5000 -wait
 kv-> pool join -name VMPool -sn sn1
 ```
 

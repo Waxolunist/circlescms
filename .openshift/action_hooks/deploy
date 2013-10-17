@@ -15,7 +15,9 @@ rm -rf "$OPENSHIFT_REPO_DIR/client/static/assets/"
 #  installed.
 ensure_node_is_installed
 
-export XDG_DATA_HOME=$HOME/app-root/data/bower/data
-export XDG_CONFIG_HOME=$HOME/app-root/data/bower/config
-export XDG_CACHE_HOME=$HOME/app-root/data/bower/cache
+source ${OPENSHIFT_DATA_DIR}/.myenv
+
+echo "export XDG_DATA_HOME=$XDG_DATA_HOME"
+echo "export XDG_CONFIG_HOME=$XDG_CONFIG_HOME"
+echo "export XDG_CACHE_HOME=$XDG_CACHE_HOME"
 

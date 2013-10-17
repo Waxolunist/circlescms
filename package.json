@@ -44,7 +44,6 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "prestart": "./node_modules/bower/bin/bower update",
     "start": "SS_ENV=production SS_PACK=1 node server.js"
   }
 }

@@ -14,3 +14,4 @@ rm -rf "$OPENSHIFT_REPO_DIR/client/static/assets/"
 #  so check if its needed. Just ensure the custom Node[.js] version is
 #  installed.
 ensure_node_is_installed
+

@@ -1,0 +1,31 @@
+{
+  "name": "circlescms",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Waxolunist/circlescms",
+  "authors": [
+    "Christian Sterzl <christian.sterzl@gmail.com>"
+  ],
+  "description": "Easy to use and easy to program, single page html5 content management system and blog engine built around websockets",
+  "main": "server.js",
+  "keywords": [
+    "openshift",
+    "angular.js",
+    "node.js"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs-bower": "master",
+    "jquery": "~2.0.3",
+    "marked": "~0.2.9",
+    "swiper": "master",
+    "underscore": "~1.5.2"
+  }
+}

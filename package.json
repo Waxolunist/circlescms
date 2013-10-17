@@ -28,21 +28,23 @@
     "ss-jade": "0.1.x",
     "ss-stylus": "0.1.x",
     "ss-angular": "0.6.x",
-    "underscore": "1.4.x",
+    "underscore": "1.5.x",
     "underscore.string": "2.3.x",
-    "amdefine": "0.0.x",
+    "amdefine": "0.1.x",
     "metamd": "0.3.x",
     "dejavu": "0.4.x",
     "filecache": "0.2.x",
-    "requirejs": "2.1.x"
+    "requirejs": "2.1.x",
+    "bower": "1.2.x"
   },
   "devDependencies": {
-    "grunt-html-snapshot": "~0.2.3"
+    "grunt-html-snapshot": "~0.5.0"
   },
   "bundleDependencies": [],
   "private": true,
   "main": "server.js",
   "scripts": {
+    "prestart": "./node_modules/bower/bin/bower update",
     "start": "SS_ENV=production SS_PACK=1 node server.js"
   }
 }

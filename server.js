@@ -16,6 +16,7 @@ var app = express();
 // Code Formatters
 ss.client.formatters.add(require('ss-jade'));
 ss.client.formatters.add(require('ss-stylus'));
+ss.client.formatters.add(require('./lib/minmap.js'));
 
 //ss.client.templateEngine.use(require('ss-handlebars'));
 ss.client.templateEngine.use('angular');
@@ -57,11 +58,11 @@ ss.client.define('newgrid', {
   css: ['newgrid/newgrid.styl'],
   code: ['app/entry.js',
          'app/controllers.js',
-         'libs/underscore-1.4.4.js',
-         'libs/jquery-2.0.0.js',
-         'libs/angular-1.1.5.js',
-         'libs/marked.js',
-         'libs/idangerous.swiper.js'
+         'libs/underscore/underscore-min.js',
+         'libs/jquery/jquery.min.js',
+         'libs/angularjs-bower/angular.min.js',
+         'libs/marked/lib/marked.js',
+         'libs/swiper/dist/idangerous.swiper-2.2.min.js'
     ],
   tmpl: '*'
 });

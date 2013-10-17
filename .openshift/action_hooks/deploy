@@ -14,10 +14,3 @@ rm -rf "$OPENSHIFT_REPO_DIR/client/static/assets/"
 #  so check if its needed. Just ensure the custom Node[.js] version is
 #  installed.
 ensure_node_is_installed
-
-source ${OPENSHIFT_DATA_DIR}/.myenv
-
-echo "export XDG_DATA_HOME=$XDG_DATA_HOME"
-echo "export XDG_CONFIG_HOME=$XDG_CONFIG_HOME"
-echo "export XDG_CACHE_HOME=$XDG_CACHE_HOME"
-

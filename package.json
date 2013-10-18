@@ -34,10 +34,10 @@
     "metamd": "0.3.x",
     "dejavu": "0.4.x",
     "filecache": "0.2.x",
-    "requirejs": "2.1.x",
-    "bower": "1.2.x"
+    "requirejs": "2.1.x"
   },
   "devDependencies": {
+    "bower": "1.2.x",
     "grunt-html-snapshot": "~0.5.0"
   },
   "bundleDependencies": [],

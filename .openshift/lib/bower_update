@@ -1,7 +1,13 @@
 #!/bin/bash
 
-export XDG_DATA_HOME=$HOME/app-root/data/bower/data
-export XDG_CONFIG_HOME=$HOME/app-root/data/bower/config
-export XDG_CACHE_HOME=$HOME/app-root/data/bower/cache
+export XDG_DATA_HOME=$OPENSHIFT_DATA_DIR/.local
+export XDG_CONFIG_HOME=$OPENSHIFT_DATA_DIR/.config
+export XDG_CACHE_HOME=$OPENSHIFT_DATA_DIR/.cache
 cd $OPENSHIFT_REPO_DIR
-./node_modules/bower/bin/bower update
+
+if hash bower 2>/dev/null; then
+  echo "Install bower:"
+  npm install -g bower
+fi
+
+bower update

@@ -96,9 +96,9 @@ angular.module('circlescms', ['ssAngular'])
           return this.id;
         }).get(),
           greppedArray = $.grep(templates, function (val, idx) {
-            return $.inArray(val.replace(/\//gi, ".") + '.html', tmplIds) > -1;
+            return $.inArray(val.replace(/\//gi, '.') + '.html', tmplIds) > -1;
           });
-        scope.templateUrl = greppedArray[0].replace(/\//gi, ".") + '.html';
+        scope.templateUrl = greppedArray[0].replace(/\//gi, '.') + '.html';
       }
 
       function loadContent(scope, location, routeParams, compile, rpc, cache) {
@@ -139,8 +139,7 @@ angular.module('circlescms', ['ssAngular'])
         });
       }
       $scope.$on('$routeChangeSuccess', function (angularEvent, current, previous) {
-        if (angular.isUndefined(previous)
-            || current.pathParams.resource !== previous.pathParams.resource) {
+        if (angular.isUndefined(previous) || current.pathParams.resource !== previous.pathParams.resource) {
           $scope.isLoading = true;
           loadContent($scope, $location, $routeParams, $compile, $rpc, $cache);
         }
@@ -180,7 +179,7 @@ angular.module('circlescms', ['ssAngular'])
       restrict: 'A',
       priority: -1,
       link: function postLink($scope, $element, $attrs) {
-        $scope.$watch("r.content", function (value) {
+        $scope.$watch('r.content', function (value) {
           var val = value || null;
           if (val) {
             $('pre code').each(function (i, e) {
@@ -217,9 +216,13 @@ angular.module('circlescms', ['ssAngular'])
             updateOnImagesReady: true,
             momentumBounce: false,
             slidesPerView: 1,
-            loop: true
+            loop: true,
+            onInit: function() {
+              var slides = $element.find('.swiper-slide');
+              slides.height('auto');
+            }
           });
-        $(paginationel.children[0]).addClass("swiper-pagination-switch swiper-visible-switch");
+        $(paginationel.children[0]).addClass('swiper-pagination-switch swiper-visible-switch');
       }
     };
   }])

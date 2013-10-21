@@ -1,9 +1,10 @@
 #!/bin/env node
 
 //Get the environment variables we need.
-var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0";
+var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 var port    = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-var rootdir = process.env.OPENSHIFT_REPO_DIR || ".";
+var rootdir = process.env.OPENSHIFT_REPO_DIR || '.';
+var wsport  = process.env.OPENSHIFT_NORFRJS_PORT ? 8000 : port;
 
 // My SocketStream 0.3 app
 var ss = require('socketstream');
@@ -27,14 +28,15 @@ ss.responders.add(require('ss-angular'), {pollFreq: 1000});
 //ss.ws.transport.use(require('ss-sockjs'));
 // nodejs is executed in openshift
 // see https://www.openshift.com/blogs/paas-websockets
-if (process.env.OPENSHIFT_NODEJS_PORT) {
-  ss.ws.transport.use('engineio', {
-    client: {
-      port: 8000,
-      transports: ['polling', 'websocket']
-    }
-  });
-}
+//if (process.env.OPENSHIFT_NODEJS_PORT) {
+console.log('Client listening on port ' + wsport);
+ss.ws.transport.use('engineio', {
+  client: {
+    port: wsport,
+    transports: ['polling', 'websocket']
+  }
+});
+//}
 
 /*
 ss.client.define('me', {
@@ -67,15 +69,21 @@ ss.client.define('newgrid', {
   tmpl: '*'
 });
 
-if (ss.env === 'production' || process.env.OPENSHIFT_CLOUD_DOMAIN) {
+if (ss.env === 'production' || process.env.OPENSHIFT_NODEJS_PORT) {
   ss.client.packAssets();
 }
 
 //Middleware
+app.use(function(req, res, next) {
+  console.log('Set expires header ' + req.url);
+  res.setHeader('Cache-Control', 'public, max-age=345600'); // 4 days
+  res.setHeader('Expires', new Date(Date.now() + 345600000).toUTCString());
+  return next();
+});
 app.use(express.compress());
-app.use("/assets", express.static(rootdir + "/resources/assets"));
+app.use('/assets', express.static(rootdir + '/resources/assets'));
 app.all(/^\/{0,1}$/, function (req, res) { res.redirect('/cc'); });
-app.get(/^\/cc(\/|$)/, function (req, res) {
+app.get(/^\/cc(\/|$)/, function (req, res, next) {
   res.serveClient('newgrid');
 });
 
@@ -86,4 +94,4 @@ ss.start(server);
 // Append SocketStream middleware to the stack
 app.stack = ss.http.middleware.stack.concat(app.stack);
 
-console.log("Server running at http://" + ipaddr + ":" + port + "/");
+console.log('Server running at http://' + ipaddr + ':' + port + '/');

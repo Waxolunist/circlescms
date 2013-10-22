@@ -16,7 +16,7 @@ var app = express();
 
 // Code Formatters
 ss.client.formatters.add(require('ss-jade'));
-ss.client.formatters.add(require('ss-stylus'));
+ss.client.formatters.add(require('ss-stylus'), { 'include css' : true });
 ss.client.formatters.add(require('./lib/minmap.js'));
 
 //ss.client.templateEngine.use(require('ss-handlebars'));

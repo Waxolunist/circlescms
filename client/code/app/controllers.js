@@ -194,7 +194,7 @@ angular.module('circlescms', ['ssAngular'])
                   element.attr('class', classList.join(' ').trim());
                 }
               }
-              Prism.highlightElement(e, true);
+              Prism.highlightElement(e, false);
             });
           }
         });

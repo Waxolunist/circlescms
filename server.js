@@ -4,7 +4,7 @@
 var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 var port    = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var rootdir = process.env.OPENSHIFT_REPO_DIR || '.';
-var wsport  = process.env.OPENSHIFT_NORFRJS_PORT ? 8000 : port;
+var wsport  = process.env.OPENSHIFT_NODEJS_PORT ? 8000 : port;
 
 // My SocketStream 0.3 app
 var ss = require('socketstream');

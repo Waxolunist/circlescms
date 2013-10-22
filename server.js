@@ -64,7 +64,9 @@ ss.client.define('newgrid', {
          'libs/jquery/jquery.min.js',
          'libs/angularjs-bower/angular.min.js',
          'libs/marked/lib/marked.js',
-         'libs/swiper/dist/idangerous.swiper-2.2.min.js'
+         'libs/swiper/dist/idangerous.swiper-2.2.min.js',
+         'libs/prism/prism.js',
+         'libs/prism/components/prism-bash.min.js'
     ],
   tmpl: '*'
 });

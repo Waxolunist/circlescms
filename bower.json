@@ -26,6 +26,7 @@
     "jquery": "~2.0.3",
     "marked": "~0.2.9",
     "swiper": "master",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "prism": "gh-pages"
   }
 }

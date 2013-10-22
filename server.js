@@ -25,10 +25,8 @@ ss.client.templateEngine.use('angular');
 
 ss.responders.add(require('ss-angular'), {pollFreq: 1000});
 
-//ss.ws.transport.use(require('ss-sockjs'));
 // nodejs is executed in openshift
 // see https://www.openshift.com/blogs/paas-websockets
-//if (process.env.OPENSHIFT_NODEJS_PORT) {
 console.log('Client listening on port ' + wsport);
 ss.ws.transport.use('engineio', {
   client: {
@@ -36,24 +34,6 @@ ss.ws.transport.use('engineio', {
     transports: ['polling', 'websocket']
   }
 });
-//}
-
-/*
-ss.client.define('me', {
-  view: 'me.jade',
-  css: ['me.styl'],
-  code: ['app/entry.js',
-         'libs/script.me.js',
-         'libs/uri.js',
-         'libs/moment.js',
-         'libs/underscore.js',
-         'libs/jquery-2.0.0.min.js',
-         'libs/handlebar-helpers.js',
-         'libs/swag.js'
-    ],
-  tmpl: '*'
-});
-*/
 
 ss.client.define('newgrid', {
   view: 'newgrid.jade',
@@ -77,7 +57,6 @@ if (ss.env === 'production' || process.env.OPENSHIFT_NODEJS_PORT) {
 
 //Middleware
 app.use(function(req, res, next) {
-  console.log('Set expires header ' + req.url);
   res.setHeader('Cache-Control', 'public, max-age=345600'); // 4 days
   res.setHeader('Expires', new Date(Date.now() + 345600000).toUTCString());
   return next();

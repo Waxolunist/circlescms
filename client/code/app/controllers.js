@@ -1,4 +1,5 @@
-var base = '/cc';
+require('/cc.active.js');
+
 var extractLabels = function (input, property, delim) {
   if (!angular.isUndefined(input) && !angular.isUndefined(property)) {
     var retVal = {};
@@ -21,7 +22,8 @@ var toArray = function (input) {
   });
 };
 
-angular.module('circlescms', ['ssAngular'])
+angular.module('circlescms', ['ssAngular', 'cc.active'])
+  .value('base', '/cc')
   .config(['$routeProvider', '$locationProvider',
           function ($routeProvider, $locationProvider) {
       $routeProvider.
@@ -145,28 +147,6 @@ angular.module('circlescms', ['ssAngular'])
         }
       });
     }])
-  .directive('ccActive', ['$location', function (location) {
-    /*
-     * Adds the class in the ccActive directive given to 
-     * the element matching the resource given in its href.
-     */
-    return {
-      restrict: 'A',
-      priority: -1,
-      link: function postLink($scope, $element, $attrs) {
-        var elementPath = $attrs.href;
-        $scope.$location = location;
-        $scope.$watch('$location.path()', function (newValue, oldValue) {
-          if ((base + newValue).substring(0, elementPath.length) === (elementPath) &&
-              !(newValue === '/' || newValue === base)) {
-            $element.addClass($attrs.ccActive);
-          } else {
-            $element.removeClass($attrs.ccActive);
-          }
-        });
-      }
-    };
-  }])
   .directive('ccPreventdefault', [function () {
     return function (scope, element, attrs) {
       $(element).click(function (event) {

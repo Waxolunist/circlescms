@@ -40,6 +40,7 @@ ss.client.define('newgrid', {
   css: ['newgrid/newgrid.styl'],
   code: ['app/entry.js',
          'app/controllers.js',
+         'app/directives',
          'libs/underscore/underscore-min.js',
          'libs/jquery/jquery.min.js',
          'libs/angularjs-bower/angular.min.js',

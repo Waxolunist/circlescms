@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export XDG_DATA_HOME=$OPENSHIFT_DATA_DIR/.local
+export XDG_CONFIG_HOME=$OPENSHIFT_DATA_DIR/.config
+export XDG_CACHE_HOME=$OPENSHIFT_DATA_DIR/.cache
+export NPM_GLOBAL_PREFIX=$XDG_DATA_HOME/node
+export PATH=$NPM_GLOBAL_PREFIX/bin:$PATH
+npm config set prefix $NPM_GLOBAL_PREFIX

@@ -1,13 +1,18 @@
 #!/bin/bash
 
-export XDG_DATA_HOME=$OPENSHIFT_DATA_DIR/.local
-export XDG_CONFIG_HOME=$OPENSHIFT_DATA_DIR/.config
-export XDG_CACHE_HOME=$OPENSHIFT_DATA_DIR/.cache
+. setenv
+
+set CWD = `pwd`
 cd $OPENSHIFT_REPO_DIR
 
-if hash bower 2>/dev/null; then
+hash bower
+#if hash bower 2>/dev/null; then
+if [ $? -ne 0 ]; then
   echo "Install bower:"
   npm install -g bower
 fi
 
 bower update
+
+cd $CWD
+

@@ -4,7 +4,7 @@
      *  Setup termination handlers (for exit and a list of signals).
      */
 /*    self.setupTerminationHandlers = function(){
-        //  Process on exit and signals.
+    self.setupTerminationHandlers = function(){
         process.on('exit', function() { self.terminator(); });
 
         // Removed 'SIGPIPE' from the list - bugz 852598.

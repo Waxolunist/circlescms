@@ -1,3 +1,0 @@
-#!/bin/bash
-
-. "$OPENSHIFT_REPO_DIR/.openshift/lib/bower_update"

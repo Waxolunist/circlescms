@@ -2,23 +2,27 @@
 
 DRY="$1"
 
-. setenv $DRY
+export XDG_DATA_HOME=$OPENSHIFT_DATA_DIR/.local
+export XDG_CONFIG_HOME=$OPENSHIFT_DATA_DIR/.config
+export XDG_CACHE_HOME=$OPENSHIFT_DATA_DIR/.cache
+
+#. setenv $DRY
 
 CWD=`pwd`
 cd $OPENSHIFT_REPO_DIR
 
-if ! bower_loc="$(type -p "bower")" || [ -z "bower_loc" ]; then 
-  if [ "$DRY" != "dry" ]; then
-    echo "Bower install:"
-    npm install -g bower
-  else
-    echo "Dry run - Bower install"
-  fi
-fi
+#if ! bower_loc="$(type -p "bower")" || [ -z "bower_loc" ]; then 
+#  if [ "$DRY" != "dry" ]; then
+#    echo "Bower install:"
+#    npm install -g bower
+#  else
+#    echo "Dry run - Bower install"
+#  fi
+#fi
 
 if [ "$DRY" != "dry" ]; then
   echo "Bower update"
-  bower update
+  node_module/.bin/bower update
 else
   echo "Dry run - Bower update"
 fi

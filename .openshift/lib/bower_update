@@ -22,7 +22,7 @@ cd $OPENSHIFT_REPO_DIR
 
 if [ "$DRY" != "dry" ]; then
   echo "Bower update"
-  node_module/.bin/bower update
+  node_modules/.bin/bower update
 else
   echo "Dry run - Bower update"
 fi

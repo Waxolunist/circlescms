@@ -1,18 +1,27 @@
 #!/bin/bash
 
-. setenv
+DRY="$1"
 
-set CWD = `pwd`
+. setenv $DRY
+
+CWD=`pwd`
 cd $OPENSHIFT_REPO_DIR
 
-hash bower
-#if hash bower 2>/dev/null; then
-if [ $? -ne 0 ]; then
-  echo "Install bower:"
-  npm install -g bower
+if ! bower_loc="$(type -p "bower")" || [ -z "bower_loc" ]; then 
+  if [ "$DRY" != "dry" ]; then
+    echo "Bower install:"
+    npm install -g bower
+  else
+    echo "Dry run - Bower install"
+  fi
 fi
 
-bower update
+if [ "$DRY" != "dry" ]; then
+  echo "Bower update"
+  bower update
+else
+  echo "Dry run - Bower update"
+fi
 
 cd $CWD
 

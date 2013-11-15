@@ -5,4 +5,11 @@ export XDG_CONFIG_HOME=$OPENSHIFT_DATA_DIR/.config
 export XDG_CACHE_HOME=$OPENSHIFT_DATA_DIR/.cache
 export NPM_GLOBAL_PREFIX=$XDG_DATA_HOME/node
 export PATH=$NPM_GLOBAL_PREFIX/bin:$PATH
-npm config set prefix $NPM_GLOBAL_PREFIX
+
+
+if [ "$1" != "dry" ]; then
+  echo "Npm set prefix"
+  npm config set prefix $NPM_GLOBAL_PREFIX
+else
+  echo "Dry run - Npm set prefix"
+fi

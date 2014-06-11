@@ -19,3 +19,4 @@ I live in Switzerland in the canton Aargau with my wife Jasmin, my son Cedric an
 We try to spend every spare minute together. I also love to indulge in my second passion - cooking. We spend a lot of our holidays in Austria but we also like to travel to more distant destinations like Florida.
 
 Sometimes it's hard for my wife to get me off my laptop or my iPhone and I understand that it's not easy to be married with a nerd. She takes it with humour though - at least most of the time. That's one of the endless reasons why I love her every day more and more.
+

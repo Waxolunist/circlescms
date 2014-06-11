@@ -3,13 +3,13 @@ time: 2005
 name: Thesis
 site: http://www.beha.at
 tags: mobile java gps embedded j2me latex
-summary: This thesis deals with alternative services in public transport in general and especially with the project BEHA, a public on-demand bus service. Furthermore, it deals particularly with location of vehicles, management of information and delay-prediction. The technical implementation of such services is of special interest. The thesis is written in german.
+summary: My thesis deals with alternative services in public transport in general and especially with the project BEHA, a public on-demand bus service. Furthermore, it deals particularly with location of vehicles, management of information and delay-prediction. The technical implementation of such services is of special interest. The thesis is written in german.
 
 <a class="download" name="thesis" title="Download the thesis here" rel="tooltip" href="/assets/DA_Sterzl.pdf">Download the thesis here</a>
 
 # Dynamic routing and delay prediction of on demand public transport systems
 
-This thesis deals with alternative services in public transport in general and especially with the project BEHA, a public on-demand bus service. Furthermore, it deals particularly with location of vehicles, management of information and delay-prediction. The technical implementation of such services is of special interest.
+My thesis deals with alternative services in public transport in general and especially with the project BEHA, a public on-demand bus service. Furthermore, it deals particularly with location of vehicles, management of information and delay-prediction. The technical implementation of such services is of special interest.
 
 First, the project BEHA is presented in the introduction. Afterwards the strategy and the methods of research are given. The next part looks at the project BEHA in detail and all technical components. A comparison of BEHA with other systems in public transport is given too. The third and fourth part of this thesis describe two physically separated applications of BEHA:
 
